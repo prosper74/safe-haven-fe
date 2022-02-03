@@ -1,20 +1,56 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
+    "allowJs": true /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+    "allowSyntheticDefaultImports": true /* Not in Node */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "module": "ESNext" /** commonjs in Node */,
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "isolatedModules": true /* Not in Node */,
+    "resolveJsonModule": true /* Not in Node */,
+    "noEmit": true /* Not in Node */,
+    "jsx": "preserve" /* Not in Node */,
+    "sourceMap": true /* Not in Node */,
+    "declaration": true /* Not in Node */,
+    "noUnusedLocals": true /* Not in Node */,
+    "noUnusedParameters": true /* Not in Node */,
+    "noFallthroughCasesInSwitch": true /* Not in Node */,
+    "rootDir": "." /* Specify the root folder within your source files. */,
+    "baseUrl": "." /* Specify the base directory to resolve non-relative module names. */,
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
+    } /* Specify a set of entries that re-map imports to additional lookup locations. */,
+    "experimentalDecorators": true /* Enable experimental support for TC39 stage 2 draft decorators. */,
+    "emitDecoratorMetadata": true /* Emit design-type metadata for decorated declarations in source files. */,
+    "removeComments": true /* Disable emitting comments. */,
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied `any` type.. */,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "src/pages/**/*",
+    "src/**/*",
+    "styles/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage"
+  ]
 }

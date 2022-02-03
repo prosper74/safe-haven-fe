@@ -1,0 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Scroll Bar styles */
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: #eecbff;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9932cc;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #430064;
+  cursor: pointer;
+}
