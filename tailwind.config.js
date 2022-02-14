@@ -21,13 +21,21 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extends: {
+    extend: {
       colors: {
         primary: '#67009b',
         primaryLight: '#e7b8ff',
         'gray-700': '#273444',
         gray: '#8492a6',
         'gray-50': '#f8fafc',
+      },
+      width: {
+        130: '62rem',
+        128: '47rem',
+      },
+      height: {
+        127: '20rem',
+        128: '30rem',
       },
     },
   },

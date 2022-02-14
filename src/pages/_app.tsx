@@ -4,14 +4,20 @@ import '@styles/globals.css';
 import React, { FC } from 'react';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
+import { ApolloProvider } from '@apollo/client';
 import store from '@src/app/store';
+import Layout from '@src/components/common/layouts/layout';
+import { client } from '@src/apollo/client';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <div className="container mx-auto m-0">
+  <>
     <Provider store={store}>
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
     </Provider>
-  </div>
+  </>
 );
 export default MyApp;

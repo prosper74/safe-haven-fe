@@ -1,13 +1,14 @@
 // index.tsx
 import React, { FC } from 'react';
 import Link from 'next/link';
+import UserDropdown from './user-dropdown';
 // import Image from 'next/image';
 
 const Navbar: FC = () => (
-  <div className="text-center">
+  <div className="container text-center mx-auto">
     {/* Desktop Menu */}
-    <section className="w-full text-gray-700 font-heading font-medium relative bg-gray-50 bg-opacity-50">
-      <nav className="flex justify-between px-4 md:px-2 xl:px-32 py-4">
+    <section className="shadow-lg fixed top-0 inset-x-0 w-full text-gray-700 font-heading font-medium bg-gray-50 bg-opacity-100 z-[10000]">
+      <nav className="flex justify-between px-4 md:px-2 xl:px-32 py-2">
         <div className="flex w-full items-center">
           <Link href="/">
             <a>
@@ -17,21 +18,21 @@ const Navbar: FC = () => (
           <ul className="hidden md:flex px-4 ml-24 md:ml-10 xl:ml-32">
             <li className="mr-16">
               <Link href="/rent">
-                <a className="text-base text-gray-500 hover:text-gray-600 uppercase">
+                <a className="text-base text-gray-500 hover:text-purple-500 uppercase">
                   Rent
                 </a>
               </Link>
             </li>
             <li className="mr-16">
               <Link href="/buy">
-                <a className="text-base text-gray-500 hover:text-gray-600 uppercase">
+                <a className="text-base text-gray-500 hover:text-purple-500 uppercase">
                   Buy
                 </a>
               </Link>
             </li>
             <li className="mr-16">
               <Link href="/shortlet">
-                <a className="text-base text-gray-500 hover:text-gray-600 uppercase">
+                <a className="text-base text-gray-500 hover:text-purple-500 uppercase">
                   Shortlet
                 </a>
               </Link>
@@ -40,7 +41,7 @@ const Navbar: FC = () => (
 
           <div className="flex items-center ml-auto">
             <Link href="#">
-              <a className="hidden sm:flex text-gray-500 hover:text-gray-600">
+              <a className="hidden sm:flex text-gray-500 hover:text-purple-500">
                 <svg
                   width="20"
                   height="23"
@@ -74,19 +75,7 @@ const Navbar: FC = () => (
             </Link>
             <div className="w-px h-8 bg-gray-200 bg-opacity-50 ml-6 mr-6" />
 
-            <a className="flex items-center mr-10" href="#">
-              <span>John</span>
-              <img
-                className="ml-4"
-                src="/assets/images/avatar-online.png"
-                alt=""
-              />
-              <img
-                className="ml-4"
-                src="/assets/images/arrow-down-gray.svg"
-                alt=""
-              />
-            </a>
+            <UserDropdown />
           </div>
         </div>
       </nav>
@@ -94,10 +83,10 @@ const Navbar: FC = () => (
     {/* End of Desktop menu */}
 
     {/* Mobile menu  */}
-    <nav className="fixed bottom-0 inset-x-0 bg-gray-50 md:hidden flex justify-between text-sm text-gray-700 uppercase font-mono rounded-t-lg shadow-inner">
+    <nav className="fixed bottom-0 inset-x-0 bg-gray-50 md:hidden flex justify-between text-sm text-gray-700 uppercase font-mono rounded-t-lg shadow-inner z-[10000]">
       <a
         href="#"
-        className="w-full block py-2 px-3 text-center hover:bg-primaryLight hover:text-primary transition duration-300"
+        className="w-full block py-2 px-3 text-center hover:bg-purple-100 hover:text-purple-500 transition duration-300"
       >
         <svg
           className="w-6 h-6 mx-auto"
@@ -114,7 +103,7 @@ const Navbar: FC = () => (
 
       <a
         href="#"
-        className="w-full block py-2 px-3 text-center hover:bg-primaryLight hover:text-primary"
+        className="w-full block py-2 px-3 text-center hover:bg-purple-100 hover:text-purple-500"
       >
         <svg
           className="w-6 h-6 mx-auto"
@@ -132,7 +121,7 @@ const Navbar: FC = () => (
 
       <a
         href="#"
-        className="w-full block py-2 px-3 text-center hover:bg-primaryLight hover:text-primary"
+        className="w-full block py-2 px-3 text-center hover:bg-purple-100 hover:text-purple-500"
       >
         <svg
           className="w-6 h-6 mx-auto"
@@ -149,7 +138,7 @@ const Navbar: FC = () => (
 
       <a
         href="#"
-        className="w-full block py-2 px-3 text-center hover:bg-primaryLight hover:text-primary"
+        className="w-full block py-2 px-3 text-center hover:bg-purple-100 hover:text-purple-500"
       >
         <svg
           className="w-6 h-6 mx-auto"
