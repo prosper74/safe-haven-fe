@@ -7,6 +7,7 @@ export const BUY_PROPERTIES = gql`
       name
       state
       city
+      sittingroom
       bedrooms
       bathroom
       description
@@ -30,6 +31,7 @@ export const RENT_PROPERTIES = gql`
       name
       state
       city
+      sittingroom
       bedrooms
       bathroom
       description
@@ -48,11 +50,15 @@ export const RENT_PROPERTIES = gql`
 
 export const SHORTLET_PROPERTIES = gql`
   query getRentTab {
-    properties(where: { category: { name: "Shortlet" } }, sort: "createdAt:DESC") {
+    properties(
+      where: { category: { name: "Shortlet" } }
+      sort: "createdAt:DESC"
+    ) {
       id
       name
       state
       city
+      sittingroom
       bedrooms
       bathroom
       description
@@ -96,6 +102,7 @@ export const GET_TAB_PROPERTIES = gql`
       name
       state
       city
+      sittingroom
       bedrooms
       bathroom
       description

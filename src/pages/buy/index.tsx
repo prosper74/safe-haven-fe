@@ -41,8 +41,10 @@ const BuyPage: FC<IProps> = ({ properties }) => {
 
       <main className="mt-24">
         <div className="container px-6 xl:px-32 mx-auto bg-white">
-          <h1 className="font-bold text-center text-3xl mt-32 mb-16">Buy Ads</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-32">
+          <h1 className="font-bold text-center text-3xl mt-32 mb-16">
+            Buy Ads
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-1 mb-32">
             {properties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}

@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import { data } from '@src/components/common/properties/sidebar-data';
 import Breadcrumb from '@src/components/common/layouts/breadcrumb';
 import SingleProperty from '@src/components/common/properties/single-property';
+import axios from 'axios';
 
 type Images = {
   url: String;
@@ -70,9 +71,13 @@ export async function getServerSideProps({ params }: GetServerSideProps) {
   const buySingle = params.buySingle;
   const buySingleId = buySingle.slice(buySingle.length - 24);
 
-  const properties = await fetch(
-    `http://localhost:1337/properties?id=${buySingleId}`
-  ).then((res) => res.json());
+  const properties = await axios
+    .get(`${process.env.NEXT_PUBLIC_REST_API}/properties?id=${buySingleId}`)
+    .then((response) => response.data)
+    .catch((err) => {
+      console.error(err);
+    });
+
   return {
     props: {
       buySingle,

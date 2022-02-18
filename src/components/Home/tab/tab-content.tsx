@@ -4,6 +4,7 @@ import PropertyCard from '@src/components/common/properties/property-card';
 import {
   useIsMedium,
   useIsLarge,
+  useIsXLarge,
 } from '@src/components/common/hooks/media-query';
 
 // Import Swiper styles
@@ -36,6 +37,7 @@ interface IProps {
 export const BuyTab: FC<IProps> = ({ properties }) => {
   const isMedium = useIsMedium();
   const isLarge = useIsLarge();
+  const isXLarge = useIsXLarge();
 
   const buyProperties = properties.filter(
     (property) => property.category.name === 'Buy'
@@ -44,8 +46,8 @@ export const BuyTab: FC<IProps> = ({ properties }) => {
   return (
     <div>
       <Swiper
-        slidesPerView={isLarge ? 3 : isMedium ? 2 : 1}
-        spaceBetween={10}
+        slidesPerView={isXLarge ? 4 : isLarge ? 3 : isMedium ? 2 : 1}
+        spaceBetween={2}
         loop={true}
         autoplay={{
           delay: 2500,
@@ -70,6 +72,7 @@ export const BuyTab: FC<IProps> = ({ properties }) => {
 export const RentTab: FC = ({ properties }) => {
   const isMedium = useIsMedium();
   const isLarge = useIsLarge();
+  const isXLarge = useIsXLarge();
 
   const RentProperties = properties.filter(
     (property) => property.category.name === 'Rent'
@@ -78,8 +81,8 @@ export const RentTab: FC = ({ properties }) => {
   return (
     <div>
       <Swiper
-        slidesPerView={isLarge ? 3 : isMedium ? 2 : 1}
-        spaceBetween={15}
+        slidesPerView={isXLarge ? 4 : isLarge ? 3 : isMedium ? 2 : 1}
+        spaceBetween={2}
         loop={true}
         autoplay={{
           delay: 2500,
@@ -104,6 +107,7 @@ export const RentTab: FC = ({ properties }) => {
 export const ShortletTab: FC = ({ properties }) => {
   const isMedium = useIsMedium();
   const isLarge = useIsLarge();
+  const isXLarge = useIsXLarge();
 
   const ShortletProperties = properties.filter(
     (property) => property.category.name === 'Shortlet'
@@ -112,8 +116,8 @@ export const ShortletTab: FC = ({ properties }) => {
   return (
     <div>
       <Swiper
-        slidesPerView={isLarge ? 3 : isMedium ? 2 : 1}
-        spaceBetween={15}
+        slidesPerView={isXLarge ? 4 : isLarge ? 3 : isMedium ? 2 : 1}
+        spaceBetween={2}
         loop={true}
         autoplay={{
           delay: 2500,
