@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-// import Link from 'next/link';
+import Link from 'next/link';
 
 const AgentCard: FC = ({ agent }) => {
   let [isOpen, setIsOpen] = useState(false);
@@ -71,7 +71,7 @@ const AgentCard: FC = ({ agent }) => {
                   Agent Information
                 </Dialog.Title>
                 <div className="my-4">
-                  <p className="text-lg text-gray-500 my-2">
+                  <p className="text-lg text-gray-500 my-2 capitalize">
                     Name: {agent.username}
                   </p>
                   <p className="text-lg text-gray-500 my-2">
@@ -127,7 +127,21 @@ const AgentCard: FC = ({ agent }) => {
                   </p>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 flex justify-between">
+                  <Link
+                    href={`/agent/${agent.username
+                      .toLowerCase()
+                      .replace(/ /g, '-')}&id=${agent.id}`}
+                  >
+                    <a>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 text-base font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      >
+                        View Agent ads
+                      </button>
+                    </a>
+                  </Link>
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-base font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"

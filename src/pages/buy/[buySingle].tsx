@@ -46,7 +46,7 @@ const BuySingle: FC<IProps> = ({ properties }) => {
       <main className="my-24">
         <div className="container px-6 xl:px-32 mx-auto bg-white">
           <Breadcrumb category="Buy" property={property.name} />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-6 mt-6">
             {/* main properties  */}
             <div className="col-span-2">
               <SingleProperty property={property} />
