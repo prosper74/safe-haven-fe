@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
-import { TabContent } from './tab-content';
+import { PropertyFeatures } from './property-features';
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
@@ -24,9 +24,9 @@ const classNames = (...classes: String[]) => {
 //   };
 // }
 
-const PropertyTab: FC = ({ properties }) => {
+const SingleTab: FC = ({ property }) => {
   return (
-    <div className="w-full py-16 items-center">
+    <div className="w-full py-8 items-center">
       <Tab.Group>
         <Tab.List className="flex p-1 space-x-1 bg-purple-100 rounded-xl">
           <Tab
@@ -40,7 +40,7 @@ const PropertyTab: FC = ({ properties }) => {
               )
             }
           >
-            Buy
+            Features
           </Tab>
           <Tab
             className={({ selected }) =>
@@ -53,20 +53,7 @@ const PropertyTab: FC = ({ properties }) => {
               )
             }
           >
-            Rent
-          </Tab>
-          <Tab
-            className={({ selected }) =>
-              classNames(
-                'w-full py-2.5 text-lg leading-5 font-medium text-gray-900 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-500 ring-white ring-opacity-60',
-                selected
-                  ? 'bg-white shadow'
-                  : 'text-gray-700 hover:bg-white/[0.12] hover:text-purple-600'
-              )
-            }
-          >
-            Shortlet
+            Full Description
           </Tab>
         </Tab.List>
         <Tab.Panels className="mt-2">
@@ -76,7 +63,7 @@ const PropertyTab: FC = ({ properties }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            <TabContent properties={properties} tabCategory="Buy" />
+            <PropertyFeatures features={property.features} />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
@@ -84,15 +71,7 @@ const PropertyTab: FC = ({ properties }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            <TabContent properties={properties} tabCategory="Rent" />
-          </Tab.Panel>
-          <Tab.Panel
-            className={classNames(
-              'bg-white rounded-xl py-3',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
-            )}
-          >
-            <TabContent properties={properties} tabCategory="Shortlet" />
+            <p className='text-lg'>{property.description}</p>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
@@ -100,4 +79,4 @@ const PropertyTab: FC = ({ properties }) => {
   );
 };
 
-export default PropertyTab;
+export default SingleTab;

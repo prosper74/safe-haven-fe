@@ -32,15 +32,16 @@ interface IProps {
     category?: Category;
     images?: Images[];
   };
+  tabCategory: String;
 }
 
-export const BuyTab: FC<IProps> = ({ properties }) => {
+export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
   const isMedium = useIsMedium();
   const isLarge = useIsLarge();
   const isXLarge = useIsXLarge();
 
   const buyProperties = properties.filter(
-    (property) => property.category.name === 'Buy'
+    (property) => property.category.name === tabCategory
   );
 
   return (
@@ -62,77 +63,7 @@ export const BuyTab: FC<IProps> = ({ properties }) => {
       </Swiper>
       <div className="flex justify-center my-6">
         <button className="flex justify-center shadow-lg py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
-          View All Buy Ads
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export const RentTab: FC = ({ properties }) => {
-  const isMedium = useIsMedium();
-  const isLarge = useIsLarge();
-  const isXLarge = useIsXLarge();
-
-  const RentProperties = properties.filter(
-    (property) => property.category.name === 'Rent'
-  );
-
-  return (
-    <div>
-      <Swiper
-        slidesPerView={isXLarge ? 4 : isLarge ? 3 : isMedium ? 2 : 1}
-        spaceBetween={2}
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: true,
-        }}
-      >
-        {RentProperties.map((property) => (
-          <SwiperSlide key={property.id} className="my-6">
-            <PropertyCard property={property} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="flex justify-center my-6">
-        <button className="flex justify-center shadow-lg py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
-          View All Rent Ads
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export const ShortletTab: FC = ({ properties }) => {
-  const isMedium = useIsMedium();
-  const isLarge = useIsLarge();
-  const isXLarge = useIsXLarge();
-
-  const ShortletProperties = properties.filter(
-    (property) => property.category.name === 'Shortlet'
-  );
-
-  return (
-    <div>
-      <Swiper
-        slidesPerView={isXLarge ? 4 : isLarge ? 3 : isMedium ? 2 : 1}
-        spaceBetween={2}
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: true,
-        }}
-      >
-        {ShortletProperties.map((property) => (
-          <SwiperSlide key={property.id} className="my-6">
-            <PropertyCard property={property} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="flex justify-center my-6">
-        <button className="flex justify-center shadow-lg py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
-          View All Shortlet Ads
+          View All {tabCategory} Ads
         </button>
       </div>
     </div>

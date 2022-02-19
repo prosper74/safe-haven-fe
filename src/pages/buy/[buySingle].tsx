@@ -58,7 +58,7 @@ const BuySingle: FC<IProps> = ({ properties }) => {
                 <SidebarCard key={d.id} data={d} property={property.name} />
               ))}
             </div>
-          </div>
+          </div>          
         </div>
       </main>
     </>

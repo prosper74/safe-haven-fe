@@ -3,9 +3,34 @@ import Link from 'next/link';
 import Image from 'next/image';
 import PropertyMeta from '@src/components/common/properties/property-meta';
 
-const PropertyCard: FC = ({ property }) => {
+type Images = {
+  url: String;
+};
+
+type Category = {
+  name: String;
+};
+
+interface IProps {
+  property: {
+    id?: String;
+    name?: String;
+    description?: String;
+    price?: Number;
+    category?: Category[];
+    state?: String;
+    city?: String;
+    per?: String;
+    bedrooms?: Number;
+    bathroom?: Number;
+    size?: Number;
+    images?: Images[];
+  };
+}
+
+const PropertyCard: FC<IProps> = ({ property }) => {
   return (
-    <div className="flex justify-center mb-6 mx-2">
+    <div className="flex justify-center mb-6 mx-1">
       {property ? (
         <Link
           href={`/${property.category.name.toLowerCase()}/${property.name

@@ -73,7 +73,7 @@ const ImageSlider: FC<IProps> = ({ property }) => {
           <SwiperSlide key={d.id}>
             <img
               src={d.url}
-              className="rounded-xl shadow-md md:w-32 md:h-32 object-cover"
+              className="rounded-xl shadow-md md:w-32 md:h-24 object-cover"
             />
           </SwiperSlide>
         ))}

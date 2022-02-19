@@ -9,7 +9,7 @@ interface IProps {
     size?: Number;
     sittingroom?: Number;
   };
-  single: {
+  single?: {
     single: Boolean;
   };
 }

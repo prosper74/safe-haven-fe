@@ -3,7 +3,8 @@ import ImageSlider from './image-slider';
 import PropertyMeta from './property-meta';
 import { timeSince } from '@src/components/common/dateFunction';
 import AgentCard from './agent-card';
-// import Link from 'next/link';
+import SingleTab from '@src/components/common/properties/tab/single-tab';
+import { RelatedPropertiesSlide } from './related-properties';
 
 // type Images = {
 //   url: String;
@@ -62,6 +63,9 @@ const SingleProperty: FC = ({ property }) => {
         {property.per ? `/${property.per}` : ''}
       </h3>
       <AgentCard agent={propertyAgent} />
+      <SingleTab property={property} />
+      <h3 className="text-3xl font-medium">Related Properties</h3>
+      <RelatedPropertiesSlide tabCategory={property.type} />
     </section>
   );
 };
