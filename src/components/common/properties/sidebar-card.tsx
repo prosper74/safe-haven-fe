@@ -14,7 +14,7 @@ interface IProps {
 
 const SidebarCard: FC<IProps> = ({ property, data }) => {
   return (
-    <div className="flex justify-center pb-6">
+    <div className="flex justify-center pb-6 sticky top-24">
       <div className="rounded-lg shadow-md bg-purple-100 max-w-sm">
         <div className="p-4">
           <h4 className="text-center text-gray-900 text-2xl font-medium mb-2">

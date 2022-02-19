@@ -28,7 +28,7 @@ import { RelatedPropertiesSlide } from './related-properties';
 // }
 
 const SingleProperty: FC = ({ property }) => {
-  console.log('Property:', property);
+  // console.log('Property:', property);
   const propertyAgent = property.users_permissions_user;
   return (
     <section className="mb-6">
