@@ -51,7 +51,7 @@ export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
         spaceBetween={2}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: true,
         }}
       >

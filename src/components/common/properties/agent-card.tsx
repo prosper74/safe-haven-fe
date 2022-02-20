@@ -2,7 +2,21 @@ import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 
-const AgentCard: FC = ({ agent }) => {
+type Images = {
+  url: String;
+};
+
+interface IProps {
+  agent: {
+    id?: String;
+    username?: String;
+    phone?: Number;
+    verified?: Boolean;
+    image?: Images[];
+  };
+}
+
+const AgentCard: FC<IProps> = ({ agent }) => {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -70,6 +84,11 @@ const AgentCard: FC = ({ agent }) => {
                 >
                   Agent Information
                 </Dialog.Title>
+                <img
+                  src={agent.image.url}
+                  alt={agent.username}
+                  className="w-24 h-24 mt-6 rounded-full object-cover"
+                />
                 <div className="my-4">
                   <p className="text-lg text-gray-500 my-2 capitalize">
                     Name: {agent.username}
@@ -94,18 +113,18 @@ const AgentCard: FC = ({ agent }) => {
                         >
                           <g
                             fill="none"
-                            fill-rule="nonzero"
+                            fillRule="nonzero"
                             stroke="none"
-                            stroke-width="1"
-                            stroke-linecap="butt"
-                            stroke-linejoin="miter"
-                            stroke-miterlimit="10"
-                            stroke-dasharray=""
-                            stroke-dashoffset="0"
-                            font-family="none"
-                            font-weight="none"
-                            font-size="none"
-                            text-anchor="none"
+                            strokeWidth="1"
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            strokeMiterlimit="10"
+                            strokeDasharray=""
+                            strokeDashoffset="0"
+                            fontFamily="none"
+                            fontWeight="none"
+                            fontSize="none"
+                            textAnchor="none"
                           >
                             <path d="M0,172v-172h172v172z" fill="none"></path>
                             <g>
