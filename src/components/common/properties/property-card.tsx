@@ -30,12 +30,13 @@ interface IProps {
 
 const PropertyCard: FC<IProps> = ({ property }) => {
   return (
-    <div className="flex justify-center mb-6 mx-1">
+    <div className="flex justify-center mb-2 mx-1">
       {property ? (
         <Link
-          href={`/${property.category.name.toLowerCase()}/${property.name
-            .toLowerCase()
-            .replace(/ /g, '-')}&id=${property.id}`}
+          href={
+            `/${property.category.name.toLowerCase()}/${property.name
+              .toLowerCase()
+              .replace(/ /g, '-')}&id=${property.id}`}
         >
           <a>
             <div className="rounded-lg shadow-lg bg-white max-w-sm">
@@ -62,7 +63,7 @@ const PropertyCard: FC<IProps> = ({ property }) => {
                 {/* End of Meta Description  */}
                 {/* Price  */}
                 <h3 className="text-purple-600 font-bold text-xl mt-2">
-                  ₦{property.price.toLocaleString()}
+                  ₦{Number(property.price).toLocaleString()}
                   {property.per ? `/${property.per}` : ''}
                 </h3>
               </div>

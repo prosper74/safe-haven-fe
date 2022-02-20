@@ -19,7 +19,6 @@ const SidebarCard: FC<IProps> = ({ property, data }) => {
         <div className="p-4">
           <h4 className="text-center text-gray-900 text-2xl font-medium mb-2">
             {data.heading}
-            {/* {property.name.substring(0, 25)} */}
           </h4>
           <p className="text-gray-900 text-center text-lg font-light mb-2">
             {data.description}
