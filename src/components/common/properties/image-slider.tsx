@@ -59,7 +59,7 @@ const ImageSlider: FC<IProps> = ({ property }) => {
           property.length < 2
             ? 1
             : property.length < 3
-            ? 2
+            ? 4
             : property.length > 2 && isXLarge
             ? 6
             : 5
@@ -73,7 +73,7 @@ const ImageSlider: FC<IProps> = ({ property }) => {
           <SwiperSlide key={d.id}>
             <img
               src={d.url}
-              className="rounded-xl shadow-md md:w-32 md:h-24 object-cover"
+              className="rounded-xl shadow-md md:w-32 md:h-24 w-full h-20 object-cover"
             />
           </SwiperSlide>
         ))}

@@ -6,6 +6,8 @@ module.exports = {
   },
   theme: {
     screens: {
+      xs: '340px',
+      // => @media (min-width: 640px) { ... }
       sm: '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -25,9 +27,9 @@ module.exports = {
       colors: {
         primary: '#67009b',
         primaryLight: '#e7b8ff',
-        'gray-700': '#273444',
-        gray: '#8492a6',
-        'gray-50': '#f8fafc',
+        // 'gray-700': '#273444',
+        // gray: '#8492a6',
+        // 'gray-50': '#f8fafc',
       },
       width: {
         130: '62rem',

@@ -44,7 +44,7 @@ const RentSingle: FC<IProps> = ({ properties }) => {
       </Head>
 
       <main className="my-24">
-        <div className="container px-6 xl:px-32 mx-auto bg-white">
+        <div className="container xs:px-0 md:px-6 xl:px-32 mx-auto bg-white">
           <Breadcrumb category="Rent" property={property.name} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-6 mt-6">
             {/* main properties  */}

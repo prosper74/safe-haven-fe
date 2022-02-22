@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 const HowItWorks: FC = () => (
   <section className="py-10 bg-white">
-    <div className="container px-6 mx-auto">
+    <div className="container xs:px-0 md:px-6 mx-auto">
       <div className="mb-10 text-center">
         <span className="block mb-9 text-xs leading-4 font-medium uppercase tracking-widest text-gray-500">
           How it works

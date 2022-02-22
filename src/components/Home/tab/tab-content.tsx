@@ -14,6 +14,7 @@ import 'swiper/css/pagination';
 
 // install Swiper modules
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
+import Link from 'next/link';
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 type Images = {
@@ -62,9 +63,11 @@ export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
         ))}
       </Swiper>
       <div className="flex justify-center my-6">
-        <button className="flex justify-center shadow-lg py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
-          View All {tabCategory} Ads
-        </button>
+        <Link href={`/${tabCategory.toLocaleLowerCase()}`}>
+          <button className="flex justify-center shadow-lg py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
+            View All {tabCategory} Ads
+          </button>
+        </Link>
       </div>
     </div>
   );

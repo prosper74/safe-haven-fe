@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 const CTASection: FC = () => (
   <div className="bg-white dark:bg-gray-800 flex relative items-center overflow-hidden my-16">
-    <div className="container mx-auto px-6 flex relative py-16">
+    <div className="container mx-auto xs:px-0 md:px-6 flex relative py-16">
       <div className="w-full md:w-1/2 flex flex-col relative xl:pl-20">
         <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12"></span>
         <h1 className="font-bebas-neue uppercase text-3xl md:text-5xl xl:text-6xl font-black flex flex-col leading-none dark:text-white text-gray-800">

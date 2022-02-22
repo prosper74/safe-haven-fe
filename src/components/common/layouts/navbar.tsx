@@ -1,9 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import UserDropdown from './user-dropdown';
+import Login from '@src/components/auth/login';
 
 const Navbar: FC = () => {
   const [selectedNav, setSelectedNav] = useState('');
+  const [user, setUser] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (window.location.href.indexOf('/buy') > -1) {
@@ -16,6 +19,10 @@ const Navbar: FC = () => {
       setSelectedNav('');
     }
   });
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="container text-center mx-auto">
@@ -64,44 +71,57 @@ const Navbar: FC = () => {
               </li>
             </ul>
 
-            <div className="flex items-center ml-auto">
-              <Link href="#">
-                <a className="hidden sm:flex text-gray-500 hover:text-purple-500">
-                  <svg
-                    width="20"
-                    height="23"
-                    viewBox="0 0 20 23"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M17.5219 18.016H2.70312V8.5933C2.70313 6.719 3.48375 4.92147 4.87328 3.59614C6.2628 2.27081 8.1474 1.52625 10.1125 1.52625C12.0776 1.52625 13.9622 2.27081 15.3517 3.59614C16.7412 4.92147 17.5219 6.719 17.5219 8.5933V18.016Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                    <path
-                      d="M1 18.0121H19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                    <path
-                      d="M8.87891 22H10.8789"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
-                </a>
-              </Link>
-              <div className="w-px h-8 bg-gray bg-opacity-50 ml-6 mr-6" />
+            {/* User buttons  */}
+            {user ? (
+              <div className="flex items-center ml-auto">
+                <Link href="#">
+                  <a className="hidden sm:flex text-gray-500 hover:text-purple-500">
+                    <svg
+                      width="20"
+                      height="23"
+                      viewBox="0 0 20 23"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.5219 18.016H2.70312V8.5933C2.70313 6.719 3.48375 4.92147 4.87328 3.59614C6.2628 2.27081 8.1474 1.52625 10.1125 1.52625C12.0776 1.52625 13.9622 2.27081 15.3517 3.59614C16.7412 4.92147 17.5219 6.719 17.5219 8.5933V18.016Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>
+                      <path
+                        d="M1 18.0121H19"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>
+                      <path
+                        d="M8.87891 22H10.8789"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </Link>
+                <div className="w-px h-8 bg-gray bg-opacity-50 ml-6 mr-6" />
 
-              <UserDropdown />
-            </div>
+                <UserDropdown />
+              </div>
+            ) : (
+              <div className="flex justify-center ml-auto">
+                <button
+                  type="button"
+                  onClick={openModal}
+                  className="flex justify-center shadow-lg xs:py-1 my-2 md:py-3 xs:px-2 md:px-5 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter xs:text-lg md:text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl"
+                >
+                  Create Ad
+                </button>
+              </div>
+            )}
           </div>
         </nav>
       </section>
@@ -176,6 +196,9 @@ const Navbar: FC = () => {
         </Link>
       </nav>
       {/* Mobile menu ends here  */}
+
+      {/* Auth Modal Popup */}
+      <Login isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
