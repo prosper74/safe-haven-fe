@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
-import { PropertyFeatures } from './property-features';
+import { PropertyFeatures } from './propertyFeatures';
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');

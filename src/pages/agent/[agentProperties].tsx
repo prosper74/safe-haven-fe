@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
-import AgentSidebar from '@src/components/common/properties/agent/agent-sidebar';
-import PropertyCard from '@src/components/common/properties/property-card';
+import AgentSidebar from '@src/components/common/properties/agent/agentSidebar';
+import PropertyCard from '@src/components/common/properties/propertyCard';
 
 type Images = {
   url: String;
@@ -34,7 +34,7 @@ interface IProps {
 
 const BuySingle: FC<IProps> = ({ properties }) => {
   const agent = properties[0].users_permissions_user;
-  console.log('Properties:', agent);
+  // console.log('Properties:', agent);
   return (
     <>
       <Head>

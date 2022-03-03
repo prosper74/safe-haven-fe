@@ -1,11 +1,15 @@
 import React, { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
-import UserDropdown from './user-dropdown';
-import Login from '@src/components/auth/login';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import UserDropdown from './userDropdown';
+import AuthPortal from '@src/components/auth';
 
 const Navbar: FC = () => {
+  const user = useSelector((state: RootStateOrAny) => state.user);
+
+  // console.log('userww', user);
+
   const [selectedNav, setSelectedNav] = useState('');
-  const [user, setUser] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -19,10 +23,6 @@ const Navbar: FC = () => {
       setSelectedNav('');
     }
   });
-
-  function openModal() {
-    setIsOpen(true);
-  }
 
   return (
     <div className="container text-center mx-auto">
@@ -72,7 +72,7 @@ const Navbar: FC = () => {
             </ul>
 
             {/* User buttons  */}
-            {user ? (
+            {user.jwt && user.onboarding ? (
               <div className="flex items-center ml-auto">
                 <Link href="#">
                   <a className="hidden sm:flex text-gray-500 hover:text-purple-500">
@@ -115,8 +115,8 @@ const Navbar: FC = () => {
               <div className="flex justify-center ml-auto">
                 <button
                   type="button"
-                  onClick={openModal}
-                  className="flex justify-center shadow-lg xs:py-1 my-2 md:py-3 xs:px-2 md:px-5 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter xs:text-lg md:text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl"
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="flex justify-center shadow-lg xs:py-1 my-2 md:py-2 xs:px-2 md:px-5 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter xs:text-lg md:text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl"
                 >
                   Create Ad
                 </button>
@@ -198,7 +198,7 @@ const Navbar: FC = () => {
       {/* Mobile menu ends here  */}
 
       {/* Auth Modal Popup */}
-      <Login isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AuthPortal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

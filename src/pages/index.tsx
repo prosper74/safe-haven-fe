@@ -4,27 +4,10 @@ import Head from 'next/head';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GET_TAB_PROPERTIES } from '@src/apollo/queries';
 import HomeBanner from '@src/components/Home/banner';
-import HowItWorks from '@src/components/Home/how-it-works';
+import HowItWorks from '@src/components/Home/howItWorks';
 import FeaturedProperties from '@src/components/Home/featured';
-import CTASection from '@src/components/Home/cta-section';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
-
-interface IProps {
-  properties: {
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    images?: Images[];
-  };
-}
+import CTASection from '@src/components/Home/ctaSection';
+import { IProps } from '@src/components/common/interfaces';
 
 const Home: FC<IProps> = ({ properties }) => {
   return (

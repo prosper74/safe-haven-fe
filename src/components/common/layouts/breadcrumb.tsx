@@ -2,10 +2,8 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 
 interface IProps {
-  property: {
-    name: String;
-  };
-  category: String;
+  property: string;
+  category: string;
 }
 
 const Breadcrumb: FC<IProps> = ({ property, category }) => {

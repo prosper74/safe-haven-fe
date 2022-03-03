@@ -3,14 +3,15 @@ import { timeSince } from '../../dateFunction';
 
 interface IProps {
   agent: {
-    username?: String;
-    phone?: Number;
-    verified?: Boolean;
+    username?: string;
+    phone?: number;
+    verified?: boolean;
+    createdAt: number;
     image?: {
-      url: String;
+      url: string;
     };
   };
-  totalCount?: Number;
+  totalCount?: number;
 }
 
 const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
@@ -18,7 +19,7 @@ const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
     <div className="sticky top-24 mb-6">
       <div className="py-2 px-4 rounded-xl shadow-md bg-purple-100">
         <img
-          src={agent.image.url}
+          src={agent.image ? agent.image.url : '/logoIcon.svg'}
           alt={agent.username}
           className="w-40 h-40 mt-6 rounded-full object-cover"
         />

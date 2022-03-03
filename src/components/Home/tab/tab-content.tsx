@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PropertyCard from '@src/components/common/properties/property-card';
+import PropertyCard from '@src/components/common/properties/propertyCard';
 import {
   useIsMedium,
   useIsLarge,
   useIsXLarge,
-} from '@src/components/common/hooks/media-query';
+} from '@src/components/common/hooks/mediaQuery';
 
 // Import Swiper styles
 import 'swiper/css';

@@ -3,33 +3,12 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { SHORTLET_PROPERTIES } from '@src/apollo/queries';
-import PropertyCard from '@src/components/common/properties/property-card';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import PropertyCard from '@src/components/common/properties/propertyCard';
+import { IProperty } from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: {
-    id?: String;
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    state?: String;
-    city?: String;
-    per?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    images?: Images[];
-  };
+  properties: IProperty[]
 }
-
 const ShortletPage: FC<IProps> = ({ properties }) => {
   return (
     <>

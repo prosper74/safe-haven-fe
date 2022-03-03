@@ -2,15 +2,15 @@ import React, { FC } from 'react';
 
 interface IProps {
   property: {
-    state?: String;
-    city?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    sittingroom?: Number;
+    state?: string;
+    city?: string;
+    bedrooms?: number;
+    bathroom?: number;
+    size?: number;
+    sittingroom?: number;
   };
   single?: {
-    single: Boolean;
+    single: boolean;
   };
 }
 

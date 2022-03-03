@@ -1,39 +1,23 @@
 import React, { FC } from 'react';
-import ImageSlider from './image-slider';
-import PropertyMeta from './property-meta';
+import ImageSlider from './imageSlider';
+import PropertyMeta from './propertyMeta';
 import { timeSince } from '@src/components/common/dateFunction';
-import AgentCard from './agent-card';
-import SingleTab from '@src/components/common/properties/tab/single-tab';
-import { RelatedPropertiesSlide } from './related-properties';
+import AgentCard from './agentCard';
+import SingleTab from '@src/components/common/properties/tab/singleTab';
+import { RelatedPropertiesSlide } from './relatedProperties';
+import { IProperty } from '../interfaces';
 
-// type Images = {
-//   url: String;
-// };
+interface IProps {
+  property: IProperty;
+}
 
-// interface IProps {
-//   property: {
-//     id?: String;
-//     name?: String;
-//     description?: String;
-//     price?: Number;
-//     category?: String;
-//     state?: String;
-//     city?: String;
-//     per?: String;
-//     bedrooms?: Number;
-//     bathroom?: Number;
-//     size?: Number;
-//     images?: Images[];
-//   };
-// }
-
-const SingleProperty: FC = ({ property }) => {
+const SingleProperty: FC<IProps> = ({ property }) => {
   // console.log('Property:', property);
   const propertyAgent = property.users_permissions_user;
   return (
     <section className="mb-6">
       {/* Property Image Slide */}
-      <ImageSlider property={property.images} />
+      <ImageSlider property={property} />
 
       {/* Property Name  */}
       <h3 className="font-bold text-2xl md:text-3xl mt-8">{property.name}</h3>

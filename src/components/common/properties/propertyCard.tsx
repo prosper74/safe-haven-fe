@@ -1,31 +1,11 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import PropertyMeta from '@src/components/common/properties/property-meta';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import PropertyMeta from '@src/components/common/properties/propertyMeta';
+import { IProperty } from '../interfaces';
 
 interface IProps {
-  property: {
-    id?: String;
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category[];
-    state?: String;
-    city?: String;
-    per?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    images?: Images[];
-  };
+  property: IProperty;
 }
 
 const PropertyCard: FC<IProps> = ({ property }) => {
@@ -34,15 +14,18 @@ const PropertyCard: FC<IProps> = ({ property }) => {
       {property ? (
         <Link
           href={
-            `/${property.category.name.toLowerCase()}/${property.name
-              .toLowerCase()
-              .replace(/ /g, '-')}&id=${property.id}`}
+            property.name
+              ? `/${property?.category?.name.toLowerCase()}/${property?.name
+                  .toLowerCase()
+                  .replace(/ /g, '-')}&id=${property.id}`
+              : ''
+          }
         >
           <a>
             <div className="rounded-lg shadow-lg bg-white max-w-sm">
               <a data-mdb-ripple="true" data-mdb-ripple-color="light">
                 <Image
-                  src={property.images[0].url}
+                  src={property.images ? `${property.images[0].url}` : ''}
                   alt={property.name}
                   width={500}
                   height={350}
@@ -56,7 +39,7 @@ const PropertyCard: FC<IProps> = ({ property }) => {
               </a>
               <div className="p-4">
                 <h4 className="text-gray-900 text-xl font-medium mb-2">
-                  {property.name.substring(0, 23)}
+                  {property?.name?.substring(0, 23)}
                 </h4>
                 {/* Location */}
                 <PropertyMeta property={property} />

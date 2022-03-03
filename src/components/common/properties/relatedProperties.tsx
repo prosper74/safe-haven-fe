@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PropertyCard from '@src/components/common/properties/property-card';
+import PropertyCard from '@src/components/common/properties/propertyCard';
 import {
   useIsLarge,
   useIsXLarge,
-} from '@src/components/common/hooks/media-query';
+} from '@src/components/common/hooks/mediaQuery';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,11 +17,11 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 interface IProps {
-  tabCategory: String;
+  tabCategory: string[];
 }
 
 export const RelatedPropertiesSlide: FC<IProps> = ({ tabCategory }) => {
-  const [properties, setProperties] = useState([]);
+  const [properties, setProperties] = useState<any[]>([]);
 
   useEffect(() => {
     axios

@@ -1,11 +1,11 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
-import SidebarCard from '@src/components/common/properties/sidebar-card';
+import SidebarCard from '@src/components/common/properties/sidebarCard';
 import { GetServerSideProps } from 'next';
-import { data } from '@src/components/common/properties/sidebar-data';
+import { data } from '@src/components/common/properties/sidebarData';
 import Breadcrumb from '@src/components/common/layouts/breadcrumb';
-import SingleProperty from '@src/components/common/properties/single-property';
+import SingleProperty from '@src/components/common/properties/singleProperty';
 import axios from 'axios';
 
 type Images = {

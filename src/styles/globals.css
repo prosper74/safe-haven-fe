@@ -16,3 +16,8 @@
   background-color: #430064;
   cursor: pointer;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #eecbff !important;
+}

@@ -1,23 +1,20 @@
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
-
-type Images = {
-  url: String;
-};
+import { Image } from '../interfaces';
 
 interface IProps {
   agent: {
-    id?: String;
-    username?: String;
-    phone?: Number;
-    verified?: Boolean;
-    image?: Images[];
+    id?: string;
+    username?: string;
+    phone?: number;
+    verified?: boolean;
+    image?: Image;
   };
 }
 
 const AgentCard: FC<IProps> = ({ agent }) => {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -85,7 +82,7 @@ const AgentCard: FC<IProps> = ({ agent }) => {
                   Agent Information
                 </Dialog.Title>
                 <img
-                  src={agent.image.url}
+                  src={agent?.image?.url}
                   alt={agent.username}
                   className="w-24 h-24 mt-6 rounded-full object-cover"
                 />
@@ -148,9 +145,13 @@ const AgentCard: FC<IProps> = ({ agent }) => {
 
                 <div className="mt-4 flex justify-between">
                   <Link
-                    href={`/agent/${agent.username
-                      .toLowerCase()
-                      .replace(/ /g, '-')}&id=${agent.id}`}
+                    href={
+                      agent.username
+                        ? `/agent/${agent.username
+                            .toLowerCase()
+                            .replace(/ /g, '-')}&id=${agent.id}`
+                        : ''
+                    }
                   >
                     <a>
                       <button
