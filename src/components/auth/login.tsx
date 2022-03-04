@@ -16,8 +16,10 @@ const schema = z.object({
   email: z.string().email().nonempty({ message: 'Invalid email' }),
   password: z
     .string()
-    .min(8, { message: 'Password must be atleast 8 characters' })
-    .nonempty(),
+    .regex(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      'Password must be atleast 8 characters, and must contain uppercase, lowercase, number and special character'
+    ),
 });
 
 const Login: FC<IProps> = ({ setIsOpen }) => {
