@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 // import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import Login from './login';
 import Signup from './Signup';
+import ForgotPassword from './ForgotPassword';
 // import Link from 'next/link';
 
 interface IProps {
@@ -19,7 +20,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
 
   const steps = [
     { component: Login, label: 'Login' },
-    // { component: ForgotPassword, label: 'Forgot Password' },
+    { component: ForgotPassword, label: 'Forgot Password' },
     { component: Signup, label: 'Sign Up' },
     // { component: Complete, label: 'Complete' },
     // { component: Reset, label: 'Reset' },
@@ -67,7 +68,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-2 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <Signup setIsOpen={setIsOpen} />
+                <ForgotPassword setIsOpen={setIsOpen} />
               </div>
             </Transition.Child>
           </div>
