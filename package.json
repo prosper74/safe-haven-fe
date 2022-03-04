@@ -29,7 +29,8 @@
     "react-hook-form": "^7.27.1",
     "react-redux": "^7.2.6",
     "swiper": "^8.0.3",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zod": "^3.13.4"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.11.3",

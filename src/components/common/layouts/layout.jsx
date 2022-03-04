@@ -1,13 +1,22 @@
 // components/layout.js
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Navbar from './navbar';
 import Footer from './footer';
-// import { ApolloWrapper } from '@src/apollo/apolloWrapper';
+import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 
 export default function Layout({ children }) {
+  const dispatch = useDispatch();
   const feedback = useSelector((state) => state.feedback);
-  // const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setSnackbar({ open: false }));
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  });
+
   return (
     <>
       {/* <ApolloWrapper> */}
