@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@src/store/reducers/userReducer';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 
 interface IProps {
@@ -12,6 +11,7 @@ interface IProps {
 }
 
 const schema = z.object({
+  name: z.string().min(5, { message: 'Name must be at at least 5 characters' }),
   email: z.string().email().nonempty({ message: 'Invalid email' }),
   password: z
     .string()
@@ -21,7 +21,7 @@ const schema = z.object({
     ),
 });
 
-const Login: FC<IProps> = ({ setIsOpen }) => {
+const Signup: FC<IProps> = ({ setIsOpen }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,22 +38,16 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
     axios
-      .post(`${process.env.NEXT_PUBLIC_REST_API}/auth/local`, {
-        identifier: data.email,
+      .post(`${process.env.NEXT_PUBLIC_REST_API}/auth/local/register`, {
+        username: data.name,
+        email: data.email,
         password: data.password,
       })
-      .then((response) => {
-        dispatch(
-          setUser({
-            ...response.data.user,
-            jwt: response.data.jwt,
-            onboarding: true,
-          })
-        );
+      .then(() => {
         dispatch(
           setSnackbar({
             status: 'success',
-            message: ` Welcome Back ${response.data.user.username.toUpperCase()}`,
+            message: ` Account created, please check you inbox to verify your email`,
             open: true,
           })
         );
@@ -79,6 +73,31 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
             {/* Local Login */}
             <div className="px-5 py-4">
               <form>
+                <div className="mb-5">
+                  <label
+                    htmlFor="name"
+                    className={`font-semibold text-base pb-1 block ${
+                      errors.name ? 'text-red-500' : 'text - gray - 600'
+                    }`}
+                  >
+                    Full name
+                  </label>
+                  <input
+                    id="name"
+                    autoComplete="name"
+                    type="text"
+                    {...register('name')}
+                    className={`focus:outline-gray-700 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                      errors.name &&
+                      'border-red-500 text-red-500 focus:outline-red-500'
+                    }`}
+                  />
+                  {errors.name?.message && (
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors.name?.message}
+                    </p>
+                  )}
+                </div>
                 <div className="mb-5">
                   <label
                     htmlFor="email"
@@ -173,7 +192,7 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
                       : 'hover:bg-purple-700 text-white'
                   }`}
                 >
-                  <span className="mr-2">Login</span>
+                  <span className="mr-2">Sign up</span>
                   {loading ? (
                     <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
                   ) : (
@@ -230,53 +249,9 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
                 </button>
               </div>
             </div>
-
-            {/* Forgot Password and Help */}
-            <div className="py-1">
-              <div className="grid grid-cols-2 gap-1">
-                <div className="text-center sm:text-left whitespace-nowrap">
-                  <button className="transition duration-200 mx-5 px-5 py-4 font-normal text-base rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4 inline-block align-text-top"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span className="ml-1">Forgot Password</span>
-                  </button>
-                </div>
-                <div className="text-center sm:text-right whitespace-nowrap">
-                  <button className="transition duration-200 mx-5 px-5 py-4 font-normal text-base rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4 inline-block align-text-bottom	"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                      />
-                    </svg>
-                    <span className="inline-block ml-1">Help</span>
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Create New Account  */}
+          {/* Login Instead  */}
           <div className="py-1">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <div className="text-center sm:text-left whitespace-nowrap">
@@ -285,11 +260,12 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
                     width="22"
                     height="22"
                     xmlns="http://www.w3.org/2000/svg"
+                    enable-background="new 0 0 24 24"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M21,10.5H20v-1a1,1,0,0,0-2,0v1H17a1,1,0,0,0,0,2h1v1a1,1,0,0,0,2,0v-1h1a1,1,0,0,0,0-2Zm-7.7,1.72A4.92,4.92,0,0,0,15,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,2,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,13.3,12.22ZM10,11.5a3,3,0,1,1,3-3A3,3,0,0,1,10,11.5Z" />
+                    <path d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z" />
                   </svg>
-                  <span className="inline-block ml-1">Create Account</span>
+                  <span className="inline-block ml-1">Login instead</span>
                 </button>
               </div>
               <button
@@ -307,4 +283,4 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -12,7 +12,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(setSnackbar({ open: false }));
-    }, 5000);
+    }, 6000);
 
     return () => clearTimeout(timer);
   });
