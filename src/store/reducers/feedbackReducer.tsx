@@ -4,7 +4,6 @@ export const initialState = {
   status: '',
   message: '',
   open: false,
-  backgroundColor: '',
 };
 
 export const feedbackReducer = createSlice({
@@ -14,8 +13,6 @@ export const feedbackReducer = createSlice({
     setSnackbar: (state, action) => ({
       ...state,
       ...action.payload,
-      backgroundColor:
-        action.payload.status === 'error' ? '#FF3232' : '#4BB543',
     }),
   },
 });

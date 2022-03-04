@@ -44,7 +44,6 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
         password: data.password,
       })
       .then((response) => {
-        // console.log('Strapi Response:', response);
         dispatch(
           setUser({
             ...response.data.user,
@@ -52,7 +51,13 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
             onboarding: true,
           })
         );
-        dispatch(setSnackbar({ open: false }));
+        dispatch(
+          setSnackbar({
+            status: 'success',
+            message: ` Welcome Back ${response.data.user.username.toUpperCase()}`,
+            open: true,
+          })
+        );
         setLoading(false);
         setIsOpen(false);
       })

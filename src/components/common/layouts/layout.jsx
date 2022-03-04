@@ -24,11 +24,15 @@ export default function Layout({ children }) {
       {/* Feedback snackbar */}
       {feedback.open && (
         <div
-          className="transition duration-200 bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-4 rounded-xl fixed top-16 inset-x-0 z-[20000]"
+          className={`transition duration-200 border px-4 py-3 mx-4 rounded-xl fixed top-20 inset-x-0 z-[20000] ${
+            feedback.status === 'error'
+              ? 'bg-red-100 border-red-400 text-red-700'
+              : 'bg-green-100 border-green-400 text-gray-900'
+          }`}
           role="alert"
         >
           <strong className="font-bold">
-            {feedback.status === 'error' ? 'Error! ' : ''}
+            {feedback.status === 'error' ? 'Error! ' : 'Success! '}
           </strong>
           <span className="block sm:inline">{feedback.message}</span>
           <span
@@ -36,7 +40,9 @@ export default function Layout({ children }) {
             onClick={() => dispatch(setSnackbar({ open: false }))}
           >
             <svg
-              className="fill-current h-6 w-6 text-red-500"
+              className={`fill-current h-6 w-6 ${
+                feedback.status === 'error' ? 'text-red-500' : 'text-green-500'
+              }`}
               role="button"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
