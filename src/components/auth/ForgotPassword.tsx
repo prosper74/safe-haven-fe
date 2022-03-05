@@ -16,7 +16,6 @@ const schema = z.object({
 
 const ForgotPassword: FC<IProps> = ({ setIsOpen }) => {
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const {

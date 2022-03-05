@@ -6,18 +6,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDispatch } from 'react-redux';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
-
-interface IProps {
-  setIsOpen: (open: boolean) => void;
-}
+import Link from 'next/link';
 
 const schema = z.object({
-  email: z.string().email().nonempty({ message: 'Invalid email' }),
+  password: z
+    .string()
+    .regex(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      'Password must be atleast 8 characters, and must contain uppercase, lowercase, number and special character'
+    ),
+  confirmPassword: z.string(),
 });
 
-const ResetPasswordPage: FC<IProps> = ({ setIsOpen }) => {
+const ResetPasswordPage: FC = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -44,7 +48,6 @@ const ResetPasswordPage: FC<IProps> = ({ setIsOpen }) => {
           })
         );
         setLoading(false);
-        setIsOpen(false);
       })
       .catch((error) => {
         const { message } = error.response.data.message[0].messages[0];
@@ -53,26 +56,21 @@ const ResetPasswordPage: FC<IProps> = ({ setIsOpen }) => {
       });
   });
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   return (
     <>
       <Head>
-        <title>Safe Haven | Buy</title>
+        <title>Safe Haven | Reset Password</title>
         <link rel="icon" href="/favicon.png" />
-        <meta content="View all ads of properties that are to be sold" />
+        <meta content="Reset your password" />
       </Head>
 
       <div className="flex flex-col justify-center mt-16 p-16">
         <div className="p-4 xs:p-0 mx-auto md:w-full md:max-w-md shadow-lg rounded-lg">
           <p className="text-2xl font-bold text-center mt-6">
-            Forgot Password?
+            Reset Your Password?
           </p>
           <p className="text-base font-normal text-center px-4">
-            Kindly input your registered email address, and we will send an
-            email with instructions on how to reset your password
+            Kindly input your new password and conrfim the password
           </p>
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             {/* Local Login */}
@@ -80,29 +78,129 @@ const ResetPasswordPage: FC<IProps> = ({ setIsOpen }) => {
               <form>
                 <div className="mb-5">
                   <label
-                    htmlFor="email"
+                    htmlFor="password"
                     className={`font-semibold text-base pb-1 block ${
-                      errors.email ? 'text-red-500' : 'text - gray - 600'
+                      errors.password ? 'text-red-500' : 'text - gray - 600'
                     }`}
                   >
-                    Email
+                    New Password
                   </label>
-                  <input
-                    id="email"
-                    autoComplete="email"
-                    type="text"
-                    {...register('email')}
-                    className={`focus:outline-gray-700 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                      errors.email &&
-                      'border-red-500 text-red-500 focus:outline-red-500'
-                    }`}
-                  />
-                  {errors.email?.message && (
+                  <div className="relative">
+                    <input
+                      id="password"
+                      type={showPassword ? 'text' : 'password'}
+                      {...register('password')}
+                      className={`focus:outline-gray-700 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.password &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    />
+                    <div
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 pt-3 transition duration-200"
+                    >
+                      {showPassword ? (
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M10.94,6.08A6.93,6.93,0,0,1,12,6c3.18,0,6.17,2.29,7.91,6a15.23,15.23,0,0,1-.9,1.64,1,1,0,0,0-.16.55,1,1,0,0,0,1.86.5,15.77,15.77,0,0,0,1.21-2.3,1,1,0,0,0,0-.79C19.9,6.91,16.1,4,12,4a7.77,7.77,0,0,0-1.4.12,1,1,0,1,0,.34,2ZM3.71,2.29A1,1,0,0,0,2.29,3.71L5.39,6.8a14.62,14.62,0,0,0-3.31,4.8,1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20a9.26,9.26,0,0,0,5.05-1.54l3.24,3.25a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Zm6.36,9.19,2.45,2.45A1.81,1.81,0,0,1,12,14a2,2,0,0,1-2-2A1.81,1.81,0,0,1,10.07,11.48ZM12,18c-3.18,0-6.17-2.29-7.9-6A12.09,12.09,0,0,1,6.8,8.21L8.57,10A4,4,0,0,0,14,15.43L15.59,17A7.24,7.24,0,0,1,12,18Z"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  {errors.password?.message && (
                     <p className="text-red-500 text-sm mt-2">
-                      {errors.email?.message}
+                      {errors.password?.message}
                     </p>
                   )}
                 </div>
+
+                <div className="mb-5">
+                  <label
+                    htmlFor="confirmPassword"
+                    className={`font-semibold text-base pb-1 block ${
+                      errors.confirmPassword
+                        ? 'text-red-500'
+                        : 'text - gray - 600'
+                    }`}
+                  >
+                    Confirm Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      {...register('confirmPassword')}
+                      className={`focus:outline-gray-700 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.confirmPassword &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    />
+                    <div
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="absolute inset-y-0 right-0 pr-3 pt-3 transition duration-200"
+                    >
+                      {showConfirmPassword ? (
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M10.94,6.08A6.93,6.93,0,0,1,12,6c3.18,0,6.17,2.29,7.91,6a15.23,15.23,0,0,1-.9,1.64,1,1,0,0,0-.16.55,1,1,0,0,0,1.86.5,15.77,15.77,0,0,0,1.21-2.3,1,1,0,0,0,0-.79C19.9,6.91,16.1,4,12,4a7.77,7.77,0,0,0-1.4.12,1,1,0,1,0,.34,2ZM3.71,2.29A1,1,0,0,0,2.29,3.71L5.39,6.8a14.62,14.62,0,0,0-3.31,4.8,1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20a9.26,9.26,0,0,0,5.05-1.54l3.24,3.25a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Zm6.36,9.19,2.45,2.45A1.81,1.81,0,0,1,12,14a2,2,0,0,1-2-2A1.81,1.81,0,0,1,10.07,11.48ZM12,18c-3.18,0-6.17-2.29-7.9-6A12.09,12.09,0,0,1,6.8,8.21L8.57,10A4,4,0,0,0,14,15.43L15.59,17A7.24,7.24,0,0,1,12,18Z"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  {errors.confirmPassword?.message && (
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors.confirmPassword?.message}
+                    </p>
+                  )}
+                </div>
+
+                {confirmPasswordError && (
+                  <p className="text-red-500 text-sm mt-2">
+                    Passwords do not match
+                  </p>
+                )}
 
                 <button
                   type="button"
@@ -155,13 +253,14 @@ const ResetPasswordPage: FC<IProps> = ({ setIsOpen }) => {
                   <span className="inline-block ml-1">Login instead</span>
                 </button>
               </div>
-              <button
-                type="button"
-                className="inline-flex justify-center items-center  text-base font-medium text-gray-500 border-transparent rounded-md hover:bg-gray-200"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
+              <Link href="/">
+                <button
+                  type="button"
+                  className="inline-flex justify-center items-center  text-base font-medium text-gray-500 border-transparent rounded-md hover:bg-gray-200"
+                >
+                  Cancel
+                </button>
+              </Link>
             </div>
           </div>
         </div>
