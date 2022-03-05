@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import UserDropdown from './userDropdown';
 import AuthPortal from '@src/components/auth';
+import LoginPopupButton from '../buttons/loginPopup';
 
 const Navbar: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
@@ -108,19 +109,14 @@ const Navbar: FC = () => {
                   </a>
                 </Link>
                 <div className="w-px h-8 bg-gray bg-opacity-50 ml-6 mr-6" />
-
                 <UserDropdown />
               </div>
             ) : (
-              <div className="flex justify-center ml-auto">
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="flex justify-center shadow-lg xs:py-1 my-2 md:py-2 xs:px-2 md:px-5 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter xs:text-lg md:text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl"
-                >
-                  Create Ad
-                </button>
-              </div>
+              <LoginPopupButton
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                buttonText="Create Ad"
+              />
             )}
           </div>
         </nav>

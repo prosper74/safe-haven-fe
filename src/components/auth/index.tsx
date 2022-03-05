@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 // import axios from 'axios';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import { setUser } from '@src/store/reducers/userReducer';
 // import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import Login from './login';
@@ -15,8 +15,8 @@ interface IProps {
 }
 
 const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
-  const dispatch = useDispatch();
-  const [selectedStep, setSelectedStep] = useState(0);
+  // const dispatch = useDispatch();
+  // const [selectedStep, setSelectedStep] = useState(0);
 
   const steps = [
     { component: Login, label: 'Login' },
@@ -68,7 +68,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-2 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <ForgotPassword setIsOpen={setIsOpen} />
+                <Login setIsOpen={setIsOpen} />
               </div>
             </Transition.Child>
           </div>
