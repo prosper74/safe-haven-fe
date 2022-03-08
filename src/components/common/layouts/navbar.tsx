@@ -115,7 +115,7 @@ const Navbar: FC = () => {
               <LoginPopupButton
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
-                buttonText="Create Ad"
+                buttonText="Login"
               />
             )}
           </div>

@@ -7,6 +7,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import Login from './login';
 import Signup from './Signup';
 import ForgotPassword from './ForgotPassword';
+import Complete from './Complete';
 // import Link from 'next/link';
 
 interface IProps {
@@ -68,7 +69,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-2 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <Login setIsOpen={setIsOpen} />
+                <Complete setIsOpen={setIsOpen} />
               </div>
             </Transition.Child>
           </div>
