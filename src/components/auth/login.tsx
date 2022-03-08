@@ -9,6 +9,8 @@ import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 
 interface IProps {
   setIsOpen: (open: boolean) => void;
+  setSelectedStep: (open: number) => void;
+  steps: any;
 }
 
 const schema = z.object({
@@ -21,10 +23,24 @@ const schema = z.object({
     ),
 });
 
-const Login: FC<IProps> = ({ setIsOpen }) => {
+const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const navigateForgotPassword = () => {
+    const forgotPassword = steps.find(
+      (step: { label: string }) => step.label === 'Forgot Password'
+    );
+    setSelectedStep(steps.indexOf(forgotPassword));
+  };
+
+  const navigateSignup = () => {
+    const signUp = steps.find(
+      (step: { label: string }) => step.label === 'Sign Up'
+    );
+    setSelectedStep(steps.indexOf(signUp));
+  };
 
   const {
     register,
@@ -235,7 +251,10 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
             <div className="py-1">
               <div className="grid grid-cols-2 gap-1">
                 <div className="text-center sm:text-left whitespace-nowrap">
-                  <button className="transition duration-200 mx-5 px-5 py-4 font-normal text-base rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center">
+                  <button
+                    onClick={navigateForgotPassword}
+                    className="transition duration-200 mx-5 px-5 py-4 font-normal text-base rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -280,7 +299,10 @@ const Login: FC<IProps> = ({ setIsOpen }) => {
           <div className="py-1">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <div className="text-center sm:text-left whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center">
+                <button
+                  onClick={navigateSignup}
+                  className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center"
+                >
                   <svg
                     width="22"
                     height="22"

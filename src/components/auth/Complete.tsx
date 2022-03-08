@@ -23,7 +23,7 @@ const Complete: FC<IProps> = ({ setIsOpen }) => {
             <Lottie
               loop
               play
-              // animationData={lottieJson}
+              animationData={lottieJson}
               direction={1}
               style={{
                 width: 150,
@@ -34,8 +34,7 @@ const Complete: FC<IProps> = ({ setIsOpen }) => {
             />
           </div>
           <p className="text-base font-normal text-center px-4">
-            Kindly input your registered email address, and we will send an
-            email with instructions on how to reset your password
+            Kindly check your email inbox to verify your account
           </p>
 
           {/* Login Instead  */}

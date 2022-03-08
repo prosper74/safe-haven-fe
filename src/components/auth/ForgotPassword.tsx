@@ -8,15 +8,24 @@ import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 
 interface IProps {
   setIsOpen: (open: boolean) => void;
+  setSelectedStep: (open: number) => void;
+  steps: any;
 }
 
 const schema = z.object({
   email: z.string().email().nonempty({ message: 'Invalid email' }),
 });
 
-const ForgotPassword: FC<IProps> = ({ setIsOpen }) => {
+const ForgotPassword: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
+  const navigateLogin = () => {
+    const login = steps.find(
+      (step: { label: string }) => step.label === 'Login'
+    );
+    setSelectedStep(steps.indexOf(login));
+  };
 
   const {
     register,
@@ -59,7 +68,9 @@ const ForgotPassword: FC<IProps> = ({ setIsOpen }) => {
     <>
       <div className="flex flex-col justify-center">
         <div className="p-4 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <p className="text-2xl font-bold text-center mt-6">Forgot Password?</p>
+          <p className="text-2xl font-bold text-center mt-6">
+            Forgot Password?
+          </p>
           <p className="text-base font-normal text-center px-4">
             Kindly input your registered email address, and we will send an
             email with instructions on how to reset your password
@@ -132,7 +143,10 @@ const ForgotPassword: FC<IProps> = ({ setIsOpen }) => {
           <div className="py-1">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <div className="text-center sm:text-left whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center">
+                <button
+                  onClick={navigateLogin}
+                  className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center"
+                >
                   <svg
                     width="22"
                     height="22"

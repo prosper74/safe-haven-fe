@@ -8,6 +8,8 @@ import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 
 interface IProps {
   setIsOpen: (open: boolean) => void;
+  setSelectedStep: (open: number) => void;
+  steps: any;
 }
 
 const schema = z.object({
@@ -21,10 +23,17 @@ const schema = z.object({
     ),
 });
 
-const Signup: FC<IProps> = ({ setIsOpen }) => {
+const Signup: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleBackward = () => {
+    const login = steps.find(
+      (step: { label: string }) => step.label === 'Login'
+    );
+    setSelectedStep(steps.indexOf(login));
+  };
 
   const {
     register,
@@ -47,12 +56,15 @@ const Signup: FC<IProps> = ({ setIsOpen }) => {
         dispatch(
           setSnackbar({
             status: 'success',
-            message: ` Account created, please check you inbox to verify your email`,
+            message: ` Account created, please check your inbox to verify your email`,
             open: true,
           })
         );
+        const complete = steps.find(
+          (step: { label: string }) => step.label === 'Complete'
+        );
+        setSelectedStep(steps.indexOf(complete));
         setLoading(false);
-        setIsOpen(false);
       })
       .catch((error) => {
         const { message } = error.response.data.message[0].messages[0];
@@ -255,7 +267,10 @@ const Signup: FC<IProps> = ({ setIsOpen }) => {
           <div className="py-1">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <div className="text-center sm:text-left whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center">
+                <button
+                  onClick={handleBackward}
+                  className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center"
+                >
                   <svg
                     width="22"
                     height="22"
