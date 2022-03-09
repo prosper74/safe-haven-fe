@@ -21,7 +21,6 @@ const Complete: FC<IProps> = ({ setIsOpen }) => {
           </p>
           <div className="flex justify-center items-center">
             <Lottie
-              loop
               play
               animationData={lottieJson}
               direction={1}

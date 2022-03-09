@@ -35,3 +35,24 @@ export interface IProperty {
 export interface IProps {
   properties: IProperty;
 }
+
+export interface propertyCard {
+  state?: string;
+  city?: string;
+  bedrooms?: number;
+  bathroom?: number;
+  size?: number;
+  sittingroom?: number;
+  id: string;
+  per: string;
+  price: number;
+  name: string;
+  category: {
+    name: string;
+  };
+  images: {
+    0: {
+      url: string;
+    };
+  };
+}

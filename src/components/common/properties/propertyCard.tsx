@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import PropertyMeta from '@src/components/common/properties/propertyMeta';
-import { IProperty } from '../interfaces';
+import { propertyCard } from '../interfaces';
 
 interface IProps {
-  property: IProperty;
+  property: propertyCard;
 }
 
 const PropertyCard: FC<IProps> = ({ property }) => {
@@ -25,17 +25,16 @@ const PropertyCard: FC<IProps> = ({ property }) => {
             <div className="rounded-lg shadow-lg bg-white max-w-sm">
               <a data-mdb-ripple="true" data-mdb-ripple-color="light">
                 <Image
-                  src={property.images ? `${property.images[0].url}` : ''}
+                  src={
+                    property.images
+                      ? `${property.images[0].url}`
+                      : '/logoIcon.svg'
+                  }
                   alt={property.name}
                   width={500}
                   height={350}
                   className="rounded-t-lg object-cover"
                 />
-                {/* <img
-                  className="rounded-t-lg w-80 h-44 object-cover"
-                  src={property.images[0].url}
-                  alt=""
-                /> */}
               </a>
               <div className="p-4">
                 <h4 className="text-gray-900 text-xl font-medium mb-2">

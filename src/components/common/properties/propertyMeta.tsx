@@ -1,14 +1,8 @@
 import React, { FC } from 'react';
+import { propertyCard } from '../interfaces';
 
 interface IProps {
-  property: {
-    state?: string;
-    city?: string;
-    bedrooms?: number;
-    bathroom?: number;
-    size?: number;
-    sittingroom?: number;
-  };
+  property: propertyCard;
   single?: {
     single: boolean;
   };
