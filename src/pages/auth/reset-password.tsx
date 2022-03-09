@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -29,6 +29,12 @@ const ResetPasswordPage: FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user.onboarding) {
+      router.push('/');
+    }
+  });
 
   const {
     register,
