@@ -38,11 +38,11 @@ const Complete: FC<IProps> = ({ setIsOpen }) => {
           </p>
 
           {/* Cancel  */}
-          <div className="py-1">
+          <div className="py-1 px-10">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <button
                 type="button"
-                className="inline-flex justify-center items-center mt-10 py-2 text-base font-medium text-gray-500 border-transparent rounded-md hover:bg-gray-200"
+                className="inline-flex justify-center items-center mt-10 py-2 text-base font-medium text-gray-600 border-transparent rounded-md bg-gray-200 hover:text-white hover:bg-purple-500"
                 onClick={closeModal}
               >
                 Got it
