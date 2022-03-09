@@ -34,10 +34,10 @@ const Complete: FC<IProps> = ({ setIsOpen }) => {
             />
           </div>
           <p className="text-base font-normal text-center px-4">
-            Kindly check your email inbox to verify your account
+            Kindly check your email inbox to verify your email
           </p>
 
-          {/* Login Instead  */}
+          {/* Cancel  */}
           <div className="py-1">
             <div className="grid grid-cols-2 xs:gap-4 md:gap-32">
               <button
