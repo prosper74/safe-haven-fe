@@ -8,7 +8,7 @@ import Login from './login';
 import Signup from './Signup';
 import ForgotPassword from './ForgotPassword';
 import Complete from './Complete';
-// import Link from 'next/link';
+import ResendEmailConfirmation from './ResendEmailConfirmation';
 
 interface IProps {
   isOpen: boolean;
@@ -16,7 +16,6 @@ interface IProps {
 }
 
 const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
-  // const dispatch = useDispatch();
   const [selectedStep, setSelectedStep] = useState(0);
 
   const steps = [
@@ -24,7 +23,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
     { component: ForgotPassword, label: 'Forgot Password' },
     { component: Signup, label: 'Sign Up' },
     { component: Complete, label: 'Complete' },
-    // { component: Reset, label: 'Reset' },
+    { component: ResendEmailConfirmation, label: 'Resend Email Confirmation' },
   ];
 
   return (

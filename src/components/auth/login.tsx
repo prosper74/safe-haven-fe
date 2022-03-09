@@ -78,8 +78,24 @@ const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
       })
       .catch((error) => {
         const { message } = error.response.data.message[0].messages[0];
-        dispatch(setSnackbar({ status: 'error', message, open: true }));
-        setLoading(false);
+        if (message === 'Your account email is not confirmed') {
+          dispatch(
+            setSnackbar({
+              status: 'error',
+              message: message + '. Resend Email Confirmation',
+              open: true,
+            })
+          );
+          const resend = steps.find(
+            (step: { label: string }) =>
+              step.label === 'Resend Email Confirmation'
+          );
+          setSelectedStep(steps.indexOf(resend));
+          setLoading(false);
+        } else {
+          dispatch(setSnackbar({ status: 'error', message, open: true }));
+          setLoading(false);
+        }
       });
   });
 
