@@ -1,13 +1,12 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { GET_TAB_PROPERTIES } from '@src/apollo/queries';
 import HomeBanner from '@src/components/Home/banner';
 import HowItWorks from '@src/components/Home/howItWorks';
 import FeaturedProperties from '@src/components/Home/featured';
 import CTASection from '@src/components/Home/ctaSection';
 import { IProps } from '@src/components/common/interfaces';
+import axios from 'axios';
 
 const Home: FC<IProps> = ({ properties }) => {
   return (
@@ -29,14 +28,13 @@ const Home: FC<IProps> = ({ properties }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_GRAPHQL_API,
-    cache: new InMemoryCache(),
-  });
-  const { data } = await client.query({ query: GET_TAB_PROPERTIES });
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_STRAPI_LIVE}/properties`
+  );
+  console.log('Properties:', res.data);
   return {
     props: {
-      properties: data.properties,
+      properties: res.data,
     },
   };
 }

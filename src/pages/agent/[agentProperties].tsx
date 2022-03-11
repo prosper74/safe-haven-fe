@@ -34,7 +34,6 @@ interface IProps {
 
 const BuySingle: FC<IProps> = ({ properties }) => {
   const agent = properties[0].users_permissions_user;
-  // console.log('Properties:', agent);
   return (
     <>
       <Head>

@@ -12,7 +12,6 @@ interface IProps {
 }
 
 const SingleProperty: FC<IProps> = ({ property }) => {
-  // console.log('Property:', property);
   const propertyAgent = property.users_permissions_user;
   return (
     <section className="mb-6">

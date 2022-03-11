@@ -7,9 +7,6 @@ import LoginPopupButton from '../buttons/loginPopup';
 
 const Navbar: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
-
-  // console.log('userww', user);
-
   const [selectedNav, setSelectedNav] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
