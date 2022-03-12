@@ -6,6 +6,7 @@ import {
   useIsLarge,
   useIsXLarge,
 } from '@src/components/common/hooks/mediaQuery';
+import { homeTabs, propertyCard } from '@src/components/common/interfaces';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,23 +18,9 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 import Link from 'next/link';
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
-
 interface IProps {
-  properties?: {
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    images?: Images[];
-  };
-  tabCategory: String;
+  properties: homeTabs;
+  tabCategory: string;
 }
 
 export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
@@ -42,7 +29,8 @@ export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
   const isXLarge = useIsXLarge();
 
   const buyProperties = properties.filter(
-    (property) => property.category.name === tabCategory
+    (property: { category: { name: string } }) =>
+      property.category.name === tabCategory
   );
 
   return (
@@ -56,7 +44,7 @@ export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
           disableOnInteraction: true,
         }}
       >
-        {buyProperties.map((property) => (
+        {buyProperties.map((property: propertyCard) => (
           <SwiperSlide key={property.id} className="my-6">
             <PropertyCard property={property} />
           </SwiperSlide>

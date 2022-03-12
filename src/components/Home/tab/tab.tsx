@@ -1,30 +1,17 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
 import { TabContent } from './tab-content';
+import { homeTabs } from '@src/components/common/interfaces';
+
+interface IProps {
+  properties: homeTabs;
+}
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
 };
 
-// type Images = {
-//   url: String;
-// };
-
-// type Category = {
-//   name: String;
-// };
-
-// interface IProps {
-//   properties: {
-//     name?: String;
-//     description?: String;
-//     price?: Number;
-//     category?: Category;
-//     images?: Images[];
-//   };
-// }
-
-const PropertyTab: FC = ({ properties }) => {
+const PropertyTab: FC<IProps> = ({ properties }) => {
   return (
     <div className="w-full py-16 items-center">
       <Tab.Group>

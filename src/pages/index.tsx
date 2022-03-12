@@ -6,7 +6,11 @@ import HomeBanner from '@src/components/Home/banner';
 import HowItWorks from '@src/components/Home/howItWorks';
 import FeaturedProperties from '@src/components/Home/featured';
 import CTASection from '@src/components/Home/ctaSection';
-import { IProps } from '@src/components/common/interfaces';
+import { homeTabs } from '@src/components/common/interfaces';
+
+interface IProps {
+  properties: homeTabs;
+}
 
 const Home: FC<IProps> = ({ properties }) => {
   return (

@@ -1,23 +1,11 @@
 import React, { FC } from 'react';
 import PropertyTab from './tab/tab';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import { homeTabs } from '../common/interfaces';
 
 interface IProps {
-  properties: {
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    images?: Images[];
-  };
+  properties: homeTabs;
 }
+
 
 const FeaturedProperties: FC<IProps> = ({ properties }) => {
   return (

@@ -8,6 +8,15 @@ export interface Category {
   name: string;
 }
 
+export interface homeTabs {
+  filter: any;
+  name: String;
+  description?: String;
+  price: Number;
+  category: Category;
+  images: Image;
+}
+
 export interface IProperty {
   id?: string;
   name?: string;
