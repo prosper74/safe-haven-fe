@@ -1,30 +1,17 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
 import { PropertyFeatures } from './propertyFeatures';
+import { singleProperties } from '../../interfaces';
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
 };
 
-// type Images = {
-//   url: String;
-// };
+interface IProps {
+  property: singleProperties;
+}
 
-// type Category = {
-//   name: String;
-// };
-
-// interface IProps {
-//   properties: {
-//     name?: String;
-//     description?: String;
-//     price?: Number;
-//     category?: Category;
-//     images?: Images[];
-//   };
-// }
-
-const SingleTab: FC = ({ property }) => {
+const SingleTab: FC<IProps> = ({ property }) => {
   return (
     <div className="w-full py-8 items-center">
       <Tab.Group>
@@ -71,7 +58,7 @@ const SingleTab: FC = ({ property }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            <p className='text-lg'>{property.description}</p>
+            <p className="text-lg">{property.description}</p>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

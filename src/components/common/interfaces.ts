@@ -1,6 +1,5 @@
 export interface Image {
   map(arg0: (image: any) => JSX.Element): import("react").ReactNode;
-  indexOf(image: any);
   url: string;
   id?: string;
   length: number;
@@ -20,6 +19,7 @@ export interface homeTabs {
 }
 
 export interface singleProperties {
+  features: { features?: String | undefined; } | undefined;
   type: string[];
   sittingroom: JSX.Element;
   id: string;
