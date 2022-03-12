@@ -19,7 +19,7 @@ export interface IProps {
 }
 
 const ImageSlider: FC<IProps> = ({ property }) => {
-  const images = property.images
+  const images = property.images;
   const isXLarge = useIsXLarge();
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
   return (

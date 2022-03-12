@@ -2,34 +2,16 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import SidebarCard from '@src/components/common/properties/sidebarCard';
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
 import { data } from '@src/components/common/properties/sidebarData';
 import Breadcrumb from '@src/components/common/layouts/breadcrumb';
 import SingleProperty from '@src/components/common/properties/singleProperty';
 import axios from 'axios';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
   properties: {
-    id?: String;
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    state?: String;
-    city?: String;
-    per?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    images?: Images[];
+    0: singleProperties;
   };
 }
 
@@ -55,7 +37,7 @@ const ShortletSingle: FC<IProps> = ({ properties }) => {
             {/* SideBar  */}
             <div className="">
               {data.map((d) => (
-                <SidebarCard key={d.id} data={d} property={property.name} />
+                <SidebarCard key={d.id} data={d} />
               ))}
             </div>
           </div>
@@ -67,7 +49,7 @@ const ShortletSingle: FC<IProps> = ({ properties }) => {
 
 export default ShortletSingle;
 
-export async function getServerSideProps({ params }: GetServerSideProps) {
+export async function getServerSideProps({ params }: any) {
   const shortletSingle = params.shortletSingle;
   const shortletSingleId = shortletSingle.slice(shortletSingle.length - 24);
 

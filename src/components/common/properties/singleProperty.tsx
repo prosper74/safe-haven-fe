@@ -5,10 +5,10 @@ import { timeSince } from '@src/components/common/dateFunction';
 import AgentCard from './agentCard';
 import SingleTab from '@src/components/common/properties/tab/singleTab';
 import { RelatedPropertiesSlide } from './relatedProperties';
-import { IProperty } from '../interfaces';
+import { singleProperties } from '../interfaces';
 
 interface IProps {
-  property: IProperty;
+  property: singleProperties;
 }
 
 const SingleProperty: FC<IProps> = ({ property }) => {

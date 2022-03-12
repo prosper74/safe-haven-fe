@@ -10,11 +10,29 @@ export interface Category {
 
 export interface homeTabs {
   filter: any;
-  name: String;
-  description?: String;
-  price: Number;
+  name: string;
+  description?: string;
+  price: number;
   category: Category;
   images: Image;
+}
+
+export interface singleProperties {
+  sittingroom: JSX.Element;
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: Category;
+  state: string;
+  city: string;
+  per: string;
+  createdAt: number;
+  bedrooms: number;
+  bathroom: number;
+  size: number;
+  images: Image;
+  users_permissions_user: string;
 }
 
 export interface IProperty {

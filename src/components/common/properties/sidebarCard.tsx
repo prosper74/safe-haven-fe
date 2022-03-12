@@ -2,17 +2,14 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 
 interface IProps {
-  property: {
-    name?: String;
-  };
   data: {
-    heading: String;
-    description: String;
-    button: String;
+    heading: string;
+    description: string;
+    button: string;
   };
 }
 
-const SidebarCard: FC<IProps> = ({ property, data }) => {
+const SidebarCard: FC<IProps> = ({ data }) => {
   return (
     <div className="flex justify-center pb-6 sticky top-24">
       <div className="rounded-lg shadow-md bg-purple-100 max-w-sm">

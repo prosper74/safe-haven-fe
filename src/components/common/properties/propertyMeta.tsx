@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import { propertyCard } from '../interfaces';
+import { singleProperties } from '../interfaces';
 
 interface IProps {
-  property: propertyCard;
-  single?: {
-    single: boolean;
-  };
+  property: singleProperties;
+  single: boolean;
 }
 
 const PropertyMeta: FC<IProps> = ({ property, single }) => {
