@@ -15,7 +15,6 @@ interface IProps {
 }
 
 const BuySingle: FC<IProps> = ({ properties, agent }) => {
-  console.log('Agent:', agent);
   return (
     <>
       <Head>
