@@ -3,30 +3,10 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import axios from 'axios';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import { propertyCard } from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: {
-    id?: String;
-    name?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    state?: String;
-    city?: String;
-    per?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    images?: Images[];
-  };
+  properties: propertyCard;
 }
 
 const RentPage: FC<IProps> = ({ properties }) => {
@@ -44,7 +24,7 @@ const RentPage: FC<IProps> = ({ properties }) => {
             Rent Ads
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-1 mb-32">
-            {properties.map((property) => (
+            {properties.map((property: propertyCard) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
