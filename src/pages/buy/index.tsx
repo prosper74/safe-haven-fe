@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { BUY_PROPERTIES } from '@src/apollo/queries';
 import PropertyCard from '@src/components/common/properties/propertyCard';
+import axios from 'axios';
 
 type Images = {
   url: String;
@@ -58,14 +59,12 @@ const BuyPage: FC<IProps> = ({ properties }) => {
 export default BuyPage;
 
 export async function getServerSideProps() {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_GRAPHQL_API,
-    cache: new InMemoryCache(),
-  });
-  const { data } = await client.query({ query: BUY_PROPERTIES });
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_STRAPI_LIVE}/properties?category.name=Buy`
+  );
   return {
     props: {
-      properties: data.properties,
+      properties: res.data,
     },
   };
 }
