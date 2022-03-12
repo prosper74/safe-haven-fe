@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useIsXLarge } from '../hooks/mediaQuery';
-import { Image } from '../interfaces';
+import { singleProperties } from '../interfaces';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,10 +12,8 @@ import 'swiper/css/thumbs';
 // import required modules
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 
-export interface IProps {
-  property: {
-    images: Image[];
-  };
+interface IProps {
+  property: singleProperties;
 }
 
 const ImageSlider: FC<IProps> = ({ property }) => {
