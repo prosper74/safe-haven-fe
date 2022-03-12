@@ -25,7 +25,7 @@ const AccountVerified: FC = () => {
 
     if (access_token) {
       axios
-        .get(`${process.env.GATSBY_STRAPI}/auth/facebook/callback`, {
+        .get(`${process.env.NEXT_PUBLIC_REST_API}/auth/facebook/callback`, {
           params: { access_token },
         })
         .then((response) => {
@@ -36,7 +36,12 @@ const AccountVerified: FC = () => {
               onboarding: true,
             })
           );
-          window.history.replaceState(null, null, window.location.pathname);
+          setSnackbar({
+            status: 'success',
+            message: ` Account Created`,
+            open: true,
+          });
+          router.push('/');
         })
         .catch((error) => {
           console.error(error);
@@ -49,7 +54,7 @@ const AccountVerified: FC = () => {
         });
 
       axios
-        .get(`${process.env.GATSBY_STRAPI}/auth/google/callback`, {
+        .get(`${process.env.NEXT_PUBLIC_REST_API}/auth/google/callback`, {
           params: { access_token },
         })
         .then((response) => {
@@ -60,7 +65,12 @@ const AccountVerified: FC = () => {
               onboarding: true,
             })
           );
-          window.history.replaceState(null, null, window.location.pathname);
+          setSnackbar({
+            status: 'success',
+            message: ` Account Created`,
+            open: true,
+          });
+          router.push('/');
         })
         .catch((error) => {
           console.error(error);

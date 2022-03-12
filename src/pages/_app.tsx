@@ -4,7 +4,6 @@ import '@styles/globals.css';
 import React, { FC } from 'react';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
-// import store from '@src/app/store';
 import configureStore from '@src/store';
 import Layout from '@src/components/common/layouts/layout';
 

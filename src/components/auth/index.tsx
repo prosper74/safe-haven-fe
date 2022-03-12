@@ -1,9 +1,5 @@
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-// import axios from 'axios';
-// import { useDispatch } from 'react-redux';
-// import { setUser } from '@src/store/reducers/userReducer';
-// import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import Login from './login';
 import Signup from './Signup';
 import ForgotPassword from './ForgotPassword';
