@@ -22,13 +22,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Provider store={configureStore}>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        )}
+        <Layout>{isLoading ? <Loader /> : <Component {...pageProps} />}</Layout>
       </Provider>
     </>
   );

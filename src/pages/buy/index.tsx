@@ -38,7 +38,7 @@ export default BuyPage;
 
 export async function getServerSideProps() {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_STRAPI_LIVE}/properties?category.name=Buy`
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy`
   );
   return {
     props: {
