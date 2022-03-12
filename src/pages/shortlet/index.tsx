@@ -1,8 +1,6 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { SHORTLET_PROPERTIES } from '@src/apollo/queries';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import { IProperty } from '@src/components/common/interfaces';
 import axios from 'axios';
@@ -38,15 +36,9 @@ const ShortletPage: FC<IProps> = ({ properties }) => {
 export default ShortletPage;
 
 export async function getServerSideProps() {
-  // const client = new ApolloClient({
-  //   uri: process.env.STRAPI_GRAPHQL_API,
-  //   cache: new InMemoryCache(),
-  // });
-  // const { data } = await client.query({ query: SHORTLET_PROPERTIES });
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_STRAPI_LIVE}/properties?category.name=Shortlet`
   );
-  console.log('Shortlet:', res.data);
   return {
     props: {
       properties: res.data,
