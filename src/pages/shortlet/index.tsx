@@ -2,12 +2,13 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import PropertyCard from '@src/components/common/properties/propertyCard';
-import { IProperty } from '@src/components/common/interfaces';
+import { propertyCard } from '@src/components/common/interfaces';
 import axios from 'axios';
 
 interface IProps {
-  properties: IProperty[];
+  properties: propertyCard;
 }
+
 const ShortletPage: FC<IProps> = ({ properties }) => {
   return (
     <>
@@ -23,7 +24,7 @@ const ShortletPage: FC<IProps> = ({ properties }) => {
             Shortlet Ads
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-1 mb-32">
-            {properties.map((property) => (
+            {properties.map((property: propertyCard) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>

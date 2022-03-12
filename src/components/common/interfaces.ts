@@ -46,6 +46,7 @@ export interface IProps {
 }
 
 export interface propertyCard {
+  map: any;
   state?: string;
   city?: string;
   bedrooms?: number;
