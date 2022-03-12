@@ -1,12 +1,12 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
+import axios from 'axios';
 import HomeBanner from '@src/components/Home/banner';
 import HowItWorks from '@src/components/Home/howItWorks';
 import FeaturedProperties from '@src/components/Home/featured';
 import CTASection from '@src/components/Home/ctaSection';
 import { IProps } from '@src/components/common/interfaces';
-import axios from 'axios';
 
 const Home: FC<IProps> = ({ properties }) => {
   return (
@@ -31,7 +31,6 @@ export async function getServerSideProps() {
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_STRAPI_LIVE}/properties`
   );
-  console.log('Properties:', res.data);
   return {
     props: {
       properties: res.data,
