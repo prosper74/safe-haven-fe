@@ -5,11 +5,11 @@ import { Image } from '../interfaces';
 
 interface IProps {
   agent: {
-    id?: string;
-    username?: string;
-    phone?: number;
-    verified?: boolean;
-    image?: Image;
+    id: string;
+    username: string;
+    phone: number;
+    verified: boolean;
+    image: Image;
   };
 }
 

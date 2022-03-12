@@ -19,7 +19,7 @@ export interface homeTabs {
 }
 
 export interface singleProperties {
-  features: { features?: String | undefined; } | undefined;
+  features: { features?: String | undefined } | undefined;
   type: string[];
   sittingroom: JSX.Element;
   id: string;
@@ -35,7 +35,13 @@ export interface singleProperties {
   bathroom: number;
   size: number;
   images: Image;
-  users_permissions_user: string;
+  users_permissions_user: {
+    id: string;
+    username: string;
+    phone: number;
+    verified: boolean;
+    image: Image;
+  };
 }
 
 export interface IProperty {
