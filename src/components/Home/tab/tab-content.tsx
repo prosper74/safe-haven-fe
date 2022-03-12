@@ -6,7 +6,7 @@ import {
   useIsLarge,
   useIsXLarge,
 } from '@src/components/common/hooks/mediaQuery';
-import { homeTabs, propertyCard } from '@src/components/common/interfaces';
+import { singleProperties } from '@src/components/common/interfaces';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -19,7 +19,7 @@ import Link from 'next/link';
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 interface IProps {
-  properties: homeTabs;
+  properties: singleProperties;
   tabCategory: string;
 }
 
@@ -44,7 +44,7 @@ export const TabContent: FC<IProps> = ({ properties, tabCategory }) => {
           disableOnInteraction: true,
         }}
       >
-        {buyProperties.map((property: propertyCard) => (
+        {buyProperties.map((property: singleProperties) => (
           <SwiperSlide key={property.id} className="my-6">
             <PropertyCard property={property} />
           </SwiperSlide>

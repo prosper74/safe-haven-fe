@@ -21,7 +21,7 @@ const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
           <p className="my-2">
             Number: <a href={`tel:+234${agent.phone}`}>+234 {agent.phone}</a>
           </p>
-          <p className="my-2">Joined: {timeSince(new Date(agent.createdAt))}</p>
+          <p className="my-2">Joined: {timeSince(new Date(agent.createdAt))} ago</p>
           <p className="my-2">
             Status:{' '}
             {agent.verified ? (
@@ -69,7 +69,7 @@ const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
               'Not verified'
             )}
           </p>
-          <p className="my-2">Total Ads: {totalCount}</p>
+          <p className="my-2">Active Ads: {totalCount}</p>
         </div>
       </div>
     </div>

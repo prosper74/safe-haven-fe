@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
 import { TabContent } from './tab-content';
-import { homeTabs } from '@src/components/common/interfaces';
+import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: homeTabs;
+  properties: singleProperties;
 }
 
 const classNames = (...classes: String[]) => {

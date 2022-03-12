@@ -6,10 +6,10 @@ import HomeBanner from '@src/components/Home/banner';
 import HowItWorks from '@src/components/Home/howItWorks';
 import FeaturedProperties from '@src/components/Home/featured';
 import CTASection from '@src/components/Home/ctaSection';
-import { homeTabs } from '@src/components/common/interfaces';
+import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: homeTabs;
+  properties: singleProperties;
 }
 
 const Home: FC<IProps> = ({ properties }) => {

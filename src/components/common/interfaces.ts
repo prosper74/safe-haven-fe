@@ -13,17 +13,19 @@ export interface Category {
   name: string;
 }
 
-export interface homeTabs {
-  filter: any;
-  name: string;
-  description?: string;
-  price: number;
-  category: Category;
-  images: Image;
-}
+// export interface homeTabs {
+//   id: string
+//   filter: any;
+//   name: string;
+//   description?: string;
+//   price: number;
+//   category: Category;
+//   images: Image;
+// }
 
 export interface singleProperties {
   length: number | undefined;
+  filter: any;
   map: any;
   features: any;
   type: string[];

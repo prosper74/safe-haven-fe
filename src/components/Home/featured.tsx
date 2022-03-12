@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import PropertyTab from './tab/tab';
-import { homeTabs } from '../common/interfaces';
+import { singleProperties } from '../common/interfaces';
 
 interface IProps {
-  properties: homeTabs;
+  properties: singleProperties;
 }
-
 
 const FeaturedProperties: FC<IProps> = ({ properties }) => {
   return (
