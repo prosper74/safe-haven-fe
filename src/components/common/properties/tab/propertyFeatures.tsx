@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
+import { featuresProps } from '../../interfaces';
 
 interface IProps {
-  features?: {
-    features?: String;
-  };
+  features: featuresProps;
 }
 
 export const PropertyFeatures: FC<IProps> = ({ features }) => {
@@ -11,7 +10,7 @@ export const PropertyFeatures: FC<IProps> = ({ features }) => {
     <>
       {features.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2">
-          {features?.map((d) => (
+          {features?.map((d: featuresProps) => (
             <div key={d.id} className="text-lg flex items-center">
               <svg
                 height="22"

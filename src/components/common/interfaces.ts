@@ -25,7 +25,7 @@ export interface homeTabs {
 export interface singleProperties {
   length: number | undefined;
   map: any;
-  features: { features?: String | undefined } | undefined;
+  features: any;
   type: string[];
   sittingroom: JSX.Element;
   id: string;
@@ -69,6 +69,13 @@ export interface agentProps {
   };
 }
 
+export interface featuresProps {
+  length: number;
+  map: any;
+  id: string;
+  name: string;
+}
+
 export interface IProperty {
   id?: string;
   name?: string;
@@ -92,7 +99,3 @@ export interface IProperty {
     username: string;
   };
 }
-
-// export interface IProps {
-//   properties: IProperty;
-// }
