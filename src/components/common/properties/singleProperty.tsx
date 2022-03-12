@@ -38,7 +38,7 @@ const SingleProperty: FC<IProps> = ({ property }) => {
         </li>
         <li>
           <span className="font-medium">Created: </span>{' '}
-          {timeSince(new Date(property.createdAt))}
+          {timeSince(new Date(property.createdAt))}{' '}ago
         </li>
       </ul>
       <h3 className="text-purple-600 font-bold text-2xl md:text-4xl my-4">

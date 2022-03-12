@@ -1,8 +1,12 @@
 export interface Image {
-  map(arg0: (image: any) => JSX.Element): import("react").ReactNode;
+  indexOf: any;
+  map(arg0: (image: any) => JSX.Element): import('react').ReactNode;
   url: string;
   id?: string;
   length: number;
+  0: {
+    url: string;
+  };
 }
 
 export interface Category {
@@ -19,6 +23,7 @@ export interface homeTabs {
 }
 
 export interface singleProperties {
+  map: any;
   features: { features?: String | undefined } | undefined;
   type: string[];
   sittingroom: JSX.Element;
@@ -44,6 +49,36 @@ export interface singleProperties {
   };
 }
 
+// export interface propertyCard {
+//   type: string[];
+//   map: any;
+//   state?: string;
+//   city?: string;
+//   bedrooms?: number;
+//   bathroom?: number;
+//   size?: number;
+//   sittingroom?: number;
+//   id: string;
+//   per: string;
+//   price: number;
+//   name: string;
+//   category: {
+//     name: string;
+//   };
+//   images: {
+//     0: {
+//       url: string;
+//     };
+//   };
+//   users_permissions_user: {
+//     id: string;
+//     username: string;
+//     phone: number;
+//     verified: boolean;
+//     image: Image;
+//   };
+// }
+
 export interface IProperty {
   id?: string;
   name?: string;
@@ -68,28 +103,6 @@ export interface IProperty {
   };
 }
 
-export interface IProps {
-  properties: IProperty;
-}
-
-export interface propertyCard {
-  map: any;
-  state?: string;
-  city?: string;
-  bedrooms?: number;
-  bathroom?: number;
-  size?: number;
-  sittingroom?: number;
-  id: string;
-  per: string;
-  price: number;
-  name: string;
-  category: {
-    name: string;
-  };
-  images: {
-    0: {
-      url: string;
-    };
-  };
-}
+// export interface IProps {
+//   properties: IProperty;
+// }

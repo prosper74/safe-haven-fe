@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import PropertyMeta from '@src/components/common/properties/propertyMeta';
-import { propertyCard } from '../interfaces';
+import { singleProperties } from '../interfaces';
 
 interface IProps {
-  property: propertyCard;
+  property: singleProperties;
 }
 
 const PropertyCard: FC<IProps> = ({ property }) => {
@@ -41,7 +41,7 @@ const PropertyCard: FC<IProps> = ({ property }) => {
                   {property?.name?.substring(0, 23)}
                 </h4>
                 {/* Location */}
-                <PropertyMeta property={property} />
+                <PropertyMeta property={property} single={false} />
                 {/* End of Meta Description  */}
                 {/* Price  */}
                 <h3 className="text-purple-600 font-bold text-xl mt-2">
