@@ -1,39 +1,21 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import AgentSidebar from '@src/components/common/properties/agent/agentSidebar';
 import PropertyCard from '@src/components/common/properties/propertyCard';
-
-type Images = {
-  url: String;
-};
-
-type Category = {
-  name: String;
-};
+import {
+  singleProperties,
+  agentProps,
+} from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: {
-    id?: String;
-    username?: String;
-    description?: String;
-    price?: Number;
-    category?: Category;
-    state?: String;
-    city?: String;
-    per?: String;
-    bedrooms?: Number;
-    bathroom?: Number;
-    size?: Number;
-    images?: Images[];
-    length: Number;
-  };
+  properties: singleProperties;
+  agent: agentProps;
 }
 
-const BuySingle: FC<IProps> = ({ properties }) => {
-  const agent = properties[0].users_permissions_user;
+const BuySingle: FC<IProps> = ({ properties, agent }) => {
+  console.log('Agent:', agent);
   return (
     <>
       <Head>
@@ -55,7 +37,7 @@ const BuySingle: FC<IProps> = ({ properties }) => {
             {/* Agent Properties  */}
             <div className="col-span-2 sm:col-span-1 lg:col-span-2 2xl:col-span-3">
               <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-1 mb-32">
-                {properties.map((property) => (
+                {properties.map((property: singleProperties) => (
                   <PropertyCard key={property.id} property={property} />
                 ))}
               </div>
@@ -69,7 +51,7 @@ const BuySingle: FC<IProps> = ({ properties }) => {
 
 export default BuySingle;
 
-export async function getServerSideProps({ params }: GetServerSideProps) {
+export async function getServerSideProps({ params }: any) {
   const agentProperties = params.agentProperties;
   const agentPropertiesId = agentProperties.slice(agentProperties.length - 24);
 
@@ -82,10 +64,18 @@ export async function getServerSideProps({ params }: GetServerSideProps) {
       console.error(err);
     });
 
+  const agent = await axios
+    .get(`${process.env.NEXT_PUBLIC_REST_API}/users?id=${agentPropertiesId}`)
+    .then((response) => response.data)
+    .catch((err) => {
+      console.error(err);
+    });
+
   return {
     props: {
       agentProperties,
       properties,
+      agent: agent[0],
     },
   };
 }

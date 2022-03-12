@@ -23,6 +23,7 @@ export interface homeTabs {
 }
 
 export interface singleProperties {
+  length: number | undefined;
   map: any;
   features: { features?: String | undefined } | undefined;
   type: string[];
@@ -47,37 +48,26 @@ export interface singleProperties {
     verified: boolean;
     image: Image;
   };
+  0: {
+    users_permissions_user: {
+      id: string;
+      username: string;
+      phone: number;
+      verified: boolean;
+      image: Image;
+    };
+  };
 }
 
-// export interface propertyCard {
-//   type: string[];
-//   map: any;
-//   state?: string;
-//   city?: string;
-//   bedrooms?: number;
-//   bathroom?: number;
-//   size?: number;
-//   sittingroom?: number;
-//   id: string;
-//   per: string;
-//   price: number;
-//   name: string;
-//   category: {
-//     name: string;
-//   };
-//   images: {
-//     0: {
-//       url: string;
-//     };
-//   };
-//   users_permissions_user: {
-//     id: string;
-//     username: string;
-//     phone: number;
-//     verified: boolean;
-//     image: Image;
-//   };
-// }
+export interface agentProps {
+  username: string;
+  phone: number;
+  verified: boolean;
+  createdAt: number;
+  image: {
+    url: string;
+  };
+}
 
 export interface IProperty {
   id?: string;

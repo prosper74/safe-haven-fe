@@ -1,16 +1,9 @@
 import React, { FC } from 'react';
 import { timeSince } from '../../dateFunction';
+import { agentProps } from '../../interfaces';
 
 interface IProps {
-  agent: {
-    username?: string;
-    phone?: number;
-    verified?: boolean;
-    createdAt: number;
-    image?: {
-      url: string;
-    };
-  };
+  agent: agentProps;
   totalCount?: number;
 }
 
