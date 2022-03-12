@@ -1,8 +1,6 @@
 // index.tsx
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { BUY_PROPERTIES } from '@src/apollo/queries';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import axios from 'axios';
 
