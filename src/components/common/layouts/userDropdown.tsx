@@ -26,7 +26,7 @@ const UserDropdown: FC = () => {
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-100 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
           <a className="flex items-center mr-10" href="#">
-            <span>John</span>
+            <span>{user.username.substr(0, 7)}</span>
             <img
               className={`ml-4 ${
                 userImage && 'w-10 h-10 object-cover rounded-full'
