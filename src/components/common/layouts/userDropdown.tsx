@@ -1,7 +1,7 @@
 // index.tsx
 import React, { FC, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setUser } from '@src/store/reducers/userReducer';
 // import Image from 'next/image';
 
@@ -10,13 +10,15 @@ function classNames(...classes: String[]) {
 }
 
 const UserDropdown: FC = () => {
+  const user = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const defaultUser = { username: 'Guest' };
+
+  const userImage = user.image && user.image.url;
 
   const handleLogout = async () => {
     typeof window !== 'undefined' && window.localStorage.removeItem('user');
     dispatch(setUser(defaultUser));
-    // window.location.replace('/');
   };
 
   return (
@@ -26,8 +28,10 @@ const UserDropdown: FC = () => {
           <a className="flex items-center mr-10" href="#">
             <span>John</span>
             <img
-              className="ml-4"
-              src="/assets/images/avatar-online.png"
+              className={`ml-4 ${
+                userImage && 'w-10 h-10 object-cover rounded-full'
+              }`}
+              src={userImage ? userImage : '/assets/images/avatar-online.png'}
               alt=""
             />
             <img
