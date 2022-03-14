@@ -7,12 +7,18 @@ import Router from 'next/router';
 import { Provider } from 'react-redux';
 import configureStore from '@src/store';
 import Layout from '@src/components/common/layouts/layout';
-import {PageLoader} from '@src/components/common/loader';
+import { PageLoader } from '@src/components/common/loader';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   Router.events.on('routeChangeStart', () => {
+    if (window.pageYOffset > 400) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
     setIsLoading(true);
   });
   Router.events.on('routeChangeComplete', () => {
