@@ -38,7 +38,7 @@ export default ShortletPage;
 
 export async function getServerSideProps() {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Shortlet`
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Shortlet&_sort=createdAt:desc`
   );
   return {
     props: {
