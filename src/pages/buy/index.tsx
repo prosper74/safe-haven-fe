@@ -20,6 +20,7 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
       `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_start=${isProperties.length}&_limit=9&_sort=createdAt:desc`
     );
     const newProperties = await res.data;
+    // @ts-ignore
     setIsProperties((isProperties) => [...isProperties, ...newProperties]);
   };
 
@@ -42,6 +43,7 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
           </h1>
 
           <InfiniteScroll
+            // @ts-ignore
             dataLength={isProperties.length}
             next={getMoreProperties}
             hasMore={hasMore}
