@@ -1,9 +1,9 @@
 // index.tsx
 import React, { FC, useState, useEffect } from 'react';
 import Head from 'next/head';
-import PropertyCard from '@src/components/common/properties/propertyCard';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import PropertyCard from '@src/components/common/properties/propertyCard';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
