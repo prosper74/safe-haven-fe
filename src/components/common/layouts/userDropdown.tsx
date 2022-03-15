@@ -3,7 +3,7 @@ import React, { FC, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setUser } from '@src/store/reducers/userReducer';
-// import Image from 'next/image';
+import { useIsMedium } from '@src/components/common/hooks/mediaQuery';
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(' ');
@@ -11,6 +11,7 @@ function classNames(...classes: String[]) {
 
 const UserDropdown: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
+  const isMedium = useIsMedium();
   const dispatch = useDispatch();
   const defaultUser = { username: 'Guest' };
 
@@ -24,11 +25,11 @@ const UserDropdown: FC = () => {
   return (
     <Menu as="div" className="relative inline-block text-left z-1000">
       <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-100 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-100 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
           <a className="flex items-center mr-10" href="#">
-            <span>{user.username.substr(0, 7)}</span>
+            <span>{isMedium && user.username.substr(0, 7)}</span>
             <img
-              className={`ml-4 ${
+              className={`ml-2 sm:ml-4 ${
                 userImage && 'w-10 h-10 object-cover rounded-full'
               }`}
               src={userImage ? userImage : '/assets/images/avatar-online.png'}

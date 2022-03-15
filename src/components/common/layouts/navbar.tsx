@@ -73,7 +73,7 @@ const Navbar: FC = () => {
             {user.jwt && user.onboarding ? (
               <div className="flex items-center ml-auto">
                 <Link href="#">
-                  <a className="hidden sm:flex text-gray-500 hover:text-purple-500">
+                  <a className=" text-gray-500 hover:text-purple-500 sm:m-0 ml-6">
                     <svg
                       width="20"
                       height="23"
@@ -105,7 +105,7 @@ const Navbar: FC = () => {
                     </svg>
                   </a>
                 </Link>
-                <div className="w-px h-8 bg-gray bg-opacity-50 ml-6 mr-6" />
+                <div className="w-px h-8 bg-gray bg-opacity-50 sm:mx-6 mx-1" />
                 <UserDropdown />
               </div>
             ) : (
