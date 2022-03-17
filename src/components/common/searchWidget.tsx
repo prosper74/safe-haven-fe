@@ -18,9 +18,9 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
 
   const handleFilter = (e: any) => {
     setWordEntered(e.target.value);
-    const newFilter = properties.filter((d: singleProperties) => {
-      return d.name.toLowerCase().includes(wordEntered.toLowerCase());
-    });
+    const newFilter = properties.filter((d: singleProperties) =>
+      d.name.toLowerCase().includes(wordEntered.toLowerCase())
+    );
 
     if (wordEntered === '') {
       setFilteredProperties([]);
