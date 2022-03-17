@@ -83,7 +83,7 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
                     className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
                   />
                   <div className="col-span-3 sm:col-span-4">
-                    <p className="font-medium">{d.name.substring(0, 25)}</p>
+                    <p className="font-medium">{d.name.substring(0, 28)}</p>
                     <h3 className="text-purple-600 font-bold text-lg">
                       ₦{Number(d.price).toLocaleString()}
                     </h3>
