@@ -17,12 +17,15 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
   const [wordEntered, setWordEntered] = useState('');
 
   const handleFilter = (e: any) => {
-    setWordEntered(e.target.value);
-    const newFilter = properties.filter((d: singleProperties) =>
-      d.name.toLowerCase().includes(wordEntered.toLowerCase())
+    const searchedWords = e.target.value;
+    setWordEntered(searchedWords);
+    const newFilter = properties.filter(
+      (d: singleProperties) =>
+        d.name.toLowerCase().includes(searchedWords.toLowerCase()) ||
+        d.description.toLowerCase().includes(searchedWords.toLowerCase())
     );
 
-    if (wordEntered === '') {
+    if (searchedWords === '') {
       setFilteredProperties([]);
     } else {
       setFilteredProperties(newFilter);
