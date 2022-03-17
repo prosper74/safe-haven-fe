@@ -10,7 +10,7 @@ interface IProps {
 const HomeBanner: FC<IProps> = ({ properties }) => (
   <section className="pb-16 2xl:pb-20 overflow-hidden">
     <div className="relative bg-purple-100 rounded-b-10xl">
-      <div className="container px-4 md:px-2 xl:px-32 mx-auto">
+      <div className="sm:container px-4 md:px-2 xl:px-32 mx-auto">
         <div className="flex flex-wrap items-center -mx-4 pt-10 pb-20">
           <div className="w-full md:w-1/2 px-4 mb-24 lg:mb-0">
             <span className="block mb-4 font-medium tracking-widest uppercase text-sm text-purple-600">
