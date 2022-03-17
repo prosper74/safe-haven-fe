@@ -13,6 +13,7 @@ interface IProps {
 }
 
 const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
+  console.log(properties);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [wordEntered, setWordEntered] = useState('');
 
@@ -73,12 +74,22 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
               }
             >
               <a>
-                <p
+                <div
                   key={d.id}
-                  className="my-2 p-3 hover:bg-gray-300 hover:rounded-lg"
+                  className="my-2 p-3 hover:bg-gray-300 hover:rounded-lg grid grid-cols-5"
                 >
-                  {d.name}
-                </p>
+                  <img
+                    src={d.images[0].url}
+                    alt={d.name}
+                    className="w-16 h-16 rounded-full"
+                  />
+                  <div className="col-span-4">
+                    <p className="font-medium">{d.name}</p>
+                    <h3 className="text-purple-600 font-bold text-lg mt-2">
+                      ₦{Number(d.price).toLocaleString()}
+                    </h3>
+                  </div>
+                </div>
               </a>
             </Link>
           ))}
