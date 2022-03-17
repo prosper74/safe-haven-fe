@@ -37,7 +37,7 @@ const RentPage: FC<IProps> = ({ properties, totalCount }) => {
       </Head>
 
       <main className="mt-24">
-        <div className="container xs:px-0 md:px-6 xl:px-32 mx-auto bg-white">
+        <div className="sm:container xs:px-4 md:px-6 xl:px-32 mx-auto bg-white">
           <h1 className="font-bold text-center text-3xl mt-32 mb-16">
             Rent Ads({totalCount})
           </h1>
