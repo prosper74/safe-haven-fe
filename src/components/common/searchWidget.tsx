@@ -75,16 +75,16 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
               <a>
                 <div
                   key={d.id}
-                  className="my-2 p-3 hover:bg-gray-300 hover:rounded-lg grid grid-cols-5"
+                  className="my-2 p-3 hover:bg-gray-300 hover:rounded-lg grid grid-cols-4 sm:grid-cols-5"
                 >
                   <img
                     src={d.images[0].url}
                     alt={d.name}
-                    className="w-16 h-16 rounded-full"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
                   />
-                  <div className="col-span-4">
-                    <p className="font-medium">{d.name}</p>
-                    <h3 className="text-purple-600 font-bold text-lg mt-2">
+                  <div className="col-span-3 sm:col-span-4">
+                    <p className="font-medium">{d.name.substring(0, 25)}</p>
+                    <h3 className="text-purple-600 font-bold text-lg">
                       ₦{Number(d.price).toLocaleString()}
                     </h3>
                   </div>
