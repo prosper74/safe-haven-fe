@@ -13,7 +13,6 @@ interface IProps {
 }
 
 const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
-  console.log(properties);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [wordEntered, setWordEntered] = useState('');
 
