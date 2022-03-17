@@ -1,7 +1,13 @@
 // index.tsx
 import React, { FC } from 'react';
+import { singleProperties } from '@src/components/common/interfaces';
+import SearchWidget from '../common/searchWidget';
 
-const HomeBanner: FC = () => (
+interface IProps {
+  properties: singleProperties;
+}
+
+const HomeBanner: FC<IProps> = ({ properties }) => (
   <section className="pb-16 2xl:pb-20 overflow-hidden">
     <div className="relative bg-purple-100 rounded-b-10xl">
       <div className="container px-4 md:px-2 xl:px-32 mx-auto">
@@ -31,16 +37,14 @@ const HomeBanner: FC = () => (
             <p className="mb-16 lg:mb-24 text-xl text-darkBlueGray-400 leading-snug">
               Get the best deals for your new home...
             </p>
-            <div className="flex flex-col sm:flex-row">
-              <input
-                className="py-5 px-10 bg-white text-xl text-darkBlueGray-400 placeholder-darkBlueGray-400 outline-none rounded-xl"
-                type="text"
-                placeholder="find your home"
-              />
-              <button className="py-5 px-10 mt-3 sm:mt-0 sm:-ml-4 font-heading font-medium tracking-tighter text-xl text-white text-center bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 hover:bg-purple-900 rounded-xl">
-                Search
-              </button>
-            </div>
+            {/* Search widget  */}
+            <SearchWidget
+              properties={properties}
+              placeholder="Find Your Home..."
+              width={''}
+              height={''}
+              fill={''}
+            />
           </div>
           <div className="w-full md:w-1/2 px-4">
             <div className="relative max-w-sm xl:max-w-none mx-auto">

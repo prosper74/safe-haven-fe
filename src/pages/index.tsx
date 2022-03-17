@@ -20,7 +20,7 @@ const Home: FC<IProps> = ({ properties }) => {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main className="mt-16">
-        <HomeBanner />
+        <HomeBanner properties={properties} />
         <FeaturedProperties properties={properties} />
         <HowItWorks />
         <CTASection />
