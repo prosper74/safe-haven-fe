@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDispatch } from 'react-redux';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
+import { ForwardArrow, BackArrowIcon } from '../common/svgIcons';
 
 interface IProps {
   setIsOpen: (open: boolean) => void;
@@ -125,20 +126,7 @@ const ResendEmailConfirmation: FC<IProps> = ({
                   {loading ? (
                     <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
                   ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
+                    <ForwardArrow />
                   )}
                 </button>
               </form>
@@ -153,15 +141,7 @@ const ResendEmailConfirmation: FC<IProps> = ({
                   onClick={navigateLogin}
                   className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-base rounded-lg text-gray-500hover:text-white hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset flex items-center"
                 >
-                  <svg
-                    width="22"
-                    height="22"
-                    xmlns="http://www.w3.org/2000/svg"
-                    enable-background="new 0 0 24 24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z" />
-                  </svg>
+                  <BackArrowIcon width="22" height="22" />
                   <span className="inline-block ml-1">Back to Login</span>
                 </button>
               </div>

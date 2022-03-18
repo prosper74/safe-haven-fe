@@ -1,22 +1,25 @@
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import {RequestProperty, InspectProperty, VerifyProperty} from './propertyForms';
 
 interface IProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  steps: any;
+  selectedStep: number;
+  setSelectedStep: (open: number) => void;
 }
 
-const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
-  const [selectedStep, setSelectedStep] = useState(0);
+const PropertyFormPortal: FC<IProps> = ({
+  isOpen,
+  setIsOpen,
+  steps,
+  selectedStep,
+  setSelectedStep,
+}) => {  
 
-  const steps = [
-    { component: Login, label: 'Login' },
-    { component: ForgotPassword, label: 'Forgot Password' },
-    { component: Signup, label: 'Sign Up' },
-    { component: Complete, label: 'Complete' },
-    { component: ResendEmailConfirmation, label: 'Resend Email Confirmation' },
-  ];
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <>
@@ -24,7 +27,7 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
         <Dialog
           as="div"
           className="fixed inset-0 overflow-y-auto z-[2000]"
-          onClose={() => ''}
+          onClose={closeModal}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
@@ -76,4 +79,4 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
   );
 };
 
-export default AuthPortal;
+export default PropertyFormPortal;
