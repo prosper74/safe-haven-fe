@@ -15,8 +15,7 @@ const PropertyFormPortal: FC<IProps> = ({
   steps,
   selectedStep,
   setSelectedStep,
-}) => {  
-
+}) => {
   function closeModal() {
     setIsOpen(false);
   }

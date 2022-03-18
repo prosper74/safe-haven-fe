@@ -30,17 +30,17 @@ const SidebarCard: FC<IProps> = ({ data }) => {
       const requestForm = steps.find(
         (step: { label: string }) => step.label === 'Request Property'
       );
-      setSelectedStep(steps.indexOf(requestForm));
+      setSelectedStep(steps.indexOf(requestForm!));
     } else if (selectedForm === 'Inspect') {
       const inspectForm = steps.find(
         (step: { label: string }) => step.label === 'Inspect Property'
       );
-      setSelectedStep(steps.indexOf(inspectForm));
+      setSelectedStep(steps.indexOf(inspectForm!));
     } else {
       const verifyForm = steps.find(
         (step: { label: string }) => step.label === 'Verify Property'
       );
-      setSelectedStep(steps.indexOf(verifyForm));
+      setSelectedStep(steps.indexOf(verifyForm!));
     }
   };
 
