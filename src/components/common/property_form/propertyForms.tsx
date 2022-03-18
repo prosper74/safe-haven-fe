@@ -7,11 +7,6 @@ import * as z from 'zod';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@src/store/reducers/userReducer';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  ForwardArrow,
-} from '@src/components/common/svgIcons';
 
 interface IProps {
   setIsOpen: (open: boolean) => void;
@@ -29,7 +24,7 @@ const schema = z.object({
     ),
 });
 
-const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
+export const RequestProperty: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -167,9 +162,30 @@ const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
                       className="absolute inset-y-0 right-0 pr-3 pt-3 transition duration-200"
                     >
                       {showPassword ? (
-                        <EyeSlashIcon width="26" height="26" fill="#9333EA" />
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M10.94,6.08A6.93,6.93,0,0,1,12,6c3.18,0,6.17,2.29,7.91,6a15.23,15.23,0,0,1-.9,1.64,1,1,0,0,0-.16.55,1,1,0,0,0,1.86.5,15.77,15.77,0,0,0,1.21-2.3,1,1,0,0,0,0-.79C19.9,6.91,16.1,4,12,4a7.77,7.77,0,0,0-1.4.12,1,1,0,1,0,.34,2ZM3.71,2.29A1,1,0,0,0,2.29,3.71L5.39,6.8a14.62,14.62,0,0,0-3.31,4.8,1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20a9.26,9.26,0,0,0,5.05-1.54l3.24,3.25a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Zm6.36,9.19,2.45,2.45A1.81,1.81,0,0,1,12,14a2,2,0,0,1-2-2A1.81,1.81,0,0,1,10.07,11.48ZM12,18c-3.18,0-6.17-2.29-7.9-6A12.09,12.09,0,0,1,6.8,8.21L8.57,10A4,4,0,0,0,14,15.43L15.59,17A7.24,7.24,0,0,1,12,18Z"
+                          />
+                        </svg>
                       ) : (
-                        <EyeIcon width="26" height="26" fill="#9333EA" />
+                        <svg
+                          width="26"
+                          height="26"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#9333EA"
+                            d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"
+                          />
+                        </svg>
                       )}
                     </div>
                   </div>
@@ -194,7 +210,20 @@ const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
                   {loading ? (
                     <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
                   ) : (
-                    <ForwardArrow />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
                   )}
                 </button>
               </form>
@@ -325,4 +354,3 @@ const Login: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
   );
 };
 
-export default Login;
