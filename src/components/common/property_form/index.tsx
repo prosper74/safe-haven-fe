@@ -58,14 +58,13 @@ const PropertyFormPortal: FC<IProps> = ({
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-2 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                {steps.map((Step, i) =>
+                {steps.map((Step: any, i: number) =>
                   selectedStep === i ? (
                     <Step.component
                       setSelectedStep={setSelectedStep}
                       steps={steps}
                       setIsOpen={setIsOpen}
                       key={Step.label}
-                      // location={location}
                     />
                   ) : null
                 )}
