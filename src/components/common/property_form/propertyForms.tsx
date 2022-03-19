@@ -13,7 +13,14 @@ interface IProps {
 }
 
 const schema = z.object({
+  name: z.string().min(5, { message: 'Name must be at at least 5 characters' }),
   email: z.string().email().nonempty({ message: 'Invalid email' }),
+  phone: z
+    .string()
+    .regex(
+      /^[0]\d{10}$/,
+      'Phone number must be 11 digits'
+    ),
   password: z
     .string()
     .regex(
@@ -96,19 +103,19 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <input
-                      id="email"
-                      autoComplete="email"
+                      id="name"
+                      autoComplete="name"
                       placeholder="Your Full Name"
                       type="text"
-                      {...register('email')}
-                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.email &&
+                      {...register('name')}
+                      className={`focus:outline-gray-700 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.name &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     />
-                    {errors.email?.message && (
+                    {errors.name?.message && (
                       <p className="text-red-500 text-sm mt-2">
-                        {errors.email?.message}
+                        {errors.name?.message}
                       </p>
                     )}
                   </div>
@@ -132,21 +139,42 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                   </div>
                   <div>
                     <input
-                      id="email"
-                      autoComplete="email"
-                      placeholder="Your email"
-                      type="text"
-                      {...register('email')}
+                      id="phone"
+                      autoComplete="phone"
+                      placeholder="Your Phone Number"
+                      type="number"
+                      {...register('phone')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.email &&
+                        errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     />
-                    {errors.email?.message && (
+                    {errors.phone?.message && (
                       <p className="text-red-500 text-sm mt-2">
-                        {errors.email?.message}
+                        {errors.phone?.message}
                       </p>
                     )}
+                  </div>
+                  <div className="relative">
+                    <select
+                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.phone &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    >
+                      <option>Lagos</option>
+                      <option>Rivers</option>
+                      <option>Ondo</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg
+                        className="fill-current h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
 
