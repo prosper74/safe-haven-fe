@@ -37,7 +37,7 @@ const ShortletSingle: FC<IProps> = ({ properties }) => {
             {/* SideBar  */}
             <div className="">
               {data.map((d) => (
-                <SidebarCard key={d.id} data={d} />
+                <SidebarCard key={d.id} data={d} property={property} />
               ))}
             </div>
           </div>
