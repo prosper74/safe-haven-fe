@@ -21,36 +21,34 @@ const PropertyCard: FC<IProps> = ({ property }) => {
               : ''
           }
         >
-          <a>
-            <div className="rounded-lg shadow-lg bg-white max-w-sm">
-              <a data-mdb-ripple="true" data-mdb-ripple-color="light">
-                <Image
-                  src={
-                    property.images
-                      ? `${property.images[0].url}`
-                      : '/logoIcon.svg'
-                  }
-                  alt={property.name}
-                  width={500}
-                  height={350}
-                  className="rounded-t-lg object-cover"
-                />
-              </a>
-              <div className="p-4">
-                <h4 className="text-gray-900 text-xl font-medium mb-2">
-                  {property?.name?.substring(0, 23)}
-                </h4>
-                {/* Location */}
-                <PropertyMeta property={property} single={false} />
-                {/* End of Meta Description  */}
-                {/* Price  */}
-                <h3 className="text-purple-600 font-bold text-xl mt-2">
-                  ₦{Number(property.price).toLocaleString()}
-                  {property.per ? `/${property.per}` : ''}
-                </h3>
-              </div>
+          <div className="rounded-lg shadow-lg bg-white max-w-sm">
+            <a data-mdb-ripple="true" data-mdb-ripple-color="light">
+              <Image
+                src={
+                  property.images
+                    ? `${property.images[0].url}`
+                    : '/logoIcon.svg'
+                }
+                alt={property.name}
+                width={500}
+                height={350}
+                className="rounded-t-lg object-cover"
+              />
+            </a>
+            <div className="p-4">
+              <h4 className="text-gray-900 text-xl font-medium mb-2">
+                {property?.name?.substring(0, 23)}
+              </h4>
+              {/* Location */}
+              <PropertyMeta property={property} single={false} />
+              {/* End of Meta Description  */}
+              {/* Price  */}
+              <h3 className="text-purple-600 font-bold text-xl mt-2">
+                ₦{Number(property.price).toLocaleString()}
+                {property.per ? `/${property.per}` : ''}
+              </h3>
             </div>
-          </a>
+          </div>
         </Link>
       ) : (
         <div>

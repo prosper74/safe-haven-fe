@@ -203,10 +203,11 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                   {/* Price Range */}
                   <div>
                     <select
+                      defaultValue="Price Range"
                       {...register('price_range')}
                       className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                     >
-                      <option selected>Price Range</option>
+                      <option defaultValue="any">Price Range</option>
                       <option value="50000-150000">50000-150000</option>
                       <option value="150000-300000">150000-300000</option>
                       <option value="300000-600000">300000-600000</option>
@@ -255,4 +256,3 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
     </>
   );
 };
-
