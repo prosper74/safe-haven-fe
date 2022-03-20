@@ -274,13 +274,11 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
-    console.log(data);
 
     emailjs
       .send('service_05kvw8y', 'template_au4zqfz', data, 'FFD1CK1AWLApETK-P')
       .then(
         (result) => {
-          console.log(result.text);
           dispatch(
             setSnackbar({
               status: 'success',
@@ -292,7 +290,6 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
           setIsOpen(false);
         },
         (error) => {
-          console.log(error.text);
           dispatch(
             setSnackbar({
               status: 'error',
@@ -303,7 +300,6 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
           setLoading(false);
         }
       );
-    // reset();
   });
 
   function closeModal() {
