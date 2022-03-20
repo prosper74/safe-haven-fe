@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDispatch } from 'react-redux';
-// import 'flowbite';
+import emailjs from 'emailjs-com';
 import { setUser } from '@src/store/reducers/userReducer';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { CloseIcon, ForwardArrow } from '@src/components/common/svgIcons';
@@ -19,6 +19,8 @@ const schema = z.object({
   name: z.string().min(5, { message: 'Name must be at at least 5 characters' }),
   email: z.string().email().nonempty({ message: 'Invalid email' }),
   phone: z.string().regex(/^[0]\d{10}$/, 'Phone number must be 11 digits'),
+  date: z.string().nonempty(),
+  time: z.string().nonempty(),
 });
 
 export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
@@ -256,7 +258,7 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
 };
 
 export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const dateToday = new Date().toISOString().split('T')[0];
@@ -272,7 +274,36 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
-    console.log(data)
+    console.log(data);
+
+    emailjs
+      .send('service_05kvw8y', 'template_au4zqfz', data, 'FFD1CK1AWLApETK-P')
+      .then(
+        (result) => {
+          console.log(result.text);
+          dispatch(
+            setSnackbar({
+              status: 'success',
+              message: ` Request Sent. We will contact you shortly`,
+              open: true,
+            })
+          );
+          setLoading(false);
+          setIsOpen(false);
+        },
+        (error) => {
+          console.log(error.text);
+          dispatch(
+            setSnackbar({
+              status: 'error',
+              message: ` ${error.text}`,
+              open: true,
+            })
+          );
+          setLoading(false);
+        }
+      );
+    // reset();
   });
 
   function closeModal() {
@@ -350,15 +381,14 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
                       </p>
                     )}
                   </div>
-
                   <div>
                     <label htmlFor="date">Preferred Date:</label>
                     <input
                       type="date"
                       id="date"
-                      name="date"
                       min={dateToday}
                       required
+                      {...register('date')}
                       className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.date &&
                         'border-red-500 text-red-500 focus:outline-red-500'
@@ -370,8 +400,8 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
                     <input
                       type="time"
                       id="time"
-                      name="time"
                       required
+                      {...register('time')}
                       className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.time &&
                         'border-red-500 text-red-500 focus:outline-red-500'
