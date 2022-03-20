@@ -19,6 +19,12 @@ const schema = z.object({
   name: z.string().min(5, { message: 'Name must be at at least 5 characters' }),
   email: z.string().email().nonempty({ message: 'Invalid email' }),
   phone: z.string().regex(/^[0]\d{10}$/, 'Phone number must be 11 digits'),
+  state: z.string().optional(),
+  category: z.string().optional(),
+  type: z.string().optional(),
+  bedroom: z.string().optional(),
+  price_range: z.string().optional(),
+  message: z.string().nonempty(),
   date: z.string().nonempty(),
   time: z.string().nonempty(),
 });
@@ -38,45 +44,32 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
-    axios
-      .post(`${process.env.NEXT_PUBLIC_REST_API}/auth/local`, {
-        identifier: data.email,
-        password: data.password,
-      })
-      .then((response) => {
-        dispatch(
-          setUser({
-            ...response.data.user,
-            jwt: response.data.jwt,
-            onboarding: true,
-          })
-        );
-        dispatch(
-          setSnackbar({
-            status: 'success',
-            message: ` Welcome Back ${response.data.user.username.toUpperCase()}`,
-            open: true,
-          })
-        );
-        setLoading(false);
-        setIsOpen(false);
-      })
-      .catch((error) => {
-        const { message } = error.response.data.message[0].messages[0];
-        if (message === 'Your account email is not confirmed') {
+
+    emailjs
+      .send('service_05kvw8y', 'template_au4zqfz', data, 'FFD1CK1AWLApETK-P')
+      .then(
+        () => {
           dispatch(
             setSnackbar({
-              status: 'error',
-              message: message + '. Resend Email Confirmation',
+              status: 'success',
+              message: ` Request Sent. We will contact you shortly`,
               open: true,
             })
           );
           setLoading(false);
-        } else {
-          dispatch(setSnackbar({ status: 'error', message, open: true }));
+          setIsOpen(false);
+        },
+        (error) => {
+          dispatch(
+            setSnackbar({
+              status: 'error',
+              message: ` ${error.text}`,
+              open: true,
+            })
+          );
           setLoading(false);
         }
-      });
+      );
   });
 
   function closeModal() {
@@ -152,74 +145,84 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                   {/* State */}
                   <div>
                     <select
+                      {...register('state')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
-                      <option>All Nigeria</option>
-                      <option>Lagos</option>
-                      <option>Rivers</option>
-                      <option>Ondo</option>
+                      <option value="nigeria">All Nigeria</option>
+                      <option value="lagos">Lagos</option>
+                      <option value="rivers">Rivers</option>
+                      <option value="abuja">Abuja</option>
                     </select>
                   </div>
                   {/* Category */}
                   <div>
                     <select
+                      {...register('category')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
-                      <option>Buy</option>
-                      <option>Rent</option>
-                      <option>Shortlet</option>
+                      <option value="buy">Buy</option>
+                      <option value="rent">Rent</option>
+                      <option value="shortlet">Shortlet</option>
                     </select>
                   </div>
                   {/* Type */}
                   <div>
                     <select
+                      {...register('type')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
-                      <option>Any Type</option>
-                      <option>Apartment</option>
-                      <option>House</option>
-                      <option>Duplex</option>
-                      <option>Bungalow</option>
-                      <option>Mini Flat</option>
-                      <option>Mansion</option>
+                      <option value="any-type">Any Type</option>
+                      <option value="apartment">Apartment</option>
+                      <option value="house">House</option>
+                      <option value="duplex">Duplex</option>
+                      <option value="bungalow">Bungalow</option>
+                      <option value="mini-flat">Mini Flat</option>
+                      <option value="mansion">Mansion</option>
                     </select>
                   </div>
                   {/* Bedrooms */}
                   <div>
-                    <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
-                      <option>Any Bedroom</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
+                    <select
+                      {...register('bedroom')}
+                      className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+                    >
+                      <option value="any-bedroom">Any Bedroom</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
                     </select>
                   </div>
                   {/* Price Range */}
                   <div>
-                    <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
+                    <select
+                      {...register('price_range')}
+                      className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+                    >
                       <option selected>Price Range</option>
-                      <option value="50000">50000-150000</option>
-                      <option>150000-300000</option>
-                      <option>300000-600000</option>
-                      <option>600000-1000000</option>
-                      <option>1000000-3000000</option>
-                      <option>3000000-above</option>
+                      <option value="50000-150000">50000-150000</option>
+                      <option value="150000-300000">150000-300000</option>
+                      <option value="300000-600000">300000-600000</option>
+                      <option value="600000-1000000">600000-1000000</option>
+                      <option value="1000000-3000000">1000000-3000000</option>
+                      <option value="3000000-above">3000000-above</option>
                     </select>
                   </div>
                   {/* Message */}
                   <div className="col-span-2">
                     <textarea
+                      {...register('message')}
                       className="focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full transition ease-in-out"
                       id="exampleFormControlTextarea1"
                       rows={3}
@@ -278,7 +281,7 @@ export const InspectProperty: FC<IProps> = ({ setIsOpen, property }) => {
     emailjs
       .send('service_05kvw8y', 'template_au4zqfz', data, 'FFD1CK1AWLApETK-P')
       .then(
-        (result) => {
+        () => {
           dispatch(
             setSnackbar({
               status: 'success',
