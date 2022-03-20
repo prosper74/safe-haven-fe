@@ -38,9 +38,20 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
 
       <main className="mt-24">
         <div className="sm:container xs:px-4 md:px-6 xl:px-32 mx-auto bg-white">
-          <h1 className="font-bold text-center text-3xl mt-32 mb-16">
+          <h1 className="font-bold text-center text-3xl mt-32 mb-10">
             Buy Ads({totalCount})
           </h1>
+
+          <div className="flex items-center justify-between my-4">
+            <div className="">filter goes here</div>
+            <div>
+              <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
+                <option value="newest">Newest</option>
+                <option value="lowest_price">Lowest Price</option>
+                <option value="highest_price">Highest Price</option>
+              </select>
+            </div>
+          </div>
 
           <InfiniteScroll
             // @ts-ignore
