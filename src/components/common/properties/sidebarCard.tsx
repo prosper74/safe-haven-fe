@@ -1,10 +1,8 @@
 import React, { FC, useState } from 'react';
 import PropertyFormPortal from '../property_form';
-import {
-  RequestProperty,
-  InspectProperty,
-  VerifyProperty,
-} from '@src/components/common/property_form/propertyForms';
+import { RequestProperty } from '@src/components/common/property_form/requestForm';
+import { InspectProperty } from '@src/components/common/property_form/inspectForm';
+import { VerifyProperty } from '@src/components/common/property_form/verifyForm';
 import { singleProperties } from '../interfaces';
 
 interface IProps {
