@@ -567,19 +567,19 @@ export const VerifyProperty: FC<IProps> = ({ setIsOpen }) => {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <input
-                      id="email"
-                      autoComplete="email"
+                      id="name"
+                      autoComplete="name"
                       placeholder="Your Full Name"
                       type="text"
-                      {...register('email')}
-                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.email &&
+                      {...register('name')}
+                      className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.name &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     />
-                    {errors.email?.message && (
+                    {errors.name?.message && (
                       <p className="text-red-500 text-sm mt-2">
-                        {errors.email?.message}
+                        {errors.name?.message}
                       </p>
                     )}
                   </div>
@@ -603,21 +603,98 @@ export const VerifyProperty: FC<IProps> = ({ setIsOpen }) => {
                   </div>
                   <div>
                     <input
-                      id="email"
-                      autoComplete="email"
-                      placeholder="Your email"
-                      type="text"
-                      {...register('email')}
+                      id="phone"
+                      autoComplete="phone"
+                      placeholder="Your Phone Number"
+                      type="number"
+                      {...register('phone')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.email &&
+                        errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     />
-                    {errors.email?.message && (
+                    {errors.phone?.message && (
                       <p className="text-red-500 text-sm mt-2">
-                        {errors.email?.message}
+                        {errors.phone?.message}
                       </p>
                     )}
+                  </div>
+                  {/* State */}
+                  <div>
+                    <select
+                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.phone &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    >
+                      <option>All Nigeria</option>
+                      <option>Lagos</option>
+                      <option>Rivers</option>
+                      <option>Ondo</option>
+                    </select>
+                  </div>
+                  {/* Category */}
+                  <div>
+                    <select
+                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.phone &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    >
+                      <option>Buy</option>
+                      <option>Rent</option>
+                      <option>Shortlet</option>
+                    </select>
+                  </div>
+                  {/* Type */}
+                  <div>
+                    <select
+                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                        errors.phone &&
+                        'border-red-500 text-red-500 focus:outline-red-500'
+                      }`}
+                    >
+                      <option>Any Type</option>
+                      <option>Apartment</option>
+                      <option>House</option>
+                      <option>Duplex</option>
+                      <option>Bungalow</option>
+                      <option>Mini Flat</option>
+                      <option>Mansion</option>
+                    </select>
+                  </div>
+                  {/* Bedrooms */}
+                  <div>
+                    <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
+                      <option>Any Bedroom</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                    </select>
+                  </div>
+                  {/* Price Range */}
+                  <div>
+                    <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
+                      <option selected>Price Range</option>
+                      <option value="50000">50000-150000</option>
+                      <option>150000-300000</option>
+                      <option>300000-600000</option>
+                      <option>600000-1000000</option>
+                      <option>1000000-3000000</option>
+                      <option>3000000-above</option>
+                    </select>
+                  </div>
+                  {/* Message */}
+                  <div className="col-span-2">
+                    <textarea
+                      className="focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full transition ease-in-out"
+                      id="exampleFormControlTextarea1"
+                      rows={3}
+                      placeholder="Your Message"
+                    ></textarea>
                   </div>
                 </div>
 
@@ -631,7 +708,7 @@ export const VerifyProperty: FC<IProps> = ({ setIsOpen }) => {
                       : 'hover:bg-purple-700 text-white'
                   }`}
                 >
-                  <span className="mr-2">Login</span>
+                  <span className="mr-2">Submit</span>
                   {loading ? (
                     <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
                   ) : (
@@ -641,6 +718,7 @@ export const VerifyProperty: FC<IProps> = ({ setIsOpen }) => {
               </form>
             </div>
           </div>
+
           <button onClick={closeModal} className="absolute top-2 right-4">
             <CloseIcon width="32" height="32" fill="#9333EA" />
           </button>
