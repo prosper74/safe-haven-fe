@@ -1,6 +1,7 @@
 module.exports = {
   enabled: process.env.NODE_ENV === 'production',
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  plugins: [require('flowbite/plugin')],
+  content: ['./src/**/*.{js,ts,jsx,tsx}', './node_modules/flowbite/**/*.js'],
   options: {
     safelist: [],
   },

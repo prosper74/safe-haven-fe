@@ -5,8 +5,10 @@ import {
   InspectProperty,
   VerifyProperty,
 } from '@src/components/common/property_form/propertyForms';
+import { singleProperties } from '../interfaces';
 
 interface IProps {
+  property: singleProperties;
   data: {
     heading: string;
     description: string;
@@ -14,7 +16,7 @@ interface IProps {
   };
 }
 
-const SidebarCard: FC<IProps> = ({ data }) => {
+const SidebarCard: FC<IProps> = ({ data, property }) => {
   const [selectedStep, setSelectedStep] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,7 +71,7 @@ const SidebarCard: FC<IProps> = ({ data }) => {
         setIsOpen={setIsOpen}
         steps={steps}
         selectedStep={selectedStep}
-        setSelectedStep={setSelectedStep}
+        property={property}
       />
     </div>
   );

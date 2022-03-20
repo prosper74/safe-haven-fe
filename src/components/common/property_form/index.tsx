@@ -1,12 +1,13 @@
 import React, { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { singleProperties } from '../interfaces';
 
 interface IProps {
+  property: singleProperties;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   steps: any;
   selectedStep: number;
-  setSelectedStep: (open: number) => void;
 }
 
 const PropertyFormPortal: FC<IProps> = ({
@@ -14,7 +15,7 @@ const PropertyFormPortal: FC<IProps> = ({
   setIsOpen,
   steps,
   selectedStep,
-  setSelectedStep,
+  property,
 }) => {
   function closeModal() {
     setIsOpen(false);
@@ -61,10 +62,9 @@ const PropertyFormPortal: FC<IProps> = ({
                 {steps.map((Step: any, i: number) =>
                   selectedStep === i ? (
                     <Step.component
-                      setSelectedStep={setSelectedStep}
-                      steps={steps}
-                      setIsOpen={setIsOpen}
                       key={Step.label}
+                      setIsOpen={setIsOpen}
+                      property={property}
                     />
                   ) : null
                 )}
