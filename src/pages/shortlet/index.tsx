@@ -69,7 +69,7 @@ const ShortletPage: FC<IProps> = ({
 
       <main className="mt-24">
         <div className="sm:container xs:px-4 md:px-6 xl:px-32 mx-auto bg-white">
-          <h1 className="font-bold text-center text-3xl mt-32 mb-16">
+          <h1 className="font-bold text-center text-3xl mt-24 mb-10">
             Shortlet Ads({totalCount})
           </h1>
 
