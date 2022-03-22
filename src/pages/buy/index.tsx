@@ -5,6 +5,7 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import { singleProperties } from '@src/components/common/interfaces';
+import { FilterIcon } from '@src/components/common/svgIcons';
 
 interface IProps {
   newestProperties: singleProperties;
@@ -68,12 +69,14 @@ const BuyPage: FC<IProps> = ({
 
       <main className="mt-24">
         <div className="sm:container xs:px-4 md:px-6 xl:px-32 mx-auto bg-white">
-          <h1 className="font-bold text-center text-3xl mt-32 mb-10">
+          <h1 className="font-bold text-center text-3xl mt-24 mb-10">
             Buy Ads({totalCount})
           </h1>
 
           <div className="flex items-center justify-between my-4">
-            <div className="">filter goes here</div>
+            <div className="">
+              <FilterIcon width="30" height="30" fill="#9932cc" />
+            </div>
             <div>
               <select
                 onChange={(e) => sort(e.target.value)}
