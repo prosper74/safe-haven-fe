@@ -5,24 +5,55 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import { singleProperties } from '@src/components/common/interfaces';
+import { FilterIcon } from '@src/components/common/svgIcons';
 
 interface IProps {
-  properties: singleProperties;
+  newestProperties: singleProperties;
+  lowestPriceProperties: singleProperties;
+  highestPriceProperties: singleProperties;
   totalCount: number;
 }
 
-const RentPage: FC<IProps> = ({ properties, totalCount }) => {
-  const [isProperties, setIsProperties] = useState(properties);
+const RentPage: FC<IProps> = ({
+  newestProperties,
+  lowestPriceProperties,
+  highestPriceProperties,
+  totalCount,
+}) => {
+  const [isProperties, setIsProperties] = useState(newestProperties);
   const [hasMore, setHasMore] = useState(true);
+  const [sortOptions, setSortOptions] = useState({ sort: 'newest' });
+
+  const sort = (sort: string) => {
+    setSortOptions({ sort });
+  };
 
   const getMoreProperties = async () => {
+    const selectedSort =
+      sortOptions.sort === 'newest'
+        ? 'createdAt:desc'
+        : sortOptions.sort === 'asc'
+        ? 'price:asc'
+        : sortOptions.sort === 'desc'
+        ? 'price:desc'
+        : 'createdAt:desc';
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_start=${isProperties.length}&_limit=9&_sort=createdAt:desc`
+      `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_start=${isProperties.length}&_limit=9&_sort=${selectedSort}`
     );
     const newProperties = await res.data;
     // @ts-ignore
     setIsProperties((isProperties) => [...isProperties, ...newProperties]);
   };
+
+  useEffect(() => {
+    if (sortOptions.sort === 'asc') {
+      setIsProperties(lowestPriceProperties);
+    } else if (sortOptions.sort === 'desc') {
+      setIsProperties(highestPriceProperties);
+    } else {
+      setIsProperties(newestProperties);
+    }
+  }, [sortOptions]);
 
   useEffect(() => {
     setHasMore(totalCount > isProperties.length! ? true : false);
@@ -31,16 +62,33 @@ const RentPage: FC<IProps> = ({ properties, totalCount }) => {
   return (
     <>
       <Head>
-        <title>Safe Haven | Rent</title>
+        <title>Safe Haven | Rent Properties</title>
         <link rel="icon" href="/favicon.png" />
         <meta content="View all ads of properties that are to be sold" />
       </Head>
 
       <main className="mt-24">
         <div className="sm:container xs:px-4 md:px-6 xl:px-32 mx-auto bg-white">
-          <h1 className="font-bold text-center text-3xl mt-32 mb-16">
+          <h1 className="font-bold text-center text-3xl mt-24 mb-16">
             Rent Ads({totalCount})
           </h1>
+
+          <div className="flex items-center justify-between my-4">
+            <div className="">
+              <FilterIcon width="30" height="30" fill="#9932cc" />
+            </div>
+            <div>
+              <select
+                onChange={(e) => sort(e.target.value)}
+                className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+              >
+                <option defaultValue="newest">Newest</option>
+                <option value="asc">Lowest Price</option>
+                <option value="desc">Highest Price</option>
+              </select>
+            </div>
+          </div>
+
           <InfiniteScroll
             // @ts-ignore
             dataLength={isProperties.length}
@@ -62,7 +110,7 @@ const RentPage: FC<IProps> = ({ properties, totalCount }) => {
             }
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 2xl:gap-1">
-              {properties.map((property: singleProperties) => (
+              {isProperties.map((property: singleProperties) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
             </div>
@@ -76,16 +124,23 @@ const RentPage: FC<IProps> = ({ properties, totalCount }) => {
 export default RentPage;
 
 export async function getServerSideProps() {
-  const res = await axios.get(
+  const newest = await axios.get(
     `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=createdAt:desc`
+  );
+  const lowestPrice = await axios.get(
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=price:asc`
+  );
+  const highestPrice = await axios.get(
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=price:desc`
   );
   const totalCount = await axios.get(
     `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Rent`
   );
-
   return {
     props: {
-      properties: res.data,
+      newestProperties: newest.data,
+      lowestPriceProperties: lowestPrice.data,
+      highestPriceProperties: highestPrice.data,
       totalCount: totalCount.data,
     },
   };
