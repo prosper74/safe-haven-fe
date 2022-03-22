@@ -13,7 +13,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   Router.events.on('routeChangeStart', () => {
-    if (window.pageYOffset > 400) {
+    if (window.pageYOffset > 200) {
       window.scrollTo({
         top: 0,
         behavior: 'smooth',

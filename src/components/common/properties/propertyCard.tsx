@@ -10,7 +10,7 @@ interface IProps {
 
 const PropertyCard: FC<IProps> = ({ property }) => {
   return (
-    <div className="flex justify-center mb-2 mx-1">
+    <div className="flex justify-center mb-2 mx-1 cursor-pointer">
       {property ? (
         <Link
           href={
