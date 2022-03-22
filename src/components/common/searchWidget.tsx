@@ -62,7 +62,7 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
       {/* Search Results  */}
       {filteredProperties.length != 0 && (
         <div className="mt-2 p-2 max-h-64 w-full bg-white shadow-lg rounded-xl overflow-hidden overflow-y-auto transition-all duration-200">
-          {filteredProperties.slice(0, 10).map((d: singleProperties) => (
+          {filteredProperties.slice(0, 15).map((d: singleProperties) => (
             <Link
               href={
                 d.name

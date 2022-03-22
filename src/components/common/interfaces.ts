@@ -24,6 +24,7 @@ export interface Category {
 // }
 
 export interface singleProperties {
+  sort: any;
   length: number | undefined;
   filter: any;
   map: any;

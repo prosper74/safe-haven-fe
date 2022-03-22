@@ -7,22 +7,52 @@ import PropertyCard from '@src/components/common/properties/propertyCard';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
-  properties: singleProperties;
+  newestProperties: singleProperties;
+  lowestPriceProperties: singleProperties;
+  highestPriceProperties: singleProperties;
   totalCount: number;
 }
 
-const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
-  const [isProperties, setIsProperties] = useState(properties);
+const BuyPage: FC<IProps> = ({
+  newestProperties,
+  lowestPriceProperties,
+  highestPriceProperties,
+  totalCount,
+}) => {
+  const [isProperties, setIsProperties] = useState(newestProperties);
   const [hasMore, setHasMore] = useState(true);
+  const [sortOptions, setSortOptions] = useState({ sort: 'newest' });
+
+  const sort = (sort: string) => {
+    setSortOptions({ sort });
+  };
 
   const getMoreProperties = async () => {
+    const selectedSort =
+      sortOptions.sort === 'newest'
+        ? 'createdAt:desc'
+        : sortOptions.sort === 'asc'
+        ? 'price:asc'
+        : sortOptions.sort === 'desc'
+        ? 'price:desc'
+        : 'createdAt:desc';
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_start=${isProperties.length}&_limit=9&_sort=createdAt:desc`
+      `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_start=${isProperties.length}&_limit=9&_sort=${selectedSort}`
     );
     const newProperties = await res.data;
     // @ts-ignore
     setIsProperties((isProperties) => [...isProperties, ...newProperties]);
   };
+
+  useEffect(() => {
+    if (sortOptions.sort === 'asc') {
+      setIsProperties(lowestPriceProperties);
+    } else if (sortOptions.sort === 'desc') {
+      setIsProperties(highestPriceProperties);
+    } else {
+      setIsProperties(newestProperties);
+    }
+  }, [sortOptions]);
 
   useEffect(() => {
     setHasMore(totalCount > isProperties.length! ? true : false);
@@ -31,7 +61,7 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
   return (
     <>
       <Head>
-        <title>Safe Haven | Buy</title>
+        <title>Safe Haven | Buy Properties</title>
         <link rel="icon" href="/favicon.png" />
         <meta content="View all ads of properties that are to be sold" />
       </Head>
@@ -45,10 +75,13 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
           <div className="flex items-center justify-between my-4">
             <div className="">filter goes here</div>
             <div>
-              <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
-                <option value="newest">Newest</option>
-                <option value="lowest_price">Lowest Price</option>
-                <option value="highest_price">Highest Price</option>
+              <select
+                onChange={(e) => sort(e.target.value)}
+                className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+              >
+                <option defaultValue="newest">Newest</option>
+                <option value="asc">Lowest Price</option>
+                <option value="desc">Highest Price</option>
               </select>
             </div>
           </div>
@@ -88,15 +121,23 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
 export default BuyPage;
 
 export async function getServerSideProps() {
-  const res = await axios.get(
+  const newest = await axios.get(
     `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_limit=9&_sort=createdAt:desc`
+  );
+  const lowestPrice = await axios.get(
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_limit=9&_sort=price:asc`
+  );
+  const highestPrice = await axios.get(
+    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy&_limit=9&_sort=price:desc`
   );
   const totalCount = await axios.get(
     `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Buy`
   );
   return {
     props: {
-      properties: res.data,
+      newestProperties: newest.data,
+      lowestPriceProperties: lowestPrice.data,
+      highestPriceProperties: highestPrice.data,
       totalCount: totalCount.data,
     },
   };
