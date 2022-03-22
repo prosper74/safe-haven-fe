@@ -19,7 +19,8 @@ const SingleProperty: FC<IProps> = ({ property }) => {
       <ImageSlider property={property} />
 
       {/* Property Name  */}
-      <h3 className="font-bold text-2xl md:text-3xl mt-8">{property.name}</h3>
+      <p className="mt-6 italic">{property.category.name}</p>
+      <h3 className="font-bold text-2xl md:text-3xl">{property.name}</h3>
       <PropertyMeta property={property} single={true} />
       <ul className="flex items-center my-1 space-x-1 text-lg font-normal leading-4 text-coolGray-500">
         <li>
@@ -38,7 +39,7 @@ const SingleProperty: FC<IProps> = ({ property }) => {
         </li>
         <li>
           <span className="font-medium">Created: </span>{' '}
-          {timeSince(new Date(property.createdAt))}{' '}ago
+          {timeSince(new Date(property.createdAt))} ago
         </li>
       </ul>
       <h3 className="text-purple-600 font-bold text-2xl md:text-4xl my-4">
