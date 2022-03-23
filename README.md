@@ -1,15 +1,38 @@
-This is my first NextJs app. It is a property listing app
+# Safe Haven
 
-## Getting Started
+--
+A real estate Jamstack app, built with NextJS and Strapi
+--
 
-More documentation coming soon!!!
+## Installation
 
-## Deploy on Vercel
+First set up the strapi backend
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+- Clone the strapi backend app and run it first, before running the frontend app
+Go here https://github.com/prosper74/safe-haven-be
+- Setup your MongoDB account, Cloudianry Account (For images) and email provider account (Sendinblue, Sendgrid etc)
+- Add your account details in the .env file
+- Run `npm install` and start up the backend server
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
-details.
+Clone this repository and cd into the project directory
+- Add the strapi url to the .env file
+- Run `npm install`  
+- To run locally, run `npm run dev`
+
+## Built With
+
+- NextJS for the frontend
+- Strapi for the backend
+- Typescript
+- Tailwind CSS
+- Jest
+- Framer Motion for animation
+- Swiper js - for the sliders
+
+## Link
+
+Access app via https://safe-haven-fe.vercel.app/
+
+## Author
+
+[Prosper Atu]
