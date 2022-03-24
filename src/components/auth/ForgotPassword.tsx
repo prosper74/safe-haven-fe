@@ -69,9 +69,9 @@ const ForgotPassword: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
     <>
       <div className="flex flex-col justify-center">
         <div className="p-4 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <p className="text-2xl font-bold text-center mt-6">
+          <h3 className="text-2xl font-bold text-center mt-6">
             Forgot Password?
-          </p>
+          </h3>
           <p className="text-base font-normal text-center px-4">
             Kindly input your registered email address, and we will send an
             email with instructions on how to reset your password
