@@ -192,11 +192,16 @@ const Signup: FC<IProps> = ({ setIsOpen, steps, setSelectedStep }) => {
                       : 'hover:bg-purple-700 text-white'
                   }`}
                 >
-                  <span className="mr-2">Sign up</span>
                   {loading ? (
-                    <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
+                    <div className="flex items-center justify-center">
+                      <span className="mr-2">Submitting</span>
+                      <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 " />
+                    </div>
                   ) : (
-                    <ForwardArrow />
+                    <div className="flex items-center justify-center">
+                      <span className="mr-2">Sign up</span>
+                      <ForwardArrow />
+                    </div>
                   )}
                 </button>
               </form>
