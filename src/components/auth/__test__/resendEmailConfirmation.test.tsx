@@ -1,7 +1,7 @@
 // src/forgotPassword.test.ts
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ForgotPassword from '../ForgotPassword';
+import ResendEmailConfirmation from '../ResendEmailConfirmation';
 
 const formInputValues = [
   {
@@ -21,10 +21,10 @@ jest.mock('react-redux', () => {
 describe('renders heading text', () => {
   it('renders a heading', () => {
     // @ts-ignore
-    render(<ForgotPassword />);
+    render(<ResendEmailConfirmation />);
 
     const heading = screen.getByRole('heading', {
-      name: /Forgot Password?/i,
+      name: /Resend Confirmation Email/i,
     });
 
     expect(heading).toBeInTheDocument();
@@ -32,18 +32,16 @@ describe('renders heading text', () => {
 
   it('renders a paragraph', () => {
     // @ts-ignore
-    render(<ForgotPassword />);
+    render(<ResendEmailConfirmation />);
 
-    const paragraph = screen.getByText(
-      'Kindly input your registered email address, and we will send an email with instructions on how to reset your password'
-    );
+    const paragraph = screen.getByText('Input your email below');
 
     expect(paragraph).toBeInTheDocument();
   });
 
   it('Should render the form input', () => {
     // @ts-ignore
-    render(<ForgotPassword />);
+    render(<ResendEmailConfirmation />);
     formInputValues.forEach((value) => {
       expect(screen.getByLabelText(value.label)).toBeInTheDocument();
     });
@@ -51,10 +49,10 @@ describe('renders heading text', () => {
 
   it('Should render submit button', async () => {
     // @ts-ignore
-    render(<ForgotPassword />);
+    render(<ResendEmailConfirmation />);
 
     //check for submit button
-    const button = screen.getByRole('button', { name: 'Submit' });
+    const button = screen.getByRole('button', { name: 'Resend' });
 
     expect(button).toBeInTheDocument();
     expect(button).not.toBeDisabled();
@@ -62,10 +60,10 @@ describe('renders heading text', () => {
 
   it('Should submit when inputs are filled and submit button clicked', async () => {
     // @ts-ignore
-    render(<ForgotPassword />);
+    render(<ResendEmailConfirmation />);
 
     //check for submit button
-    const submitButton = screen.getByRole('button', { name: 'Submit' });
+    const submitButton = screen.getByRole('button', { name: 'Resend' });
 
     formInputValues.forEach((mockValue) => {
       const input = screen.getByLabelText(mockValue.label);
@@ -77,7 +75,7 @@ describe('renders heading text', () => {
     fireEvent.click(submitButton);
 
     expect(
-      await screen.findByRole('button', { name: 'Submit' })
+      await screen.findByRole('button', { name: 'Resend' })
     ).toBeInTheDocument();
   });
 });

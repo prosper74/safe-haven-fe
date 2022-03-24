@@ -76,9 +76,9 @@ const ResendEmailConfirmation: FC<IProps> = ({
     <>
       <div className="flex flex-col justify-center">
         <div className="p-4 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <p className="text-2xl font-bold text-center mt-6">
+          <h3 className="text-2xl font-bold text-center mt-6">
             Resend Confirmation Email
-          </p>
+          </h3>
           <p className="text-base font-normal text-center px-4 mb-6">
             Input your email below
           </p>
