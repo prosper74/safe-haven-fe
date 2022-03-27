@@ -1,8 +1,13 @@
 // index.tsx
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import PropertiesList from '@src/components/common/properties/propertiesList';
+import {
+  time,
+  alphabetic,
+  price,
+} from '@src/components/common/properties/Sorting/SortFunctions';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {
@@ -11,6 +16,39 @@ interface IProps {
 }
 
 const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
+  const [sortOptions, setSortOptions] = useState([
+    {
+      label: 'NEWEST',
+      active: true,
+      function: (data: singleProperties) => time(data, 'asc'),
+    },
+    {
+      label: 'OLDEST',
+      active: false,
+      function: (data: singleProperties) => time(data, 'desc'),
+    },
+    {
+      label: 'A-Z',
+      active: false,
+      function: (data: singleProperties) => alphabetic(data, 'asc'),
+    },
+    {
+      label: 'Z-A',
+      active: false,
+      function: (data: singleProperties) => alphabetic(data, 'desc'),
+    },
+    {
+      label: 'PRICE ⬆',
+      active: false,
+      function: (data: singleProperties) => price(data, 'asc'),
+    },
+    {
+      label: 'PRICE ⬇',
+      active: false,
+      function: (data: singleProperties) => price(data, 'desc'),
+    },
+  ]);
+
   return (
     <>
       <Head>
