@@ -13,16 +13,6 @@ export interface Category {
   name: string;
 }
 
-// export interface homeTabs {
-//   id: string
-//   filter: any;
-//   name: string;
-//   description?: string;
-//   price: number;
-//   category: Category;
-//   images: Image;
-// }
-
 export interface singleProperties {
   sort: any;
   length: number | undefined;
@@ -77,4 +67,10 @@ export interface featuresProps {
   map: any;
   id: string;
   name: string;
+}
+
+export interface sortOptionProps {
+  label: string;
+  active: boolean;
+  function: any;
 }

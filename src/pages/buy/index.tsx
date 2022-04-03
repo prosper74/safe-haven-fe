@@ -38,16 +38,21 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
       function: (data: singleProperties) => alphabetic(data, 'desc'),
     },
     {
-      label: 'PRICE ⬆',
-      active: false,
-      function: (data: singleProperties) => price(data, 'asc'),
-    },
-    {
-      label: 'PRICE ⬇',
+      label: 'LOWEST PRICE',
       active: false,
       function: (data: singleProperties) => price(data, 'desc'),
     },
+    {
+      label: 'HIGHEST PRICE',
+      active: false,
+      function: (data: singleProperties) => price(data, 'asc'),
+    },
   ]);
+
+  const selectedSort = sortOptions.filter((option) => option.active)[0];
+  const sortedProperties = selectedSort.function(properties);
+
+  // console.log(properties);
 
   return (
     <>
@@ -63,7 +68,11 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
             Buy Ads({totalCount})
           </h1>
 
-          <PropertiesList properties={properties} />
+          <PropertiesList
+            sortOptions={sortOptions}
+            setSortOptions={setSortOptions}
+            properties={sortedProperties}
+          />
         </div>
       </main>
     </>

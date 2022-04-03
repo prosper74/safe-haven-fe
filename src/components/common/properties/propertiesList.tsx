@@ -4,12 +4,21 @@ import Head from 'next/head';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import { singleProperties } from '@src/components/common/interfaces';
 import { FilterIcon } from '@src/components/common/svgIcons';
+import SortModal from './Sorting/sortModal';
 
 interface IProps {
   properties: singleProperties;
+  sortOptions: any[];
+  setSortOptions: (open: any) => any;
 }
 
-const PropertiesList: FC<IProps> = ({ properties }) => {
+const PropertiesList: FC<IProps> = ({
+  properties,
+  sortOptions,
+  setSortOptions,
+}) => {
+
+  
   return (
     <>
       <Head>
@@ -24,14 +33,11 @@ const PropertiesList: FC<IProps> = ({ properties }) => {
             <FilterIcon width="30" height="30" fill="#9932cc" />
           </div>
           <div>
-            <select
-              // onChange={(e) => sort(e.target.value)}
-              className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
-            >
-              <option defaultValue="newest">Newest</option>
-              <option value="asc">Lowest Price</option>
-              <option value="desc">Highest Price</option>
-            </select>
+            <SortModal
+              sortOptions={sortOptions}
+              setSortOptions={setSortOptions}
+              // map={undefined}
+            />
           </div>
         </div>
 
