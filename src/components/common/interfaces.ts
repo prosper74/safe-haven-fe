@@ -14,6 +14,7 @@ export interface Category {
 }
 
 export interface singleProperties {
+  slice(arg0: number, arg1: number): import("react").SetStateAction<never[]>;
   sort: any;
   length: number | undefined;
   filter: any;

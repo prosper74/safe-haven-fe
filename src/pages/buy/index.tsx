@@ -69,7 +69,9 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
           <PropertiesList
             sortOptions={sortOptions}
             setSortOptions={setSortOptions}
-            properties={sortedProperties}
+            allProperties={sortedProperties}
+            sortedProperties={sortedProperties.slice(0, 9)}
+            totalCount={totalCount}
           />
         </div>
       </main>
