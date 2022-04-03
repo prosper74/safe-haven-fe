@@ -52,8 +52,6 @@ const BuyPage: FC<IProps> = ({ properties, totalCount }) => {
   const selectedSort = sortOptions.filter((option) => option.active)[0];
   const sortedProperties = selectedSort.function(properties);
 
-  // console.log(properties);
-
   return (
     <>
       <Head>

@@ -1,6 +1,5 @@
 export const time = (data, direction) =>
   data.sort((a, b) => {
-    console.log(a.createdAt);
     const first = new Date(a.createdAt);
     const second = new Date(b.createdAt);
 
@@ -29,7 +28,6 @@ export const alphabetic = (data, direction) =>
 
 export const price = (data, direction) =>
   data.sort((a, b) => {
-    console.log(a.price);
     const first = Number(a.price);
     const second = Number(b.price);
 
