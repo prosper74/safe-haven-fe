@@ -39,7 +39,7 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
   return (
     <>
       {/* Search Input  */}
-      <div className="relative">
+      <div className="relative z-20">
         <input
           className="w-full p-5 bg-white text-xl text-darkBlueGray-400 placeholder-darkBlueGray-400 outline-none rounded-xl shadow-lg"
           type="text"
