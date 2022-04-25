@@ -34,7 +34,7 @@ const HomeBanner: FC<IProps> = ({ properties }) => (
                 <span className="relative z-10"> Home</span>
               </span>
             </h1>
-            <p className="mb-16 lg:mb-24 text-xl text-darkBlueGray-400 leading-snug">
+            <p className="mb-10 lg:mb-12 text-xl text-darkBlueGray-400 leading-snug">
               Get the best deals for your new home...
             </p>
             {/* Search widget  */}
