@@ -1,4 +1,3 @@
-// index.tsx
 import React, { FC, useState } from 'react';
 import Head from 'next/head';
 import axios from 'axios';

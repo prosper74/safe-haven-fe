@@ -1,13 +1,7 @@
-// index.tsx
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { locations, propertyType, priceRange } from '../../propertyData';
 import { CloseIcon, FilterIcon } from '../../svgIcons';
-
-// interface IProps {
-//   sortOptions: any[];
-//   setSortOptions: (open: any) => void;
-// }
 
 const FilterModal: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,10 +87,7 @@ const FilterModal: FC = () => {
                           </div>
                           {/* Bedrooms */}
                           <div>
-                            <select
-                              // {...register('bedroom')}
-                              className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
-                            >
+                            <select className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full">
                               <option value="any-bedroom">Any Bedroom</option>
                               {[1, 2, 3, 4, 5, 6, 7].map((d) => (
                                 <option key={d} value={d}>
