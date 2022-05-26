@@ -21,7 +21,7 @@ const SortModal: FC<IProps> = ({ sortOptions, setSortOptions }) => {
     <Menu as="div" className="relative inline-block text-left z-1000">
       <div>
         <Menu.Button className="">
-          <button className="flex items-center mr-2">
+          <button>
             <SortIcon width="33" height="33" fill="#9932cc" />
           </button>
         </Menu.Button>

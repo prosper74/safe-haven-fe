@@ -14,7 +14,7 @@ export interface Category {
 }
 
 export interface singleProperties {
-  slice(arg0: number, arg1: number): import("react").SetStateAction<never[]>;
+  slice(arg0: number, arg1: number): import('react').SetStateAction<never[]>;
   sort: any;
   length: number | undefined;
   filter: any;
@@ -74,4 +74,16 @@ export interface sortOptionProps {
   label: string;
   active: boolean;
   function: any;
+}
+
+export interface userProps {
+  id: string;
+  properties: singleProperties[];
+  username: string;
+  createdAt: string;
+  email: string;
+  phone: string;
+  image: {
+    url: string;
+  };
 }

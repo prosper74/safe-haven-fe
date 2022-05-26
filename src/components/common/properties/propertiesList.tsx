@@ -3,8 +3,9 @@ import React, { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropertyCard from '@src/components/common/properties/propertyCard';
 import SortModal from './Sorting/sortModal';
-import { FilterIcon } from '@src/components/common/svgIcons';
+// import { FilterIcon } from '@src/components/common/svgIcons';
 import { singleProperties } from '@src/components/common/interfaces';
+import FilterModal from './filter/filterModal';
 
 interface IProps {
   allProperties: singleProperties;
@@ -46,7 +47,7 @@ const PropertiesList: FC<IProps> = ({
       <main className="">
         <div className="flex items-center justify-between my-4">
           <div className="">
-            <FilterIcon width="30" height="30" fill="#9932cc" />
+            <FilterModal />
           </div>
           <div>
             <SortModal

@@ -7,6 +7,7 @@ import emailjs from 'emailjs-com';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { CloseIcon, ForwardArrow } from '@src/components/common/svgIcons';
 import { singleProperties } from '../interfaces';
+import { locations, propertyType, priceRange } from '../propertyData';
 
 interface IProps {
   property: singleProperties;
@@ -147,10 +148,11 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
-                      <option value="nigeria">All Nigeria</option>
-                      <option value="lagos">Lagos</option>
-                      <option value="rivers">Rivers</option>
-                      <option value="abuja">Abuja</option>
+                      {locations.map((location) => (
+                        <option key={location.name} value={location.name}>
+                          {location.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   {/* Category */}
@@ -176,13 +178,11 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
-                      <option value="any-type">Any Type</option>
-                      <option value="apartment">Apartment</option>
-                      <option value="house">House</option>
-                      <option value="duplex">Duplex</option>
-                      <option value="bungalow">Bungalow</option>
-                      <option value="mini-flat">Mini Flat</option>
-                      <option value="mansion">Mansion</option>
+                      {propertyType.map((type) => (
+                        <option key={type.name} value={type.name}>
+                          {type.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   {/* Bedrooms */}
@@ -192,12 +192,11 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                       className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                     >
                       <option value="any-bedroom">Any Bedroom</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((d: number) => (
+                        <option key={d} value={d}>
+                          {d}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   {/* Price Range */}
@@ -207,12 +206,11 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                       className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                     >
                       <option defaultValue="any">Price Range</option>
-                      <option value="50000-150000">50000-150000</option>
-                      <option value="150000-300000">150000-300000</option>
-                      <option value="300000-600000">300000-600000</option>
-                      <option value="600000-1000000">600000-1000000</option>
-                      <option value="1000000-3000000">1000000-3000000</option>
-                      <option value="3000000-above">3000000-above</option>
+                      {priceRange.map(({ price }) => (
+                        <option key={price} value={price}>
+                          {price}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   {/* Message */}

@@ -4,6 +4,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setUser } from '@src/store/reducers/userReducer';
 import { useIsMedium } from '@src/components/common/hooks/mediaQuery';
+import Link from 'next/link';
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(' ');
@@ -72,28 +73,30 @@ const UserDropdown: FC = () => {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Your Profile
-                </a>
+                <Link href="/agent/account">
+                  <a
+                    className={classNames(
+                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                      'block px-4 py-2 text-sm hover:bg-slate-100'
+                    )}
+                  >
+                    My Profile
+                  </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Support
-                </a>
+                <Link href="#">
+                  <a
+                    className={classNames(
+                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                      'block px-4 py-2 text-sm hover:bg-slate-100'
+                    )}
+                  >
+                    Support
+                  </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
