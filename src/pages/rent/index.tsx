@@ -94,26 +94,3 @@ export async function getServerSideProps() {
     },
   };
 }
-
-// export async function getServerSideProps() {
-//   const newest = await axios.get(
-//     `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=createdAt:desc`
-//   );
-//   const lowestPrice = await axios.get(
-//     `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=price:asc`
-//   );
-//   const highestPrice = await axios.get(
-//     `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent&_limit=9&_sort=price:desc`
-//   );
-//   const totalCount = await axios.get(
-//     `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Rent`
-//   );
-//   return {
-//     props: {
-//       newestProperties: newest.data,
-//       lowestPriceProperties: lowestPrice.data,
-//       highestPriceProperties: highestPrice.data,
-//       totalCount: totalCount.data,
-//     },
-//   };
-// }
