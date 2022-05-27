@@ -4,14 +4,11 @@ import Head from 'next/head';
 import axios from 'axios';
 import AgentSidebar from '@src/components/common/properties/agent/agentSidebar';
 import PropertyCard from '@src/components/common/properties/propertyCard';
-import {
-  singleProperties,
-  agentProps,
-} from '@src/components/common/interfaces';
+import { singleProperties, userProps } from '@src/components/common/interfaces';
 
 interface IProps {
   properties: singleProperties;
-  agent: agentProps;
+  agent: userProps;
 }
 
 const BuySingle: FC<IProps> = ({ properties, agent }) => {

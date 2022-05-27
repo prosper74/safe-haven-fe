@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { timeSince } from '../../dateFunction';
-import { agentProps } from '../../interfaces';
+import { userProps } from '../../interfaces';
 
 interface IProps {
-  agent: agentProps;
+  agent: userProps;
   totalCount?: number;
 }
 
@@ -21,7 +21,9 @@ const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
           <p className="my-2">
             Number: <a href={`tel:+234${agent.phone}`}>+234 {agent.phone}</a>
           </p>
-          <p className="my-2">Joined: {timeSince(new Date(agent.createdAt))} ago</p>
+          <p className="my-2">
+            Joined: {timeSince(new Date(agent.createdAt))} ago
+          </p>
           <p className="my-2">
             Status:{' '}
             {agent.verified ? (

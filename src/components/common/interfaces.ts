@@ -53,15 +53,15 @@ export interface singleProperties {
   };
 }
 
-export interface agentProps {
-  username: string;
-  phone: number;
-  verified: boolean;
-  createdAt: number;
-  image: {
-    url: string;
-  };
-}
+// export interface agentProps {
+//   username: string;
+//   phone: number;
+//   verified: boolean;
+//   createdAt: number;
+//   image: {
+//     url: string;
+//   };
+// }
 
 export interface featuresProps {
   length: number;
@@ -78,9 +78,10 @@ export interface sortOptionProps {
 
 export interface userProps {
   id: string;
-  properties: singleProperties[];
+  properties: singleProperties;
   username: string;
   createdAt: string;
+  verified: boolean;
   email: string;
   phone: string;
   image: {
