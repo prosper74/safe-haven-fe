@@ -8,7 +8,7 @@ interface IProps {
   property: singleProperties;
 }
 
-const PropertyCard: FC<IProps> = ({ property }) => {
+export const PropertyCard: FC<IProps> = ({ property }) => {
   return (
     <div className="flex justify-center mb-2 mx-1 cursor-pointer">
       {property ? (
@@ -64,5 +64,3 @@ const PropertyCard: FC<IProps> = ({ property }) => {
     </div>
   );
 };
-
-export default PropertyCard;

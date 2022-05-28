@@ -66,13 +66,25 @@ const UserTab: FC<IProps> = ({ user }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-0 sm:gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-0 sm:gap-4">
               {/* agent sidebar */}
               <div>
-                <AgentSidebar
-                  agent={user.properties}
-                  totalCount={properties.length}
-                />
+                <div className="flex justify-between mb-4">
+                  <button
+                    className={`inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 ${
+                      user.verified && 'w-full'
+                    }`}
+                  >
+                    Edit Profile
+                  </button>
+
+                  {!user.verified && (
+                    <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                      Verify Account
+                    </button>
+                  )}
+                </div>
+                <AgentSidebar agent={user} totalCount={properties.length} />
               </div>
 
               {/* Agent Properties  */}

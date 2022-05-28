@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PropertyCard from '@src/components/common/properties/propertyCard';
+import { PropertyCard } from '@src/components/common/properties/propertyCard';
 import {
   useIsLarge,
   useIsXLarge,

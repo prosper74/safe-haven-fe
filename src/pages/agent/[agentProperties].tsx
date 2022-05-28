@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import AgentSidebar from '@src/components/common/properties/agent/agentSidebar';
-import PropertyCard from '@src/components/common/properties/propertyCard';
+import { PropertyCard } from '@src/components/common/properties/propertyCard';
 import { singleProperties, userProps } from '@src/components/common/interfaces';
 
 interface IProps {

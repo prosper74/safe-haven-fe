@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PropertyCard from '@src/components/common/properties/propertyCard';
+import { PropertyCard } from '@src/components/common/properties/propertyCard';
 import {
   useIsMedium,
   useIsLarge,

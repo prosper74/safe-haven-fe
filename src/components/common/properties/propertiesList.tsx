@@ -1,7 +1,7 @@
 // index.tsx
 import React, { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import PropertyCard from '@src/components/common/properties/propertyCard';
+import { PropertyCard } from '@src/components/common/properties/propertyCard';
 import SortModal from './Sorting/sortModal';
 // import { FilterIcon } from '@src/components/common/svgIcons';
 import { singleProperties } from '@src/components/common/interfaces';
