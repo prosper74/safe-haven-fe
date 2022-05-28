@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
 import AgentSidebar from './agentSidebar';
-import { userProps } from '@src/components/common/interfaces';
+import { singleProperties, userProps } from '@src/components/common/interfaces';
+import { PropertyCardList } from '../propertyCard';
 
 interface IProps {
   // properties: userProps;
@@ -16,7 +17,7 @@ const UserTab: FC<IProps> = ({ user }) => {
   const properties = user.properties;
   console.log('properties', properties);
   return (
-    <div className="w-full py-16 items-center">
+    <div className="w-full py-16">
       <Tab.Group>
         <Tab.List className="flex p-1 space-x-1 text-lg font-medium bg-purple-100 rounded-xl">
           <Tab
@@ -66,7 +67,7 @@ const UserTab: FC<IProps> = ({ user }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-0 sm:gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-0 sm:gap-4">
               {/* agent sidebar */}
               <div>
                 <div className="flex justify-between mb-4">
@@ -88,13 +89,31 @@ const UserTab: FC<IProps> = ({ user }) => {
               </div>
 
               {/* Agent Properties  */}
-              <div className="col-span-2 sm:col-span-1 lg:col-span-2 2xl:col-span-3">
-                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-1 mb-32">
-                  {/* {properties.map((property: singleProperties) => (
-                    <PropertyCard key={property.id} property={property} />
-                  ))} */}
+              {properties.length! < 1 ? (
+                <div className="flex flex-col justify-center items-center text-center">
+                  <h3 className="font-medium text-lg">
+                    You do not have any ads.{' '}
+                    {user.verified
+                      ? 'Create one'
+                      : 'Please verify your account, then create new ads'}
+                  </h3>
+                  {user.verified ? (
+                    <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                      Create Ad
+                    </button>
+                  ) : (
+                    <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                      Verify Account
+                    </button>
+                  )}
                 </div>
-              </div>
+              ) : (
+                <div className="col-span-2 sm:col-span-1 lg:col-span-2 2xl:col-span-3">
+                  {properties.map((property: singleProperties) => (
+                    <PropertyCardList key={property.id} property={property} />
+                  ))}
+                </div>
+              )}
             </div>
           </Tab.Panel>
           <Tab.Panel

@@ -53,16 +53,6 @@ export interface singleProperties {
   };
 }
 
-// export interface agentProps {
-//   username: string;
-//   phone: number;
-//   verified: boolean;
-//   createdAt: number;
-//   image: {
-//     url: string;
-//   };
-// }
-
 export interface featuresProps {
   length: number;
   map: any;
