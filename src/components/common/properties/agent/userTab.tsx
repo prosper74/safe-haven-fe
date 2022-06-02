@@ -122,7 +122,7 @@ const UserTab: FC<IProps> = ({ user }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            Tab1
+            Reviews
             {/* <TabContent properties={properties} tabCategory="Rent" /> */}
           </Tab.Panel>
           <Tab.Panel
@@ -131,7 +131,7 @@ const UserTab: FC<IProps> = ({ user }) => {
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-purple-400 ring-white ring-opacity-60'
             )}
           >
-            Tab2
+            Favourites
             {/* <TabContent properties={properties} tabCategory="Shortlet" /> */}
           </Tab.Panel>
         </Tab.Panels>

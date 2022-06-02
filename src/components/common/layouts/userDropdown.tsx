@@ -1,5 +1,5 @@
 // index.tsx
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setUser } from '@src/store/reducers/userReducer';
@@ -15,10 +15,12 @@ const UserDropdown: FC = () => {
   const isMedium = useIsMedium();
   const dispatch = useDispatch();
   const defaultUser = { username: 'Guest' };
+  const [isOpen, setIsOpen] = useState(false);
 
   const userImage = user.image && user.image.url;
 
   const handleLogout = async () => {
+    setIsOpen(!isOpen);
     typeof window !== 'undefined' && window.localStorage.removeItem('user');
     dispatch(setUser(defaultUser));
   };
@@ -26,7 +28,10 @@ const UserDropdown: FC = () => {
   return (
     <Menu as="div" className="relative inline-block text-left z-1000">
       <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-100 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+        <Menu.Button
+          onClick={() => setIsOpen(!isOpen)}
+          className="inline-flex justify-center w-full rounded-md border border-gray-100 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+        >
           <a className="flex items-center mr-2" href="#">
             <span>{isMedium && user.username.substr(0, 7)}</span>
             <img
@@ -46,7 +51,9 @@ const UserDropdown: FC = () => {
       </div>
 
       <Transition
+        appear
         as={Fragment}
+        show={isOpen}
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -58,23 +65,26 @@ const UserDropdown: FC = () => {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active
-                      ? 'bg-gray-100 text-gray-900 rounded-md'
-                      : 'bg-purple-500 text-gray-100 rounded-md',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Create Ad
-                </a>
+                <Link href="/create-ad">
+                  <a
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={classNames(
+                      active
+                        ? 'bg-gray-100 text-gray-900 rounded-md'
+                        : 'bg-purple-500 text-gray-100 rounded-md',
+                      'block px-4 py-2 text-sm'
+                    )}
+                  >
+                    Create Ad
+                  </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <Link href="/agent/account">
                   <a
+                    onClick={() => setIsOpen(!isOpen)}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm hover:bg-slate-100'
@@ -89,6 +99,7 @@ const UserDropdown: FC = () => {
               {({ active }) => (
                 <Link href="#">
                   <a
+                    onClick={() => setIsOpen(!isOpen)}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm hover:bg-slate-100'
