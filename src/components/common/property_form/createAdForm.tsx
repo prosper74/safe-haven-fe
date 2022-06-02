@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDispatch } from 'react-redux';
-import emailjs from 'emailjs-com';
-import { setSnackbar } from '@src/store/reducers/feedbackReducer';
+// import emailjs from 'emailjs-com';
+// import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { ForwardArrow } from '@src/components/common/svgIcons';
 // import { singleProperties } from '../interfaces';
 import { locations, propertyType, priceRange } from '../propertyData';
@@ -15,23 +15,29 @@ import { locations, propertyType, priceRange } from '../propertyData';
 // }
 
 const schema = z.object({
-  name: z.string().min(5, { message: 'Name must be at at least 5 characters' }),
-  email: z.string().email().nonempty({ message: 'Invalid email' }),
+  title: z
+    .string()
+    .min(5, { message: 'Title must be at at least 10 characters' })
+    .max(40, { message: 'Title must not be more than 40 characters' }),
+  email: z.string().email().min(1, { message: 'Invalid email' }),
   phone: z.string().regex(/^[0]\d{10}$/, 'Phone number must be 11 digits'),
   state: z.string().optional(),
-  category: z.string().optional(),
+  category: z.string().min(1),
   type: z.string().optional(),
   bedroom: z.string().optional(),
   price_range: z.string().optional(),
-  message: z.string().nonempty(),
+  message: z.string().min(1),
 });
 
 export const CreateAdForm: FC = () => {
   const dispatch = useDispatch();
+  const [isCategory, setIsCategory] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(false);
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -42,31 +48,19 @@ export const CreateAdForm: FC = () => {
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
     console.log('Data', data);
+  });
 
-    // emailjs
-    //   .send('service_05kvw8y', 'template_au4zqfz', data, 'FFD1CK1AWLApETK-P')
-    //   .then(
-    //     () => {
-    //       dispatch(
-    //         setSnackbar({
-    //           status: 'success',
-    //           message: ` Request Sent. We will contact you shortly`,
-    //           open: true,
-    //         })
-    //       );
-    //       setLoading(false);
-    //     },
-    //     (error) => {
-    //       dispatch(
-    //         setSnackbar({
-    //           status: 'error',
-    //           message: ` ${error.text}`,
-    //           open: true,
-    //         })
-    //       );
-    //       setLoading(false);
-    //     }
-    //   );
+  useEffect(() => {
+    setSelectedCategory(watch('category'));
+    if (
+      selectedCategory === 'buy' ||
+      selectedCategory === 'rent' ||
+      selectedCategory === 'shortlet'
+    ) {
+      setIsCategory(true);
+    } else {
+      setIsCategory(false);
+    }
   });
 
   return (
@@ -78,61 +72,24 @@ export const CreateAdForm: FC = () => {
             <div className="px-3 py-4">
               <form>
                 <div className="grid grid-cols-2 gap-2">
+                  {/* Category */}
                   <div>
-                    <input
-                      id="name"
-                      autoComplete="name"
-                      placeholder="Your Full Name"
-                      type="text"
-                      {...register('name')}
-                      className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.name &&
-                        'border-red-500 text-red-500 focus:outline-red-500'
-                      }`}
-                    />
-                    {errors.name?.message && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors.name?.message}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <input
-                      id="email"
-                      autoComplete="email"
-                      placeholder="Your email"
-                      type="text"
-                      {...register('email')}
-                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.email &&
-                        'border-red-500 text-red-500 focus:outline-red-500'
-                      }`}
-                    />
-                    {errors.email?.message && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors.email?.message}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <input
-                      id="phone"
-                      autoComplete="phone"
-                      placeholder="Your Phone Number"
-                      type="number"
-                      {...register('phone')}
+                    {/* <label htmlFor="category"></label> */}
+                    <select
+                      id="category"
+                      placeholder="Select Category"
+                      {...register('category')}
                       className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                         errors.phone &&
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
-                    />
-                    {errors.phone?.message && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors.phone?.message}
-                      </p>
-                    )}
+                    >
+                      <option selected>Select a Category</option>
+                      <option value="buy">Buy</option>
+                      <option value="rent">Rent</option>
+                      <option value="shortlet">Shortlet</option>
+                    </select>
                   </div>
-                  {/* State */}
                   <div>
                     <select
                       {...register('state')}
@@ -141,6 +98,7 @@ export const CreateAdForm: FC = () => {
                         'border-red-500 text-red-500 focus:outline-red-500'
                       }`}
                     >
+                      <option selected>Select Location</option>
                       {locations.map((location) => (
                         <option key={location.name} value={location.name}>
                           {location.label}
@@ -148,80 +106,124 @@ export const CreateAdForm: FC = () => {
                       ))}
                     </select>
                   </div>
-                  {/* Category */}
-                  <div>
-                    <select
-                      {...register('category')}
-                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.phone &&
-                        'border-red-500 text-red-500 focus:outline-red-500'
-                      }`}
-                    >
-                      <option value="buy">Buy</option>
-                      <option value="rent">Rent</option>
-                      <option value="shortlet">Shortlet</option>
-                    </select>
-                  </div>
-                  {/* Type */}
-                  <div>
-                    <select
-                      {...register('type')}
-                      className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
-                        errors.phone &&
-                        'border-red-500 text-red-500 focus:outline-red-500'
-                      }`}
-                    >
-                      {propertyType.map((type) => (
-                        <option key={type.name} value={type.name}>
-                          {type.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {/* Bedrooms */}
-                  <div>
-                    <select
-                      {...register('bedroom')}
-                      className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
-                    >
-                      <option value="any-bedroom">Any Bedroom</option>
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((d: number) => (
-                        <option key={d} value={d}>
-                          {d}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {/* Price Range */}
-                  <div>
-                    <select
-                      {...register('price_range')}
-                      className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
-                    >
-                      <option defaultValue="any">Price Range</option>
-                      {priceRange.map(({ price }) => (
-                        <option key={price} value={price}>
-                          {price}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {/* Message */}
-                  <div className="col-span-2">
-                    <textarea
-                      {...register('message')}
-                      className="focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full transition ease-in-out"
-                      id="exampleFormControlTextarea1"
-                      rows={3}
-                      placeholder="Your Message"
-                    ></textarea>
-                  </div>
+                  {isCategory && (
+                    <>
+                      <div>
+                        <input
+                          id="title"
+                          autoComplete="title"
+                          placeholder="Property Title"
+                          type="text"
+                          {...register('title')}
+                          className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                            errors.name &&
+                            'border-red-500 text-red-500 focus:outline-red-500'
+                          }`}
+                        />
+                        {errors.name?.message && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors.name?.message}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <input
+                          id="email"
+                          autoComplete="email"
+                          placeholder="Your email"
+                          type="text"
+                          {...register('email')}
+                          className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                            errors.email &&
+                            'border-red-500 text-red-500 focus:outline-red-500'
+                          }`}
+                        />
+                        {errors.email?.message && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors.email?.message}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <input
+                          id="phone"
+                          autoComplete="phone"
+                          placeholder="Your Phone Number"
+                          type="number"
+                          {...register('phone')}
+                          className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                            errors.phone &&
+                            'border-red-500 text-red-500 focus:outline-red-500'
+                          }`}
+                        />
+                        {errors.phone?.message && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors.phone?.message}
+                          </p>
+                        )}
+                      </div>
+                      {/* Type */}
+                      <div>
+                        <select
+                          {...register('type')}
+                          className={`focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
+                            errors.phone &&
+                            'border-red-500 text-red-500 focus:outline-red-500'
+                          }`}
+                        >
+                          {propertyType.map((type) => (
+                            <option key={type.name} value={type.name}>
+                              {type.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {/* Bedrooms */}
+                      <div>
+                        <select
+                          {...register('bedroom')}
+                          className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+                        >
+                          <option value="any-bedroom">Any Bedroom</option>
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((d: number) => (
+                            <option key={d} value={d}>
+                              {d}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {/* Price Range */}
+                      <div>
+                        <select
+                          {...register('price_range')}
+                          className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
+                        >
+                          <option defaultValue="any">Price Range</option>
+                          {priceRange.map(({ price }) => (
+                            <option key={price} value={price}>
+                              {price}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {/* Message */}
+                      <div className="col-span-2">
+                        <textarea
+                          {...register('message')}
+                          className="focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full transition ease-in-out"
+                          id="exampleFormControlTextarea1"
+                          rows={3}
+                          placeholder="Your Message"
+                        ></textarea>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <button
                   type="button"
                   onClick={onSubmit}
-                  disabled={loading}
+                  disabled={loading || isCategory}
                   className={`mt-5 transition duration-200 bg-purple-600 focus:bg-purple-800 focus:shadow-sm focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 w-full py-2.5 rounded-lg text-lg shadow-sm hover:shadow-md font-semibold text-center flex justify-center items-center ${
                     loading
                       ? 'hover:bg-purple-300 text-gray-300'
