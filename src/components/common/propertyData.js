@@ -1,62 +1,48 @@
 export const locations = [
   {
-    name: 'nigeria',
-    label: 'All Nigeria',
+    name: 'Lagos',
   },
   {
-    name: 'lagos',
-    label: 'Lagos',
+    name: 'Rivers',
   },
   {
-    id: 'rivers',
-    label: 'Rivers',
+    name: 'Oyo',
   },
   {
-    name: 'oyo',
-    label: 'Oyo',
+    name: 'Akwa Ibom',
   },
   {
-    name: 'akwa-ibom',
-    label: 'Akwa Ibom',
+    name: 'Delta',
   },
   {
-    name: 'delta',
-    label: 'Delta',
-  },
-  {
-    name: 'osun',
-    label: 'Osun',
+    name: 'Osun',
   },
 ];
 
 export const propertyType = [
   {
-    name: 'any-type',
-    label: 'Any Type',
+    name: 'Apartment',
   },
   {
-    name: 'apartment',
-    label: 'Apartment',
+    name: 'House',
   },
   {
-    name: 'house',
-    label: 'House',
+    name: 'Bungalow',
   },
   {
-    name: 'bungalow',
-    label: 'Bungalow',
+    name: 'Duplex',
   },
   {
-    name: 'duplex',
-    label: 'Duplex',
+    name: 'MiniFlat',
   },
   {
-    name: 'mini-flat',
-    label: 'Mini Flat',
+    name: 'Mansion',
   },
   {
-    name: 'mansion',
-    label: 'Mansion',
+    name: 'Villa',
+  },
+  {
+    name: 'Land',
   },
 ];
 
@@ -81,5 +67,48 @@ export const priceRange = [
   },
   {
     price: '5000000+',
+  },
+];
+
+export const perPeriod = [
+  {
+    name: 'day',
+    label: 'day',
+  },
+  {
+    name: 'week',
+    label: 'week',
+  },
+  {
+    name: 'month',
+    label: 'month',
+  },
+  {
+    name: 'threeMonths',
+    label: '3 months',
+  },
+  {
+    name: 'sixMonths',
+    label: '6 months',
+  },
+  {
+    name: 'year',
+    label: 'year',
+  },
+  {
+    name: 'twoYears',
+    label: '2 years',
+  },
+  {
+    name: 'threeYears',
+    label: '3 years',
+  },
+  {
+    name: 'fourYears',
+    label: '4 years',
+  },
+  {
+    name: 'fiveYears',
+    label: '5 years',
   },
 ];

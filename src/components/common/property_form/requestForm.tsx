@@ -150,7 +150,7 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                     >
                       {locations.map((location) => (
                         <option key={location.name} value={location.name}>
-                          {location.label}
+                          {location.name}
                         </option>
                       ))}
                     </select>
@@ -180,7 +180,7 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                     >
                       {propertyType.map((type) => (
                         <option key={type.name} value={type.name}>
-                          {type.label}
+                          {type.name}
                         </option>
                       ))}
                     </select>
@@ -205,7 +205,7 @@ export const RequestProperty: FC<IProps> = ({ setIsOpen }) => {
                       {...register('price_range')}
                       className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                     >
-                      <option defaultValue="any">Price Range</option>
+                      <option selected>Price Range</option>
                       {priceRange.map(({ price }) => (
                         <option key={price} value={price}>
                           {price}
