@@ -5,7 +5,6 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import AuthPortal from '@src/components/auth';
 import LoginPopupButton from '@src/components/common/buttons/loginPopup';
 import { CreateAdForm } from '@src/components/common/property_form/createAdForm';
-// import axios from 'axios';
 
 const CreateAdPage: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);

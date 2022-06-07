@@ -4,17 +4,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDropzone } from 'react-dropzone';
+// @ts-ignore
 import { Image } from 'cloudinary-react';
+import { IImageUpload } from '../interfaces';
 // import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { ForwardArrow } from '@src/components/common/svgIcons';
 // import { singleProperties } from '../interfaces';
 import { locations, propertyType, perPeriod } from '../propertyData';
-
-interface IImageUpload {
-  files: File[];
-  onDrop: (acceptedFiles: File[]) => void;
-  // acceptedFile: (acceptedFiles: File[]) => void;
-}
 
 const schema = z.object({
   images: z.any(),
@@ -50,11 +46,13 @@ export const CreateAdForm: FC<IImageUpload> = () => {
   const onDrop = useCallback(async (acceptedFiles) => {
     const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
 
-    acceptedFiles.forEach(async (acceptedFile) => {
+    acceptedFiles.forEach(async (acceptedFile: IImageUpload) => {
       const formData = new FormData();
+      // @ts-ignore
       formData.append('file', acceptedFile);
       formData.append(
         'upload_preset',
+        // @ts-ignore
         process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
       );
 
@@ -64,11 +62,13 @@ export const CreateAdForm: FC<IImageUpload> = () => {
       });
 
       const data = await response.json();
+      // @ts-ignore
       setUploadedFiles((old) => [...old, data]);
     });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    // @ts-ignore
     accepts: 'images/*',
     multiple: true,
     maxFiles: 4,
@@ -126,7 +126,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
             )}
 
             <ul className="flex flex-row justify-center">
-              {uploadedFiles.map((file) => (
+              {uploadedFiles.map((file: IImageUpload) => (
                 <li key={file.public_id} className="mr-1">
                   <Image
                     cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_NAME}
@@ -236,6 +236,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('bedroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
+                            <option selected>Select Bedroom</option>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
                               (d: number) => (
                                 <option key={d} value={d}>
@@ -253,6 +254,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('bathroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
+                            <option selected>Select Bathroom</option>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
                               (d: number) => (
                                 <option key={d} value={d}>
@@ -270,6 +272,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('sittingroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
+                            <option selected>Select Sitting Room</option>
                             {[1, 2, 3, 4, 5, 6, 7].map((d: number) => (
                               <option key={d} value={d}>
                                 {d} Sitting Room{d > 1 && 's'}
@@ -278,7 +281,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                           </select>
                         </div>
                       )}
-
                       {/* Period */}
                       {selectedCategory !== 'buy' && (
                         <div>
@@ -316,7 +318,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                           placeholder="Property features. Enter each feature in a new line"
                         ></textarea>
                       </div>
-                      {/* Message */}
+                      {/* description */}
                       <div className="col-span-2">
                         <textarea
                           {...register('description')}
@@ -334,7 +336,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                           </div>
                           <input
                             type="number"
-                            // autoComplete="price"
                             placeholder="1200000"
                             className={`focus:outline-purple-600 pl-7 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                               errors.price &&

@@ -78,3 +78,10 @@ export interface userProps {
     url: string;
   };
 }
+
+export interface IImageUpload {
+  files: File[];
+  onDrop: (acceptedFiles: File[]) => void;
+  public_id: string;
+  acceptedFile: File[];
+}
