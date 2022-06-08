@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
-// import { timeSince } from '../../dateFunction';
-// import { userProps } from '../../interfaces';
 import UserTab from './userTab';
-
-// interface IProps {
-//   user: userProps;
-// }
 
 const AccountPortal: FC = () => {
   return (

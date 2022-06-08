@@ -1,15 +1,9 @@
-// index.tsx
 import React, { FC, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSelector, RootStateOrAny } from 'react-redux';
-// import { userProps } from '@src/components/common/interfaces';
 import { PageLoader } from '@src/components/common/loader';
 import AccountPortal from '@src/components/common/properties/agent/accountPortal';
-
-// interface IProps {
-//   user: userProps;
-// }
 
 const AccountPage: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);

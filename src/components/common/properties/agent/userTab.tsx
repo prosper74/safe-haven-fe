@@ -2,12 +2,8 @@ import React, { FC } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Tab } from '@headlessui/react';
 import AgentSidebar from './agentSidebar';
-import { singleProperties, userProps } from '@src/components/common/interfaces';
+import { singleProperties } from '@src/components/common/interfaces';
 import { PropertyCardList } from '../propertyCard';
-
-// interface IProps {
-//   user: userProps;
-// }
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
@@ -92,7 +88,6 @@ const UserTab: FC = () => {
                 <AgentSidebar agent={user} totalCount={properties.length} />
               </div>
 
-              {/* Agent Properties  */}
               {properties.length! < 1 ? (
                 <div className="flex flex-col justify-center items-center text-center">
                   <h3 className="font-medium text-lg">
@@ -127,7 +122,6 @@ const UserTab: FC = () => {
             )}
           >
             Reviews
-            {/* <TabContent properties={properties} tabCategory="Rent" /> */}
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
@@ -136,7 +130,6 @@ const UserTab: FC = () => {
             )}
           >
             Favourites
-            {/* <TabContent properties={properties} tabCategory="Shortlet" /> */}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
