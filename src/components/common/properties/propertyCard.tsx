@@ -67,7 +67,7 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
   );
 };
 
-export const PropertyCardList: FC<IProps> = ({ property }) => {
+export const PropertyCardList: FC<IProps> = ({ property }) => {  
   const isSmall = useIsSmall();
   return (
     <div className="mb-1">

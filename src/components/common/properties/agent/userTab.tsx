@@ -1,21 +1,25 @@
 import React, { FC } from 'react';
+import { useSelector, RootStateOrAny } from 'react-redux';
 import { Tab } from '@headlessui/react';
 import AgentSidebar from './agentSidebar';
 import { singleProperties, userProps } from '@src/components/common/interfaces';
 import { PropertyCardList } from '../propertyCard';
 
-interface IProps {
-  // properties: userProps;
-  user: userProps;
-}
+// interface IProps {
+//   user: userProps;
+// }
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
 };
 
-const UserTab: FC<IProps> = ({ user }) => {
-  const properties = user.properties;
-  console.log('properties', properties);
+const UserTab: FC = () => {
+  const user = useSelector((state: RootStateOrAny) => state.user);
+  const properties = [...user.properties];
+  const newProperties = properties.sort(
+    (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+  );
+
   return (
     <div className="w-full py-16">
       <Tab.Group>
@@ -109,7 +113,7 @@ const UserTab: FC<IProps> = ({ user }) => {
                 </div>
               ) : (
                 <div className="col-span-2 sm:col-span-1 lg:col-span-2 2xl:col-span-3">
-                  {properties.map((property: singleProperties) => (
+                  {newProperties.map((property: singleProperties) => (
                     <PropertyCardList key={property.id} property={property} />
                   ))}
                 </div>
