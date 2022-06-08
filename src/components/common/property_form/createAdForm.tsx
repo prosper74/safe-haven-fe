@@ -6,10 +6,9 @@ import * as z from 'zod';
 import { useDropzone } from 'react-dropzone';
 // @ts-ignore
 import { Image } from 'cloudinary-react';
-import { IImageUpload } from '../interfaces';
 // import { setSnackbar } from '@src/store/reducers/feedbackReducer';
+import { IImageUpload } from '../interfaces';
 import { ForwardArrow } from '@src/components/common/svgIcons';
-// import { singleProperties } from '../interfaces';
 import { locations, propertyType, perPeriod } from '../propertyData';
 
 const schema = z.object({
@@ -72,6 +71,8 @@ export const CreateAdForm: FC<IImageUpload> = () => {
     accepts: 'images/*',
     multiple: true,
     maxFiles: 4,
+    minSize: 0,
+    maxSize: 1000000,
   });
 
   const {
@@ -100,8 +101,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
       : setIsCategory(false);
   });
 
-  console.log('uploadedFiles: ', uploadedFiles.length);
-  // console.log('type: ', selectedType);
+  // console.log('uploadedFiles: ', uploadedFiles.length);
 
   return (
     <>
@@ -120,8 +120,8 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                 }`}
               >
                 <input {...getInputProps()} />
-                Drag and drop some files here, or click to select files.Min 1
-                file and Max 4 images
+                Drag and drop some files here, or click to select files. Min 1
+                image, Max 4 images. Max file size per image is 1mb. PNG/JPEG
               </div>
             )}
 

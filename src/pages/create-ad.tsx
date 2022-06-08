@@ -35,6 +35,7 @@ const CreateAdPage: FC = () => {
               <h1 className="font-bold text-center text-3xl mt-28 mb-10">
                 Create New Ad
               </h1>
+              {/* @ts-ignore */}
               <CreateAdForm />
             </>
           )}

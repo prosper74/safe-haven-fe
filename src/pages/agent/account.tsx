@@ -30,7 +30,6 @@ const AccountPage: FC<IProps> = () => {
             <link rel="icon" href="/favicon.png" />
             <meta content={`${user.username} account page`} />
           </Head>
-
           <AccountPortal user={user} />
         </>
       ) : (
