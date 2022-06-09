@@ -1,12 +1,13 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useDropzone } from 'react-dropzone';
 // @ts-ignore
 import { Image } from 'cloudinary-react';
-// import { setSnackbar } from '@src/store/reducers/feedbackReducer';
+import axios from 'axios';
+import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { IImageUpload } from '../interfaces';
 import { ForwardArrow } from '@src/components/common/svgIcons';
 import { locations, propertyType, perPeriod } from '../propertyData';
@@ -35,6 +36,7 @@ const schema = z.object({
 });
 
 export const CreateAdForm: FC<IImageUpload> = () => {
+  const user = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const [isCategory, setIsCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -86,8 +88,60 @@ export const CreateAdForm: FC<IImageUpload> = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    setLoading(false);
+    setLoading(true);
     console.log('Data', data);
+
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_REST_API}/properties`,
+        {
+          data: {
+            name: data.name,
+            state: data.state,
+            city: data.city,
+            category: data.category,
+            price: data.price,
+            type: data.type,
+            bedrooms: data.bedroom,
+            bathroom: data.bathroom,
+            sittingroom: data.sittingroom,
+            per: data.per,
+            size: data.size,
+            features: data.features,
+            description: data.description,
+            images: uploadedFiles,
+            users_permissions_user: user,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.jwt}`,
+          },
+        }
+      )
+      .then((res: any) => {
+        setLoading(false);
+        console.log('Res: ', res);
+        dispatch(
+          setSnackbar({
+            status: 'success',
+            message: ` Property added successfully`,
+            open: true,
+          })
+        );
+      })
+      .catch((err: any) => {
+        setLoading(false);
+        console.error(err);
+        const { message } = err.response.data.message[0].messages[0];
+        dispatch(
+          setSnackbar({
+            status: 'error',
+            message: `There was an error: ${message}`,
+            open: true,
+          })
+        );
+      });
   });
 
   useEffect(() => {
@@ -141,7 +195,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
             {/* Form Fields */}
             <div className="px-3 py-4">
               <form>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid sm:grid-cols-2 gap-2">
                   <div>
                     <select
                       id="category"

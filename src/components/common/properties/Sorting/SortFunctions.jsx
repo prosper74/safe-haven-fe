@@ -38,15 +38,4 @@ export const price = (data, direction) =>
     if (x > y) return 1;
 
     return 0;
-});
-
-export const newestFirst = (data) =>
-  data.sort((a, b) => {
-    const first = new Date(a.createdAt);
-    const second = new Date(b.createdAt);    
-
-    if (x < y) return -1;
-    if (x > y) return 1;
-
-    return 0;
   });

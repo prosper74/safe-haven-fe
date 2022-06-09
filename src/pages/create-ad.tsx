@@ -5,6 +5,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import AuthPortal from '@src/components/auth';
 import LoginPopupButton from '@src/components/common/buttons/loginPopup';
 import { CreateAdForm } from '@src/components/common/property_form/createAdForm';
+import Link from 'next/link';
 
 const CreateAdPage: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
@@ -29,6 +30,20 @@ const CreateAdPage: FC = () => {
                 buttonText="Login"
               />
               <AuthPortal isOpen={isOpen} setIsOpen={setIsOpen} />
+            </>
+          ) : user.verified === false ? (
+            <>
+              <h1 className="font-bold text-center text-3xl mt-28 mb-4">
+                Your account is not yet veirifed!
+              </h1>
+              <h1 className="font-bold text-center text-xl mb-3">
+                Please verify your account to create ads
+              </h1>
+              <Link href="/agent/account">
+                <a className="transition duration-200 text-white bg-purple-600 focus:bg-purple-800 focus:shadow-sm focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 w-auto py-2.5 rounded-lg text-lg shadow-sm hover:shadow-md font-semibold text-center flex justify-center items-center disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200">
+                  Verify
+                </a>
+              </Link>
             </>
           ) : (
             <>
