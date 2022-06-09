@@ -68,7 +68,7 @@ const FilterModal: FC = () => {
                                   key={location.name}
                                   value={location.name}
                                 >
-                                  {location.label}
+                                  {location.name}
                                 </option>
                               ))}
                             </select>
@@ -80,7 +80,7 @@ const FilterModal: FC = () => {
                             >
                               {propertyType.map((type) => (
                                 <option key={type.name} value={type.name}>
-                                  {type.label}
+                                  {type.name}
                                 </option>
                               ))}
                             </select>

@@ -133,11 +133,10 @@ export const CreateAdForm: FC<IImageUpload> = () => {
       .catch((err: any) => {
         setLoading(false);
         console.error(err);
-        const { message } = err.response.data.message[0].messages[0];
         dispatch(
           setSnackbar({
             status: 'error',
-            message: `There was an error: ${message}`,
+            message: `There was an error. Please try again later`,
             open: true,
           })
         );
