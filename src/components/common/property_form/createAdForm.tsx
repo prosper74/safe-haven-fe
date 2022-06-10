@@ -11,12 +11,13 @@ import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { IImageUpload } from '../interfaces';
 import { ForwardArrow } from '@src/components/common/svgIcons';
 import { locations, propertyType, perPeriod } from '../propertyData';
+import { buyCategory, rentCategory, shortletCategory } from './formCategory';
 
 const schema = z.object({
   images: z.any(),
   category: z.string(),
   state: z.string(),
-  name: z
+  title: z
     .string()
     .min(5, { message: 'Title must be at at least 10 characters' })
     .max(50, { message: 'Title must not be more than 40 characters' }),
@@ -28,7 +29,7 @@ const schema = z.object({
   bedroom: z.string(),
   bathroom: z.string(),
   sittingroom: z.string(),
-  per: z.string(),
+  period: z.string(),
   size: z.string(),
   features: z.string(),
   price: z.string().min(2, { message: 'Please enter amount' }),
@@ -87,15 +88,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
     resolver: zodResolver(schema),
   });
 
-  const buyCategory = {
-    name: 'Buy',
-  };
-  const rentCategory = {
-    name: 'Rent',
-  };
-  const shortletCategory = {
-    name: 'Shortlet',
-  };
+  console.log('selectedType: ', selectedType);
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
@@ -111,18 +104,18 @@ export const CreateAdForm: FC<IImageUpload> = () => {
       .post(
         `${process.env.NEXT_PUBLIC_REST_API}/adverts`,
         {
-          title: data.name,
-          // state: data.state,
-          // city: data.city,
+          title: data.title,
           category: categorySelected,
+          state: data.state,
+          city: data.city,
           price: data.price,
-          // type: data.type,
-          // bedrooms: data.bedroom,
-          // bathroom: data.bathroom,
-          // sittingroom: data.sittingroom,
-          // per: data.per,
-          // size: data.size,
-          // features: data.features,
+          type: data.type,
+          bedroom: data.bedroom,
+          bathroom: data.bathroom,
+          sittingroom: data.sittingroom,
+          period: data.per,
+          size: data.size,
+          features: data.features,
           description: data.description,
           images: uploadedFiles,
           users_permissions_user: user,
@@ -244,11 +237,10 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                       {/* Title */}
                       <div>
                         <input
-                          id="name"
                           autoComplete="title"
                           placeholder="Property Title"
                           type="text"
-                          {...register('name')}
+                          {...register('title')}
                           className={`focus:outline-purple-600 focus:rounded-lg bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full ${
                             errors.name &&
                             'border-red-500 text-red-500 focus:outline-red-500'
@@ -350,7 +342,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                       {selectedCategory !== 'buy' && (
                         <div>
                           <select
-                            {...register('per')}
+                            {...register('period')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full "
                           >
                             <option selected>Select Period</option>
