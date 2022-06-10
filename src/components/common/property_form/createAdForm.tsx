@@ -87,31 +87,68 @@ export const CreateAdForm: FC<IImageUpload> = () => {
     resolver: zodResolver(schema),
   });
 
+  const buyCategory = {
+    _id: '6202f6ba2bf36d19805b16e6',
+    filterOptions: null,
+    name: 'Buy',
+    published_at: '2022-02-08T23:03:30.407Z',
+    createdAt: '2022-02-08T23:03:22.048Z',
+    updatedAt: '2022-02-08T23:03:31.166Z',
+    __v: 0,
+    id: '6202f6ba2bf36d19805b16e6',
+  };
+  const rentCategory = {
+    _id: '6202f6d02bf36d19805b16e7',
+    filterOptions: null,
+    name: 'Rent',
+    published_at: '2022-02-08T23:03:52.916Z',
+    createdAt: '2022-02-08T23:03:44.996Z',
+    updatedAt: '2022-02-08T23:03:53.651Z',
+    __v: 0,
+    id: '6202f6d02bf36d19805b16e7',
+  };
+  const shortletCategory = {
+    _id: '6202f6e52bf36d19805b16e8',
+    filterOptions: null,
+    name: 'Shortlet',
+    published_at: '2022-02-08T23:04:13.984Z',
+    createdAt: '2022-02-08T23:04:05.970Z',
+    updatedAt: '2022-02-08T23:04:14.725Z',
+    __v: 0,
+    id: '6202f6e52bf36d19805b16e8',
+  };
+
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
     console.log('Data', data);
+    const categorySelected =
+      data.category === 'Buy'
+        ? buyCategory
+        : data.category === 'Rent'
+        ? rentCategory
+        : shortletCategory;
 
     axios
       .post(
-        `${process.env.NEXT_PUBLIC_REST_API}/properties`,
+        `${process.env.NEXT_PUBLIC_REST_API}/adverts`,
         {
-          data: {
-            name: data.name,
-            state: data.state,
-            city: data.city,
-            category: data.category,
-            price: data.price,
-            type: data.type,
-            bedrooms: data.bedroom,
-            bathroom: data.bathroom,
-            sittingroom: data.sittingroom,
-            per: data.per,
-            size: data.size,
-            features: data.features,
-            description: data.description,
-            images: uploadedFiles,
-            users_permissions_user: user,
-          },
+          // data: {
+          title: data.name,
+          // state: data.state,
+          // city: data.city,
+          category: categorySelected,
+          price: data.price,
+          // type: data.type,
+          // bedrooms: data.bedroom,
+          // bathroom: data.bathroom,
+          // sittingroom: data.sittingroom,
+          // per: data.per,
+          // size: data.size,
+          // features: data.features,
+          description: data.description,
+          images: uploadedFiles,
+          users_permissions_user: user,
+          // },
         },
         {
           headers: {
@@ -153,8 +190,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
       ? setIsCategory(true)
       : setIsCategory(false);
   });
-
-  // console.log('uploadedFiles: ', uploadedFiles.length);
 
   return (
     <>
@@ -419,7 +454,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                 >
                   <span className="mr-2">Submit</span>
                   {loading ? (
-                    <div className="border-b-2 border-white rounded-full animate-spin w-6 h-6 "></div>
+                    <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 "></div>
                   ) : (
                     <ForwardArrow />
                   )}
