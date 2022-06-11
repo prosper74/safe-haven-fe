@@ -90,7 +90,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
     resolver: zodResolver(schema),
   });
 
-  console.log('selectedType: ', selectedType);
+  // console.log('selectedType: ', selectedType);
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
@@ -112,10 +112,14 @@ export const CreateAdForm: FC<IImageUpload> = () => {
           city: data.city,
           price: data.price,
           type: data.type,
-          bedroom: data.bedroom,
-          bathroom: data.bathroom,
-          sittingroom: data.sittingroom,
-          period: data.per,
+          bedroom: selectedType === 'Land' ? '' : data.bedroom,
+          bathroom: selectedType === 'Land' ? '' : data.bathroom,
+          sittingroom: selectedType === 'Land' ? '' : data.sittingroom,
+          period: selectedCategory === 'Buy' ? '' : data.period,
+          // bedroom: data.bedroom,
+          // bathroom: data.bathroom,
+          // sittingroom: data.sittingroom,
+          // period: data.period,
           size: data.size,
           features: data.features,
           description: data.description,
@@ -134,7 +138,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
         dispatch(
           setSnackbar({
             status: 'success',
-            message: ` Property added successfully`,
+            message: ` Property added successfully. Your ad will also be reviewed`,
             open: true,
           })
         );
@@ -146,7 +150,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
         dispatch(
           setSnackbar({
             status: 'error',
-            message: `There was an error. Please try again later`,
+            message: ` There was an error. Please try again later`,
             open: true,
           })
         );
@@ -235,6 +239,22 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                       ))}
                     </select>
                   </div>
+                  {/* Period */}
+                  {selectedCategory !== 'Buy' && (
+                    <div>
+                      <select
+                        {...register('period')}
+                        className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full "
+                      >
+                        <option selected>Select Period</option>
+                        {perPeriod.map((location) => (
+                          <option key={location.name} value={location.name}>
+                            per {location.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                   {isCategory && (
                     <>
                       {/* Title */}
@@ -296,7 +316,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('bedroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
-                            <option selected>Select Bedroom</option>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
                               (d: number) => (
                                 <option key={d} value={d}>
@@ -314,7 +333,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('bathroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
-                            <option selected>Select Bathroom</option>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
                               (d: number) => (
                                 <option key={d} value={d}>
@@ -332,26 +350,9 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('sittingroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
-                            <option selected>Select Sitting Room</option>
                             {[1, 2, 3, 4, 5, 6, 7].map((d: number) => (
                               <option key={d} value={d}>
                                 {d} Sitting Room{d > 1 && 's'}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
-                      {/* Period */}
-                      {selectedCategory !== 'buy' && (
-                        <div>
-                          <select
-                            {...register('period')}
-                            className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full "
-                          >
-                            <option selected>Select Period</option>
-                            {perPeriod.map((location) => (
-                              <option key={location.name} value={location.name}>
-                                per {location.label}
                               </option>
                             ))}
                           </select>
@@ -362,7 +363,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                         <input
                           {...register('size')}
                           type="number"
-                          placeholder="Land size in square meter"
+                          placeholder="Land size"
                           className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                         />
                         <div className="absolute top-2 right-10 flex items-center pointer-events-none">
