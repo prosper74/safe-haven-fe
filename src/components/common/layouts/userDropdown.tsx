@@ -6,10 +6,6 @@ import { setUser } from '@src/store/reducers/userReducer';
 import { useIsMedium } from '@src/components/common/hooks/mediaQuery';
 import Link from 'next/link';
 
-function classNames(...classes: String[]) {
-  return classes.filter(Boolean).join(' ');
-}
-
 const UserDropdown: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
   const isMedium = useIsMedium();
@@ -64,65 +60,43 @@ const UserDropdown: FC = () => {
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-[1000]">
           <div className="py-1">
             <Menu.Item>
-              {({ active }) => (
-                <Link href="/create-ad">
-                  <a
-                    onClick={() => setIsOpen(!isOpen)}
-                    className={classNames(
-                      active
-                        ? 'bg-gray-100 text-gray-900 rounded-md'
-                        : 'bg-purple-500 text-gray-100 rounded-md',
-                      'block px-4 py-2 text-sm'
-                    )}
-                  >
-                    Create Ad
-                  </a>
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <Link href="/agent/account">
-                  <a
-                    onClick={() => setIsOpen(!isOpen)}
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm hover:bg-slate-100'
-                    )}
-                  >
-                    My Profile
-                  </a>
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <Link href="#">
-                  <a
-                    onClick={() => setIsOpen(!isOpen)}
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm hover:bg-slate-100'
-                    )}
-                  >
-                    Support
-                  </a>
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
+              <Link href="/create-ad">
                 <button
-                  type="submit"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block w-full text-left px-4 py-2 text-sm'
-                  )}
-                  onClick={handleLogout}
+                  onClick={() => setIsOpen(!isOpen)}
+                  className={`text-gray-900 block px-4 py-2 w-full text-left text-sm font-bold rounded-md hover:bg-slate-100`}
                 >
-                  Sign out
+                  Create Ad
                 </button>
-              )}
+              </Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link href="/agent/account">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className={`text-gray-900 block px-4 py-2 w-full text-left text-sm rounded-md hover:bg-slate-100`}
+                >
+                  My Profile
+                </button>
+              </Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link href="#">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className={`text-gray-900 block px-4 py-2 w-full text-left text-sm rounded-md hover:bg-slate-100`}
+                >
+                  Support
+                </button>
+              </Link>
+            </Menu.Item>
+            <Menu.Item>
+              <button
+                type="submit"
+                className={`text-gray-900 block px-4 py-2 w-full text-left text-sm rounded-md hover:bg-slate-100`}
+                onClick={handleLogout}
+              >
+                Sign out
+              </button>
             </Menu.Item>
           </div>
         </Menu.Items>
