@@ -24,6 +24,7 @@ export interface singleProperties {
   sittingroom: JSX.Element;
   id: string;
   name: string;
+  title: string;
   description: string;
   price: number;
   category: Category;

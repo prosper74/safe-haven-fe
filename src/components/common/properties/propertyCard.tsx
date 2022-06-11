@@ -16,7 +16,7 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
       {property ? (
         <Link
           href={
-            property.name
+            property.title
               ? `/${property?.category?.name.toLowerCase()}/${property?.name
                   .toLowerCase()
                   .replace(/ /g, '-')}&id=${property.id}`
@@ -31,7 +31,7 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
                     ? `${property.images[0].url}`
                     : '/logoIcon.svg'
                 }
-                alt={property.name}
+                alt={property.title}
                 width={500}
                 height={350}
                 className="rounded-t-lg object-cover"
@@ -67,7 +67,8 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
   );
 };
 
-export const PropertyCardList: FC<IProps> = ({ property }) => {  
+export const PropertyCardList: FC<IProps> = ({ property }) => {
+  console.log('Property: ', property);
   const isSmall = useIsSmall();
   return (
     <div className="mb-1">
@@ -77,12 +78,12 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
             src={
               property.images ? `${property.images[0].url}` : '/logoIcon.svg'
             }
-            alt={property.name}
+            alt={property.title}
             className="w-24 h-24 rounded-lg object-cover"
           />
           <div className="px-4 sm:col-span-4 col-span-6 flex flex-col justify-between">
             <h4 className="text-gray-900 text-lg flex-wrap font-medium">
-              {property?.name?.substring(0, 60)}
+              {property?.title?.substring(0, 60)}
             </h4>
             {isSmall && <PropertyMeta property={property} single={false} />}
             {!isSmall && (
