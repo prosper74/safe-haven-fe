@@ -11,7 +11,7 @@ const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
 };
 
-const UserTab: FC<singleProperties> = () => {
+const UserTab: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
   const [ads, setAds] = useState<any[]>([]);
   const newAds =
