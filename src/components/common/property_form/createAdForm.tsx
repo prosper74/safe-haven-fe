@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,6 +39,7 @@ const schema = z.object({
 
 export const CreateAdForm: FC<IImageUpload> = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
+  const router = useRouter();
   const dispatch = useDispatch();
   const [isCategory, setIsCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -136,6 +138,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
             open: true,
           })
         );
+        router.push('/agent/account');
       })
       .catch((err: any) => {
         setLoading(false);
