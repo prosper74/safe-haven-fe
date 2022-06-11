@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import axios from 'axios';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Tab } from '@headlessui/react';
 import AgentSidebar from './agentSidebar';
@@ -9,12 +10,28 @@ const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
 };
 
-const UserTab: FC = () => {
+const UserTab: FC<singleProperties> = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
   const properties = [...user.properties];
+  const [ads, setAds] = useState([]);
   const newProperties = properties.sort(
     (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
   );
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_REST_API}/adverts?users_permissions_user.id=${user.id}`
+      )
+      .then((res) => {
+        setAds([res.data, ...ads]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  console.log('Ads: ', ads);
 
   return (
     <div className="w-full py-16">

@@ -90,11 +90,8 @@ export const CreateAdForm: FC<IImageUpload> = () => {
     resolver: zodResolver(schema),
   });
 
-  // console.log('selectedType: ', selectedType);
-
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
-    console.log('Data', data);
     const categorySelected =
       data.category === 'Buy'
         ? buyCategory
@@ -116,10 +113,6 @@ export const CreateAdForm: FC<IImageUpload> = () => {
           bathroom: selectedType === 'Land' ? '' : data.bathroom,
           sittingroom: selectedType === 'Land' ? '' : data.sittingroom,
           period: selectedCategory === 'Buy' ? '' : data.period,
-          // bedroom: data.bedroom,
-          // bathroom: data.bathroom,
-          // sittingroom: data.sittingroom,
-          // period: data.period,
           size: data.size,
           features: data.features,
           description: data.description,
@@ -132,9 +125,8 @@ export const CreateAdForm: FC<IImageUpload> = () => {
           },
         }
       )
-      .then((res: any) => {
+      .then(() => {
         setLoading(false);
-        console.log('Res: ', res);
         dispatch(
           setSnackbar({
             status: 'success',
@@ -144,9 +136,8 @@ export const CreateAdForm: FC<IImageUpload> = () => {
         );
         router.push('/agent/account');
       })
-      .catch((err: any) => {
+      .catch(() => {
         setLoading(false);
-        console.error(err);
         dispatch(
           setSnackbar({
             status: 'error',
