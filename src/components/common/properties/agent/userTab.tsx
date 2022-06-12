@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
 import axios from 'axios';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Tab } from '@headlessui/react';
@@ -94,14 +95,18 @@ const UserTab: FC = () => {
                   <div>
                     <div className="flex justify-between mb-4">
                       <button
-                        className={`inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 ${
-                          user.verified && 'w-full'
-                        }`}
+                        className={`inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2`}
                       >
                         Edit Profile
                       </button>
 
-                      {!user.verified && (
+                      {user.verified ? (
+                        <Link href="/create-ad">
+                          <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                            Create Ad
+                          </button>
+                        </Link>
+                      ) : (
                         <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
                           Verify Account
                         </button>

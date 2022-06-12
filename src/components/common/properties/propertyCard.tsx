@@ -1,6 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import PropertyMeta from '@src/components/common/properties/propertyMeta';
 import { useIsSmall } from '@src/components/common/hooks/mediaQuery';
 import { singleProperties } from '../interfaces';
@@ -68,7 +72,41 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
 };
 
 export const PropertyCardList: FC<IProps> = ({ property }) => {
-  console.log('Property: ', property);
+  const user = useSelector((state: RootStateOrAny) => state.user);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDelete = (adId: string) => {
+    setIsLoading(true);
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_REST_API}/adverts/${adId}`, {
+        headers: { Authorization: `Bearer ${user.jwt}` },
+      })
+      .then(() => {
+        setIsLoading(false);
+        dispatch(
+          setSnackbar({
+            status: 'success',
+            message: ` ad deleted successfully`,
+            open: true,
+          })
+        );
+        router.push('/agent/account');
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+        dispatch(
+          setSnackbar({
+            status: 'error',
+            message: ` There was an error. Please try again later`,
+            open: true,
+          })
+        );
+      });
+  };
+
   const isSmall = useIsSmall();
   return (
     <div className="mb-1">
@@ -96,9 +134,13 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
                   <button className="flex flex-row mr-4">
                     <EditIcon width="22px" height="22px" fill="#9333EC" />
                   </button>
-                  <button>
-                    <DeleteIcon width="22px" height="22px" fill="#c10000" />
-                  </button>
+                  {isLoading ? (
+                    <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 " />
+                  ) : (
+                    <button onClick={() => handleDelete(property.id)}>
+                      <DeleteIcon width="22px" height="22px" fill="#c10000" />
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -113,9 +155,13 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
                 <button className="flex flex-row mr-4">
                   <EditIcon width="22px" height="22px" fill="#9333EC" />
                 </button>
-                <button>
-                  <DeleteIcon width="22px" height="22px" fill="#c10000" />
-                </button>
+                {isLoading ? (
+                  <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 " />
+                ) : (
+                  <button onClick={() => handleDelete(property.id)}>
+                    <DeleteIcon width="22px" height="22px" fill="#c10000" />
+                  </button>
+                )}
               </div>
             </div>
           )}

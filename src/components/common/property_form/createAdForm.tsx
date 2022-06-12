@@ -418,7 +418,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                 >
                   <span className="mr-2">Submit</span>
                   {loading ? (
-                    <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 "></div>
+                    <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 " />
                   ) : (
                     <ForwardArrow />
                   )}
