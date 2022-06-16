@@ -33,6 +33,7 @@ export interface singleProperties {
   per: string;
   createdAt: number;
   bedrooms: number;
+  bedroom: number;
   bathroom: number;
   size: number;
   images: Image;

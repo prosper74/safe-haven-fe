@@ -54,8 +54,8 @@ const PropertyMeta: FC<IProps> = ({ property, single }) => {
             {property.sittingroom} {single ? 'Living Room' : 'L.Room'}
           </li>
         )}
-        {property.bedrooms && <li>&middot;</li>}
-        {property.bedrooms && (
+        {property.bedroom && <li>&middot;</li>}
+        {property.bedroom && (
           <li>
             <BedIcon
               width={single ? '25' : '20'}
@@ -64,7 +64,7 @@ const PropertyMeta: FC<IProps> = ({ property, single }) => {
             />
           </li>
         )}
-        {property.bedrooms && <li>{property.bedrooms} Beds</li>}
+        {property.bedroom && <li>{property.bedroom} Beds</li>}
         {property.bathroom && <li>&middot;</li>}
         {property.bathroom && (
           <li>

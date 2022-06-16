@@ -2,10 +2,10 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
-import HomeBanner from '@src/components/Home/banner';
-import HowItWorks from '@src/components/Home/howItWorks';
-import FeaturedProperties from '@src/components/Home/featured';
-import CTASection from '@src/components/Home/ctaSection';
+import HomeBanner from '@src/components/home/banner';
+import HowItWorks from '@src/components/home/howItWorks';
+import FeaturedProperties from '@src/components/home/featured';
+import CTASection from '@src/components/home/ctaSection';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {

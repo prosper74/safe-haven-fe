@@ -341,7 +341,7 @@ export const CreateAdForm: FC<IImageUpload> = () => {
                             {...register('sittingroom')}
                             className="focus:outline-purple-600 bg-slate-100 border rounded-lg px-3 py-2 mt-1 text-base w-full"
                           >
-                            {[1, 2, 3, 4, 5, 6, 7].map((d: number) => (
+                            {[0, 1, 2, 3, 4, 5, 6, 7].map((d: number) => (
                               <option key={d} value={d}>
                                 {d} Sitting Room{d > 1 && 's'}
                               </option>

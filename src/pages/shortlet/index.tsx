@@ -6,7 +6,7 @@ import {
   time,
   alphabetic,
   price,
-} from '@src/components/common/properties/Sorting/SortFunctions';
+} from '@src/components/common/properties/sorting/SortFunctions';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {

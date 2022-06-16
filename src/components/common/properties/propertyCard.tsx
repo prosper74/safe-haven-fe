@@ -121,7 +121,7 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
           />
           <div className="px-4 sm:col-span-4 col-span-6 flex flex-col justify-between">
             <h4 className="text-gray-900 text-lg flex-wrap font-medium">
-              {property?.title?.substring(0, 60)}
+              {property?.title?.substring(0, 60)} ({property?.category?.name})
             </h4>
             {isSmall && <PropertyMeta property={property} single={false} />}
             {!isSmall && (

@@ -1,10 +1,10 @@
 import React, { FC, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Login from './login';
-import Signup from './Signup';
-import ForgotPassword from './ForgotPassword';
-import Complete from './Complete';
-import ResendEmailConfirmation from './ResendEmailConfirmation';
+import ForgotPassword from './forgotPassword';
+import Signup from './signup';
+import Complete from './complete';
+import ResendEmailConfirmation from './resendEmailConfirmation';
 
 interface IProps {
   isOpen: boolean;

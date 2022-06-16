@@ -1,7 +1,7 @@
 // src/complete.test.ts
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Complete from '../Complete';
+import Complete from '../complete';
 
 describe('Home', () => {
   it('renders a heading', () => {

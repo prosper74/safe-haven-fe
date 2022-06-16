@@ -1,7 +1,7 @@
 // src/signup.test.ts
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Signup from '../Signup';
+import Signup from '../signup';
 
 const formInputValues = [
   {

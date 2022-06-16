@@ -1,7 +1,7 @@
 // src/forgotPassword.test.ts
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ResendEmailConfirmation from '../ResendEmailConfirmation';
+import ResendEmailConfirmation from '../resendEmailConfirmation';
 
 const formInputValues = [
   {

@@ -2,12 +2,12 @@ import React, { FC, useState } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import PropertiesList from '@src/components/common/properties/propertiesList';
+import { singleProperties } from '@src/components/common/interfaces';
 import {
   time,
   alphabetic,
-  price,
-} from '@src/components/common/properties/Sorting/SortFunctions';
-import { singleProperties } from '@src/components/common/interfaces';
+  price
+} from '@src/components/common/properties/sorting/sortFunctions';
 
 interface IProps {
   properties: singleProperties;
