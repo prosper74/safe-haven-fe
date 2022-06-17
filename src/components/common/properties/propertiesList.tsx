@@ -1,4 +1,3 @@
-// index.tsx
 import React, { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { PropertyCard } from '@src/components/common/properties/propertyCard';

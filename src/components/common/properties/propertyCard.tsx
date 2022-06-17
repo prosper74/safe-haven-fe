@@ -1,10 +1,6 @@
 import React, { FC, useState } from 'react';
-// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-// import axios from 'axios';
-// import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-// import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import PropertyMeta from '@src/components/common/properties/propertyMeta';
 import { useIsSmall } from '@src/components/common/hooks/mediaQuery';
 import { singleProperties } from '../interfaces';
@@ -73,43 +69,10 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
 };
 
 export const PropertyCardList: FC<IProps> = ({ property }) => {
-  // const user = useSelector((state: RootStateOrAny) => state.user);
-  // const router = useRouter();
-  // const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
-  // const handleDelete = (adId: string) => {
-  //   setIsLoading(true);
-  //   axios
-  //     .delete(`${process.env.NEXT_PUBLIC_REST_API}/adverts/${adId}`, {
-  //       headers: { Authorization: `Bearer ${user.jwt}` },
-  //     })
-  //     .then(() => {
-  //       setIsLoading(false);
-  //       dispatch(
-  //         setSnackbar({
-  //           status: 'success',
-  //           message: ` ad deleted successfully`,
-  //           open: true,
-  //         })
-  //       );
-  //       router.push('/agent/account');
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false);
-  //       console.log(err);
-  //       dispatch(
-  //         setSnackbar({
-  //           status: 'error',
-  //           message: ` There was an error. Please try again later`,
-  //           open: true,
-  //         })
-  //       );
-  //     });
-  // };
-
   const isSmall = useIsSmall();
+
   return (
     <div className="mb-1">
       {property ? (
