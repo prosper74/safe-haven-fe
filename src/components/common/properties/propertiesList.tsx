@@ -2,10 +2,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { PropertyCard } from '@src/components/common/properties/propertyCard';
-import SortModal from './sorting/sortModal';
-// import { FilterIcon } from '@src/components/common/svgIcons';
+import SortModal from '@src/components/common/properties/sorting/sortModal';
 import { singleProperties } from '@src/components/common/interfaces';
-import FilterModal from './filter/filterModal';
+import FilterModal from '@src/components/common/properties/filter/filterModal';
 
 interface IProps {
   allProperties: singleProperties;
