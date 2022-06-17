@@ -1,14 +1,15 @@
 import React, { FC, useState } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-import axios from 'axios';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { setSnackbar } from '@src/store/reducers/feedbackReducer';
+// import axios from 'axios';
+// import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+// import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import PropertyMeta from '@src/components/common/properties/propertyMeta';
 import { useIsSmall } from '@src/components/common/hooks/mediaQuery';
 import { singleProperties } from '../interfaces';
 import { DeleteIcon, EditIcon } from '../svgIcons';
+import DeletePropertyModal from './deleteModal';
 
 interface IProps {
   property: singleProperties;
@@ -72,40 +73,41 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
 };
 
 export const PropertyCardList: FC<IProps> = ({ property }) => {
-  const user = useSelector((state: RootStateOrAny) => state.user);
-  const router = useRouter();
-  const dispatch = useDispatch();
+  // const user = useSelector((state: RootStateOrAny) => state.user);
+  // const router = useRouter();
+  // const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const handleDelete = (adId: string) => {
-    setIsLoading(true);
-    axios
-      .delete(`${process.env.NEXT_PUBLIC_REST_API}/adverts/${adId}`, {
-        headers: { Authorization: `Bearer ${user.jwt}` },
-      })
-      .then(() => {
-        setIsLoading(false);
-        dispatch(
-          setSnackbar({
-            status: 'success',
-            message: ` ad deleted successfully`,
-            open: true,
-          })
-        );
-        router.push('/agent/account');
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-        dispatch(
-          setSnackbar({
-            status: 'error',
-            message: ` There was an error. Please try again later`,
-            open: true,
-          })
-        );
-      });
-  };
+  // const handleDelete = (adId: string) => {
+  //   setIsLoading(true);
+  //   axios
+  //     .delete(`${process.env.NEXT_PUBLIC_REST_API}/adverts/${adId}`, {
+  //       headers: { Authorization: `Bearer ${user.jwt}` },
+  //     })
+  //     .then(() => {
+  //       setIsLoading(false);
+  //       dispatch(
+  //         setSnackbar({
+  //           status: 'success',
+  //           message: ` ad deleted successfully`,
+  //           open: true,
+  //         })
+  //       );
+  //       router.push('/agent/account');
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false);
+  //       console.log(err);
+  //       dispatch(
+  //         setSnackbar({
+  //           status: 'error',
+  //           message: ` There was an error. Please try again later`,
+  //           open: true,
+  //         })
+  //       );
+  //     });
+  // };
 
   const isSmall = useIsSmall();
   return (
@@ -137,7 +139,7 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
                   {isLoading ? (
                     <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 " />
                   ) : (
-                    <button onClick={() => handleDelete(property.id)}>
+                    <button onClick={() => setOpenDeleteModal(true)}>
                       <DeleteIcon width="22px" height="22px" fill="#c10000" />
                     </button>
                   )}
@@ -158,7 +160,7 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
                 {isLoading ? (
                   <div className="border-b-2 border-purple-600 rounded-full animate-spin w-6 h-6 " />
                 ) : (
-                  <button onClick={() => handleDelete(property.id)}>
+                  <button onClick={() => setOpenDeleteModal(true)}>
                     <DeleteIcon width="22px" height="22px" fill="#c10000" />
                   </button>
                 )}
@@ -177,6 +179,13 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
           </a>
         </div>
       )}
+      <DeletePropertyModal
+        isOpen={openDeleteModal}
+        setIsOpen={setOpenDeleteModal}
+        setIsLoading={setIsLoading}
+        urlRoute="adverts"
+        advertId={property.id}
+      />
     </div>
   );
 };

@@ -178,7 +178,7 @@ const Navbar: FC = () => {
           </a>
         </Link>
 
-        <Link href="/account">
+        <Link href="/agent/account">
           <a className="w-full block py-2 px-3 text-center hover:bg-purple-100 hover:text-purple-500">
             <svg
               className="w-6 h-6 mx-auto"
