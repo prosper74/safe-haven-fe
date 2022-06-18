@@ -1,17 +1,12 @@
 import React, { FC, useState } from 'react';
 import { SearchIcon, CloseIcon } from '@src/components/common/svgIcons';
-import { singleProperties } from '@src/components/common/interfaces';
+import {
+  singleProperties,
+  ISearchWidget,
+} from '@src/components/common/interfaces';
 import Link from 'next/link';
 
-interface IProps {
-  properties: singleProperties;
-  width: string;
-  height: string;
-  fill: string;
-  placeholder: string;
-}
-
-const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
+const SearchWidget: FC<ISearchWidget> = ({ properties, placeholder }) => {
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [wordEntered, setWordEntered] = useState('');
 
@@ -20,7 +15,7 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
     setWordEntered(searchedWords);
     const newFilter = properties.filter(
       (d: singleProperties) =>
-        d.name.toLowerCase().includes(searchedWords.toLowerCase()) ||
+        d.title.toLowerCase().includes(searchedWords.toLowerCase()) ||
         d.description.toLowerCase().includes(searchedWords.toLowerCase())
     );
 
@@ -65,8 +60,8 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
             {filteredProperties.slice(0, 15).map((d: singleProperties) => (
               <Link
                 href={
-                  d.name
-                    ? `/${d?.category?.name.toLowerCase()}/${d?.name
+                  d.title
+                    ? `/${d?.category?.name.toLowerCase()}/${d?.title
                         .toLowerCase()
                         .replace(/ /g, '-')}&id=${d.id}`
                     : ''
@@ -79,11 +74,11 @@ const SearchWidget: FC<IProps> = ({ properties, placeholder }) => {
                   >
                     <img
                       src={d.images[0].url}
-                      alt={d.name}
+                      alt={d.title}
                       className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
                     />
                     <div className="col-span-3 sm:col-span-4">
-                      <p className="font-medium">{d.name.substring(0, 28)}</p>
+                      <p className="font-medium">{d.title.substring(0, 28)}</p>
                       <div className="flex items-center justify-between">
                         <h3 className="text-purple-600 font-bold text-lg">
                           ₦{Number(d.price).toLocaleString()}

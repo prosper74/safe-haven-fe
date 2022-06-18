@@ -14,8 +14,8 @@ export const time = (data, direction) =>
 
 export const alphabetic = (data, direction) =>
   data.sort((a, b) => {
-    const first = a.name.toLowerCase();
-    const second = b.name.toLowerCase();
+    const first = a.title.toLowerCase();
+    const second = b.title.toLowerCase();
 
     const x = direction === 'asc' ? first : second;
     const y = direction === 'asc' ? second : first;

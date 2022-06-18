@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import PropertyMeta from '@src/components/common/properties/propertyMeta';
+import { PropertyMeta, PropertyCardMeta } from '@src/components/common/properties/propertyMeta';
 import { useIsSmall } from '@src/components/common/hooks/mediaQuery';
 import { singleProperties } from '../interfaces';
 import { DeleteIcon, EditIcon } from '../svgIcons';
@@ -18,7 +18,7 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
         <Link
           href={
             property.title
-              ? `/${property?.category?.name.toLowerCase()}/${property?.name
+              ? `/${property?.category?.name.toLowerCase()}/${property?.title
                   .toLowerCase()
                   .replace(/ /g, '-')}&id=${property.id}`
               : ''
@@ -40,10 +40,12 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
             </a>
             <div className="p-4">
               <h4 className="text-gray-900 text-xl font-medium mb-2">
-                {property?.name?.substring(0, 23)}
+                {property?.title?.substring(0, 23)}
               </h4>
               {/* Location */}
-              <PropertyMeta property={property} single={false} />
+              <PropertyCardMeta
+                property={property}
+              />
               {/* End of Meta Description  */}
               {/* Price  */}
               <h3 className="text-purple-600 font-bold text-xl mt-2">
@@ -88,7 +90,9 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
             <h4 className="text-gray-900 text-lg flex-wrap font-medium">
               {property?.title?.substring(0, 60)} ({property?.category?.name})
             </h4>
-            {isSmall && <PropertyMeta property={property} single={false} />}
+            {isSmall && (
+              <PropertyMeta property={property} />
+            )}
             {!isSmall && (
               <div className="flex flex-row sm:flex-col justify-between">
                 <h3 className="text-purple-600 font-bold text-xl">

@@ -1,4 +1,4 @@
-export const data = [
+export const formData = [
   {
     id: 1,
     heading: 'Request A Property',

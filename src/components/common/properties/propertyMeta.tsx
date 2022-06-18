@@ -10,24 +10,15 @@ import {
 
 interface IProps {
   property: singleProperties;
-  single: boolean;
 }
 
-const PropertyMeta: FC<IProps> = ({ property, single }) => {
+export const PropertyMeta: FC<IProps> = ({ property }) => {
   return (
     <>
       {/* Location */}
-      <ul
-        className={`flex items-center my-1 space-x-1 ${
-          single ? 'text-lg' : 'text-sm'
-        } font-normal leading-4 text-coolGray-500`}
-      >
+      <ul className="flex items-center my-1 space-x-1 text-lg font-normal leading-4 text-coolGray-500">
         <li>
-          <LocationIcon
-            width={single ? '25' : '20'}
-            height={single ? '25' : '20'}
-            fill="#9932cc"
-          />
+          <LocationIcon width="25" height="25" fill="#9932cc" />
         </li>
         <li>
           {property.city}, {property.state}
@@ -35,55 +26,39 @@ const PropertyMeta: FC<IProps> = ({ property, single }) => {
       </ul>
       {/* End of Location */}
       {/* Meta Description  */}
-      <ul
-        className={`flex items-center my-1 space-x-1 ${
-          single ? 'text-base' : 'text-sm'
-        } font-normal leading-4 text-coolGray-500`}
-      >
+      <ul className="flex items-center my-1 space-x-1 text-base font-normal leading-4 text-coolGray-500">
         {property.sittingroom && (
           <li>
-            <TVIcon
-              width={single ? '25' : '20'}
-              height={single ? '25' : '20'}
-              fill="#9932cc"
-            />
+            <TVIcon width="25" height="25" fill="#9932cc" />
           </li>
         )}
-        {property.sittingroom && (
-          <li>
-            {property.sittingroom} {single ? 'Living Room' : 'L.Room'}
-          </li>
-        )}
+        {property.sittingroom && <li>{property.sittingroom} Living Room</li>}
         {property.bedroom && <li>&middot;</li>}
         {property.bedroom && (
           <li>
-            <BedIcon
-              width={single ? '25' : '20'}
-              height={single ? '25' : '20'}
-              fill="#9932cc"
-            />
+            <BedIcon width="25" height="25" fill="#9932cc" />
           </li>
         )}
-        {property.bedroom && <li>{property.bedroom} Beds</li>}
+        {property.bedroom && (
+          <li>
+            {property.bedroom} Bedroom{Number(property.bedroom) > 1 && 's'}
+          </li>
+        )}
         {property.bathroom && <li>&middot;</li>}
         {property.bathroom && (
           <li>
-            <ShowerIcon
-              width={single ? '25' : '20'}
-              height={single ? '25' : '20'}
-              fill="#9932cc"
-            />
+            <ShowerIcon width="25" height="25" fill="#9932cc" />
           </li>
         )}
-        {property.bathroom && <li>{property.bathroom} Baths</li>}
+        {property.bathroom && (
+          <li>
+            {property.bathroom} Bathroom{Number(property.bathroom) > 1 && 's'}
+          </li>
+        )}
         {property.bathroom && property.size ? <li>&middot;</li> : ''}
         {property.size && (
           <li>
-            <HomeIcon
-              width={single ? '25' : '20'}
-              height={single ? '25' : '20'}
-              fill="#9932cc"
-            />            
+            <HomeIcon width="25" height="25" fill="#9932cc" />
           </li>
         )}
         {property.size && <li>{property.size} sqm</li>}
@@ -92,4 +67,42 @@ const PropertyMeta: FC<IProps> = ({ property, single }) => {
   );
 };
 
-export default PropertyMeta;
+export const PropertyCardMeta: FC<IProps> = ({ property }) => {
+  return (
+    <>
+      {/* Location */}
+      <ul className="flex items-center my-1 space-x-1 text-sm font-normal leading-4 text-coolGray-500">
+        <li>
+          <LocationIcon width="20" height="20" fill="#9932cc" />
+        </li>
+        <li>
+          {property.city}, {property.state}
+        </li>
+      </ul>
+      {/* End of Location */}
+      {/* Meta Description  */}
+      <ul className="flex items-center my-1 space-x-1 text-sm font-normal leading-4 text-coolGray-500">
+        {property.sittingroom && (
+          <li>
+            <TVIcon width="20" height="20" fill="#9932cc" />
+          </li>
+        )}
+        {property.sittingroom && <li>{property.sittingroom} L.Room</li>}
+        {property.bedroom && <li>&middot;</li>}
+        {property.bedroom && (
+          <li>
+            <BedIcon width="20" height="20" fill="#9932cc" />
+          </li>
+        )}
+        {property.bedroom && <li>{property.bedroom} Beds</li>}
+        {property.bathroom && property.size ? <li>&middot;</li> : ''}
+        {property.size && (
+          <li>
+            <HomeIcon width="25" height="25" fill="#9932cc" />
+          </li>
+        )}
+        {property.size && <li>{property.size} sqm</li>}
+      </ul>
+    </>
+  );
+};

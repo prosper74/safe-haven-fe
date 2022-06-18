@@ -17,15 +17,15 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 interface IProps {
-  tabCategory: string[];
+  propertyType: string[];
 }
 
-export const RelatedPropertiesSlide: FC<IProps> = ({ tabCategory }) => {
+export const RelatedPropertiesSlide: FC<IProps> = ({ propertyType }) => {
   const [properties, setProperties] = useState<any[]>([]);
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_REST_API}/properties?type=${tabCategory}`)
+      .get(`${process.env.NEXT_PUBLIC_REST_API}/adverts?type=${propertyType}`)
       .then((response) => {
         setProperties(response.data);
       })
