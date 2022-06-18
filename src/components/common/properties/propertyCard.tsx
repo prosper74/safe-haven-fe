@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PropertyMeta, PropertyCardMeta } from '@src/components/common/properties/propertyMeta';
+import { PropertyCardMeta } from '@src/components/common/properties/propertyMeta';
 import { useIsSmall } from '@src/components/common/hooks/mediaQuery';
 import { singleProperties } from '../interfaces';
 import { DeleteIcon, EditIcon } from '../svgIcons';
@@ -43,9 +43,7 @@ export const PropertyCard: FC<IProps> = ({ property }) => {
                 {property?.title?.substring(0, 23)}
               </h4>
               {/* Location */}
-              <PropertyCardMeta
-                property={property}
-              />
+              <PropertyCardMeta property={property} />
               {/* End of Meta Description  */}
               {/* Price  */}
               <h3 className="text-purple-600 font-bold text-xl mt-2">
@@ -90,9 +88,7 @@ export const PropertyCardList: FC<IProps> = ({ property }) => {
             <h4 className="text-gray-900 text-lg flex-wrap font-medium">
               {property?.title?.substring(0, 60)} ({property?.category?.name})
             </h4>
-            {isSmall && (
-              <PropertyMeta property={property} />
-            )}
+            {isSmall && <PropertyCardMeta property={property} />}
             {!isSmall && (
               <div className="flex flex-row sm:flex-col justify-between">
                 <h3 className="text-purple-600 font-bold text-xl">

@@ -19,18 +19,6 @@ const HomeBanner: FC<IProps> = ({ properties }) => (
             <h1 className="max-w-xl mb-4 font-heading font-medium text-4xl md:text-3xl xl:text-8xl leading-none">
               <span>Find Your Way </span>
               <span className="relative inline-block">
-                <span className="absolute inset-0 xl:-left-8 xl:-right-8">
-                  <img
-                    className="absolute inset-0 w-full max-w-non"
-                    src="assets/images/lines-blue1.svg"
-                    alt=""
-                  />
-                  <img
-                    className="absolute inset-0 mt-1 lg:mt-2 xl:ml-4 w-full max-w-none"
-                    src="uinel-assets/elements/heroes/lines-blue2.svg"
-                    alt=""
-                  />
-                </span>
                 <span className="relative z-10"> Home</span>
               </span>
             </h1>
