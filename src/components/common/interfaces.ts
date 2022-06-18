@@ -59,6 +59,7 @@ export interface singleProperties {
 export interface featuresProps {
   length: number;
   map: any;
+  split: any;
   id: string;
   name: string;
 }
