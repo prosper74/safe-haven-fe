@@ -82,10 +82,10 @@ export default RentPage;
 
 export async function getServerSideProps() {
   const properties = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Rent`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts?category.name=Rent`
   );
   const totalCount = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Rent`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts/count?category.name=Rent`
   );
   return {
     props: {

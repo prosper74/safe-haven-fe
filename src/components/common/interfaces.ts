@@ -31,6 +31,7 @@ export interface singleProperties {
   state: string;
   city: string;
   per: string;
+  period: string;
   createdAt: number;
   bedrooms: number;
   bedroom: number;
@@ -86,4 +87,12 @@ export interface IImageUpload {
   onDrop: (acceptedFiles: File[]) => void;
   public_id: string;
   acceptedFile: File[];
+}
+
+export interface ISearchWidget {
+  properties: singleProperties;
+  width: string;
+  height: string;
+  fill: string;
+  placeholder: string;
 }

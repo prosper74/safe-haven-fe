@@ -6,7 +6,7 @@ import { singleProperties } from '@src/components/common/interfaces';
 import {
   time,
   alphabetic,
-  price
+  price,
 } from '@src/components/common/properties/sorting/sortFunctions';
 
 interface IProps {
@@ -82,10 +82,10 @@ export default BuyPage;
 
 export async function getServerSideProps() {
   const properties = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Buy`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts?category.name=Buy`
   );
   const totalCount = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Buy`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts/count?category.name=Buy`
   );
   return {
     props: {

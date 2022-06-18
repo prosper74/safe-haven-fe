@@ -32,7 +32,7 @@ const Home: FC<IProps> = ({ properties }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_REST_API}/properties`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_REST_API}/adverts`);
   return {
     props: {
       properties: res.data,

@@ -82,10 +82,10 @@ export default ShortletPage;
 
 export async function getServerSideProps() {
   const properties = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties?category.name=Shortlet`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts?category.name=Shortlet`
   );
   const totalCount = await axios.get(
-    `${process.env.NEXT_PUBLIC_REST_API}/properties/count?category.name=Shortlet`
+    `${process.env.NEXT_PUBLIC_REST_API}/adverts/count?category.name=Shortlet`
   );
   return {
     props: {

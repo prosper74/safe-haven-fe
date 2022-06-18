@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Tab } from '@headlessui/react';
-import { TabContent } from './tab-content';
+import { TabContent } from '@src/components/home/tab/tab-content';
 import { singleProperties } from '@src/components/common/interfaces';
 
 interface IProps {

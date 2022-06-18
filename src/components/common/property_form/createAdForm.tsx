@@ -1,13 +1,13 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 // @ts-ignore
 import { Image } from 'cloudinary-react';
-import axios from 'axios';
 import { setSnackbar } from '@src/store/reducers/feedbackReducer';
 import { IImageUpload } from '../interfaces';
 import { ForwardArrow } from '@src/components/common/svgIcons';

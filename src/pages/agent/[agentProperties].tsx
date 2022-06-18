@@ -53,7 +53,7 @@ export async function getServerSideProps({ params }: any) {
 
   const properties = await axios
     .get(
-      `${process.env.NEXT_PUBLIC_REST_API}/properties?users_permissions_user=${agentPropertiesId}`
+      `${process.env.NEXT_PUBLIC_REST_API}/adverts?users_permissions_user=${agentPropertiesId}`
     )
     .then((response) => response.data)
     .catch((err) => {
