@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { timeSince } from '../../dateFunction';
 import { userProps } from '../../interfaces';
+import { VerifiedIcon } from '../../svgIcons';
 
 interface IProps {
   agent: userProps;
@@ -29,43 +30,7 @@ const AgentSidebar: FC<IProps> = ({ agent, totalCount }) => {
             {agent.verified ? (
               <span>
                 Verified
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 172 172"
-                  className="inline-block mb-1 ml-2"
-                >
-                  <g
-                    fill="none"
-                    fillRule="nonzero"
-                    stroke="none"
-                    strokeWidth="1"
-                    strokeLinecap="butt"
-                    strokeLinejoin="miter"
-                    strokeMiterlimit="10"
-                    strokeDasharray=""
-                    strokeDashoffset="0"
-                    fontFamily="none"
-                    fontWeight="none"
-                    fontSize="none"
-                    textAnchor="none"
-                  >
-                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                    <g>
-                      <path
-                        d="M86,7.16667l16.1465,18.02058l23.27017,-7.27058l5.24958,23.41708l23.41708,5.24958l-7.16667,23.27017l17.91667,16.1465l-17.91667,16.1465l7.16667,23.27017l-23.41708,5.24958l-5.24958,23.41708l-23.27017,-7.27058l-16.1465,18.02058l-16.1465,-18.02058l-23.27017,7.27058l-5.24958,-23.41708l-23.41708,-5.24958l7.16667,-23.27017l-17.91667,-16.1465l17.91667,-16.1465l-7.16667,-23.27017l23.41708,-5.24958l5.24958,-23.41708l23.27017,7.27058z"
-                        fill="#2ecc71"
-                      ></path>
-                      <path
-                        d="M123.9905,52.32383l-48.7405,48.72258l-20.07383,-20.0595l-10.02258,10.02258l30.09642,30.11075l58.7595,-58.77383z"
-                        fill="#ffffff"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
+                <VerifiedIcon />
               </span>
             ) : (
               'Not verified'
