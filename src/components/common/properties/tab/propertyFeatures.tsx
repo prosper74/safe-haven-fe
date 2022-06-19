@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { featuresProps } from '../../interfaces';
+import { CheckIcon } from '../../svgIcons';
 
 interface IProps {
   features: featuresProps;
@@ -13,34 +14,14 @@ export const PropertyFeatures: FC<IProps> = ({ features }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2">
           {featuresArray.map((feature: featuresProps, index: number) => (
             <div key={index} className="text-lg flex items-center">
-              <svg
-                height="22"
-                width="22"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="#9932cc"
-                  d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
-                />
-              </svg>
+              <CheckIcon width="22" height="22" fill="#9932cc" />
               <span className="pl-2">{feature}</span>
             </div>
           ))}
         </div>
       ) : (
         <div className="text-lg flex items-center">
-          <svg
-            height="22"
-            width="22"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="#9932cc"
-              d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
-            />
-          </svg>
+          <CheckIcon width="22" height="22" fill="#9932cc" />
           <span className="pl-2">Nice Property</span>
         </div>
       )}
