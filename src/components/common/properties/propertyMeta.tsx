@@ -26,42 +26,35 @@ export const PropertyMeta: FC<IProps> = ({ property }) => {
       </ul>
       {/* End of Location */}
       {/* Meta Description  */}
-      <ul className="flex items-center my-1 space-x-1 text-base font-normal leading-4 text-coolGray-500">
+      <ul className="flex flex-col sm:flex-row items-start sm:items-center my-1 space-x-1 text-base font-normal leading-4 text-coolGray-500 mb-3">
         {property.sittingroom && (
-          <li>
+          <li className="flex flex-row items-center">
             <TVIcon width="25" height="25" fill="#9932cc" />
+            &nbsp;
+            {property.sittingroom} Living Room{' '}
           </li>
         )}
-        {property.sittingroom && <li>{property.sittingroom} Living Room</li>}
-        {property.bedroom && <li>&middot;</li>}
         {property.bedroom && (
-          <li>
+          <li className="flex flex-row items-center">
             <BedIcon width="25" height="25" fill="#9932cc" />
+            &nbsp;
+            {property.bedroom} Bedroom{Number(property.bedroom) > 1 && 's'}{' '}
           </li>
         )}
-        {property.bedroom && (
-          <li>
-            {property.bedroom} Bedroom{Number(property.bedroom) > 1 && 's'}
-          </li>
-        )}
-        {property.bathroom && <li>&middot;</li>}
         {property.bathroom && (
-          <li>
+          <li className="flex flex-row items-center">
             <ShowerIcon width="25" height="25" fill="#9932cc" />
-          </li>
-        )}
-        {property.bathroom && (
-          <li>
+            &nbsp;
             {property.bathroom} Bathroom{Number(property.bathroom) > 1 && 's'}
           </li>
         )}
-        {property.bathroom && property.size ? <li>&middot;</li> : ''}
         {property.size && (
-          <li>
+          <li className="flex flex-row items-center">
             <HomeIcon width="25" height="25" fill="#9932cc" />
+            &nbsp;
+            {property.size} sqm
           </li>
         )}
-        {property.size && <li>{property.size} sqm</li>}
       </ul>
     </>
   );
