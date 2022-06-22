@@ -45,7 +45,7 @@ export const PropertyMeta: FC<IProps> = ({ property }) => {
           <li className="flex flex-row items-center">
             <ShowerIcon width="25" height="25" fill="#9932cc" />
             &nbsp;
-            {property.bathroom} Bathroom{Number(property.bathroom) > 1 && 's'}
+            {property.bathroom} Bathroom{Number(property.bathroom) > 1 && 's'}{' '}
           </li>
         )}
         {property.size && (

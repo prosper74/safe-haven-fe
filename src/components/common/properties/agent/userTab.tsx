@@ -7,6 +7,7 @@ import AgentSidebar from './agentSidebar';
 import { singleProperties } from '@src/components/common/interfaces';
 import { PropertyCardList } from '../propertyCard';
 import { PageLoader } from '../../loader';
+import VerificationModal from './verificationModal';
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
@@ -14,6 +15,8 @@ const classNames = (...classes: String[]) => {
 
 const UserTab: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
+  const [verificationModalOpen, setVerificationModalOpen] = useState(false);
+  const [isVerification, setIsVerification] = useState(false);
   const [ads, setAds] = useState<any[]>([]);
   const newAds =
     ads.length > 0 &&
@@ -29,6 +32,21 @@ const UserTab: FC = () => {
       )
       .then((res) => {
         setAds([res.data]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_REST_API}/verifications?users_permissions_user.id=${user.id}`
+      )
+      .then((res) => {
+        res.data[0]?.verifying
+          ? setIsVerification(true)
+          : setIsVerification(false);
       })
       .catch((err) => {
         console.error(err);
@@ -107,7 +125,13 @@ const UserTab: FC = () => {
                           </button>
                         </Link>
                       ) : (
-                        <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                        <button
+                          disabled={isVerification}
+                          onClick={() =>
+                            setVerificationModalOpen(!verificationModalOpen)
+                          }
+                          className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-50"
+                        >
                           Verify Account
                         </button>
                       )}
@@ -116,19 +140,28 @@ const UserTab: FC = () => {
                   </div>
 
                   {ads[0].length! < 1 ? (
-                    <div className="flex flex-col justify-center items-center text-center">
-                      <h3 className="font-medium text-lg">
-                        You do not have any ads.{' '}
+                    <div className="flex flex-col col-span-2 justify-center items-center text-center">
+                      <h3 className="font-medium text-lg mb-6">
                         {user.verified
-                          ? 'Create one'
+                          ? 'You do not have any ads. Create one'
+                          : isVerification
+                          ? 'You have submitted your verification documents and they are under review. You will be able to create ad once your account is verified'
                           : 'Please verify your account, then create new ads'}
                       </h3>
                       {user.verified ? (
-                        <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
-                          Create Ad
-                        </button>
+                        <Link href="/create-ad">
+                          <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                            Create Ad
+                          </button>
+                        </Link>
                       ) : (
-                        <button className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+                        <button
+                          disabled={isVerification}
+                          onClick={() =>
+                            setVerificationModalOpen(!verificationModalOpen)
+                          }
+                          className="inline-flex justify-center rounded-md border border-transparent bg-purple-300 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-50"
+                        >
                           Verify Account
                         </button>
                       )}
@@ -163,6 +196,10 @@ const UserTab: FC = () => {
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
+          <VerificationModal
+            isOpen={verificationModalOpen}
+            setIsOpen={setVerificationModalOpen}
+          />
         </div>
       )}
     </>
