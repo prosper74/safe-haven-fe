@@ -47,8 +47,6 @@ const ChangePasswordModal: FC<IProps> = ({ isOpen, setIsOpen }) => {
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
 
-    console.log(data);
-
     axios
       .post(`${process.env.NEXT_PUBLIC_REST_API}/auth/local`, {
         identifier: user.email,
