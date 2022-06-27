@@ -4,10 +4,11 @@ import axios from 'axios';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Tab } from '@headlessui/react';
 import AgentSidebar from './agentSidebar';
+import VerificationModal from './verificationModal';
+import EditProfileModal from './editProfileModal';
 import { singleProperties } from '@src/components/common/interfaces';
 import { PropertyCardList } from '../propertyCard';
 import { PageLoader } from '../../loader';
-import VerificationModal from './verificationModal';
 
 const classNames = (...classes: String[]) => {
   return classes.filter(Boolean).join(' ');
@@ -16,6 +17,7 @@ const classNames = (...classes: String[]) => {
 const UserTab: FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.user);
   const [verificationModalOpen, setVerificationModalOpen] = useState(false);
+  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [isVerification, setIsVerification] = useState(false);
   const [ads, setAds] = useState<any[]>([]);
   const newAds =
@@ -113,6 +115,9 @@ const UserTab: FC = () => {
                   <div>
                     <div className="flex justify-between mb-4">
                       <button
+                        onClick={() =>
+                          setEditProfileModalOpen(!editProfileModalOpen)
+                        }
                         className={`inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2`}
                       >
                         Edit Profile
@@ -199,6 +204,10 @@ const UserTab: FC = () => {
           <VerificationModal
             isOpen={verificationModalOpen}
             setIsOpen={setVerificationModalOpen}
+          />
+          <EditProfileModal
+            isOpen={editProfileModalOpen}
+            setIsOpen={setEditProfileModalOpen}
           />
         </div>
       )}
