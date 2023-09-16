@@ -67,7 +67,6 @@ const AuthPortal: FC<IProps> = ({ isOpen, setIsOpen }) => {
                       steps={steps}
                       setIsOpen={setIsOpen}
                       key={Step.label}
-                      // location={location}
                     />
                   ) : null
                 )}

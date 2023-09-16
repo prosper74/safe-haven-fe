@@ -136,6 +136,7 @@ const UserTab: FC = () => {
                         </button>
                       )}
                     </div>
+                    
                     <AgentSidebar agent={user} totalCount={ads[0].length} />
                   </div>
 
